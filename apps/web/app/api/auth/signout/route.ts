@@ -2,6 +2,14 @@ import { createClient } from '@/lib/supabase/server';
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
+  return handleSignOut(request);
+}
+
+export async function GET(request: Request) {
+  return handleSignOut(request);
+}
+
+async function handleSignOut(request: Request) {
   const supabase = await createClient();
 
   // Check if a user's logged in

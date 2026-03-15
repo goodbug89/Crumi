@@ -16,7 +16,12 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  // 2. next-intl 다국어 라우팅 미들웨어 실행
+  // 2. API 경로는 다국어 처리를 건너뜀 (404 방지)
+  if (request.nextUrl.pathname.startsWith('/api')) {
+    return response;
+  }
+
+  // 3. next-intl 다국어 라우팅 미들웨어 실행
   return intlMiddleware(request);
 }
 
