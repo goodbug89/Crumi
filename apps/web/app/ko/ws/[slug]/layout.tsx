@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import HelpGuide from '@/components/help/HelpGuide';
 
 export default async function AppLayout({
   children,
@@ -100,10 +101,11 @@ export default async function AppLayout({
         {/* 상단바 */}
         <header className="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-border bg-surface/80 px-6 backdrop-blur">
           <div className="flex items-center gap-4">
-            <h1 className="text-lg font-semibold capitalize">{workspace.name}</h1>
-            <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
-              {workspace.plan.toUpperCase()}
+            <h1 className="text-lg font-semibold capitalize text-slate-900">{workspace.name}</h1>
+            <span className="rounded-md bg-emerald-50 px-2.5 py-0.5 text-[10px] font-bold text-emerald-700 border border-emerald-100 uppercase tracking-wider">
+              {workspace.plan}
             </span>
+            <HelpGuide />
           </div>
           <div className="flex items-center gap-4">
             <Link
