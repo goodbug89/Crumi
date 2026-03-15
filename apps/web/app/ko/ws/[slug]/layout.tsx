@@ -3,6 +3,8 @@ import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
+import HelpGuide from '@/components/help/HelpGuide';
+
 export default async function AppLayout({
   children,
   params,
@@ -54,10 +56,10 @@ export default async function AppLayout({
             href={`/ko/ws/${slug}/dashboard`}
             className="flex items-center gap-3 font-black group"
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary text-white shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-600 text-white shadow-lg shadow-emerald-600/20 group-hover:scale-110 transition-transform">
               {workspace.name[0]}
             </div>
-            <span className="truncate text-lg tracking-tighter">{workspace.name}</span>
+            <span className="truncate text-lg tracking-tighter text-slate-800 font-black">{workspace.name}</span>
           </Link>
         </div>
 
@@ -99,16 +101,19 @@ export default async function AppLayout({
       <div className="flex flex-1 flex-col pl-64">
         {/* 상단바 */}
         <header className="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-border bg-surface/80 px-6 backdrop-blur">
-          <div className="flex items-center gap-4">
-            <h1 className="text-lg font-semibold capitalize">{workspace.name}</h1>
-            <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
-              {workspace.plan.toUpperCase()}
-            </span>
+          <div className="flex items-center gap-3">
+            <h1 className="text-lg font-bold tracking-tight text-slate-900">{workspace.name}</h1>
+            <div className="flex items-center gap-2">
+              <span className="rounded-md bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700 border border-emerald-100 uppercase tracking-widest leading-none">
+                {workspace.plan}
+              </span>
+              <HelpGuide />
+            </div>
           </div>
           <div className="flex items-center gap-4">
             <Link
               href="/ko/workspace-select"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground"
+              className="text-sm font-medium text-muted-foreground hover:text-slate-900 transition-colors"
             >
               {t('switchWorkspace')}
             </Link>

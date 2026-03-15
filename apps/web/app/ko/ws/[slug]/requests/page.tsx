@@ -51,7 +51,7 @@ export default async function FeatureRequestsPage({
         </div>
         <Link
           href={`/ko/ws/${slug}/requests/new`}
-          className="inline-flex h-12 items-center justify-center rounded-2xl bg-primary px-8 font-bold text-primary-foreground shadow-xl shadow-primary/20 transition-all hover:bg-primary/90 hover:scale-[1.02] active:scale-95"
+          className="inline-flex h-10 items-center justify-center rounded-lg bg-emerald-600 px-6 font-bold text-sm text-white shadow-sm transition-all hover:bg-emerald-700 hover:translate-y-[-2px] active:scale-[0.98]"
         >
           {t('addNew')}
         </Link>
@@ -62,7 +62,7 @@ export default async function FeatureRequestsPage({
           requests.map((req) => (
             <div
               key={req.id}
-              className="group flex gap-6 p-7 rounded-[32px] border border-border bg-surface shadow-sm hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/[0.03] transition-all hover-lift"
+              className="group flex gap-6 p-7 rounded-2xl border border-slate-100 bg-white shadow-sm hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-600/5 transition-all hover:translate-y-[-2px]"
             >
               {/* 투표 컨체이너 (Side) */}
               <div className="shrink-0 flex items-start pt-1">
@@ -129,7 +129,7 @@ export default async function FeatureRequestsPage({
             </p>
             <Link
               href={`/ko/ws/${slug}/requests/new`}
-              className="mt-10 h-12 px-10 bg-foreground text-background rounded-2xl font-black text-sm hover:opacity-90 active:scale-95 transition-all"
+              className="mt-10 inline-flex h-11 items-center justify-center px-10 bg-emerald-600 text-white rounded-lg font-bold text-sm shadow-sm hover:bg-emerald-700 hover:translate-y-[-2px] transition-all active:scale-[0.98]"
             >
               {t('empty.action')}
             </Link>

@@ -90,7 +90,7 @@ export default async function PipelinePage({
         <div className="flex items-center gap-3">
           <Link
             href={`/ko/ws/${slug}/pipeline/new`}
-            className="inline-flex h-12 items-center justify-center rounded-2xl bg-primary px-6 font-bold text-primary-foreground shadow-xl shadow-primary/20 transition-all hover:bg-primary/90 hover:scale-[1.02] active:scale-95"
+            className="inline-flex h-10 items-center justify-center rounded-lg bg-emerald-600 px-6 font-bold text-sm text-white shadow-sm transition-all hover:bg-emerald-700 hover:translate-y-[-2px] active:scale-[0.98]"
           >
             {t('addNew')}
           </Link>
@@ -108,7 +108,7 @@ export default async function PipelinePage({
           </p>
           <Link
             href={`/ko/ws/${slug}/pipeline/new`}
-            className="mt-8 h-12 px-8 bg-foreground text-background rounded-2xl font-black text-sm hover:opacity-90 active:scale-95 transition-all"
+            className="mt-8 inline-flex h-11 items-center justify-center px-8 bg-emerald-600 text-white rounded-lg font-bold text-sm shadow-sm hover:bg-emerald-700 hover:translate-y-[-2px] active:scale-[0.98] transition-all"
           >
             {t('empty.action')}
           </Link>
@@ -118,7 +118,7 @@ export default async function PipelinePage({
           {pipelineData.map((stage) => (
             <div
               key={stage.id}
-              className="flex flex-col gap-5 min-w-[320px] max-w-[320px] rounded-[32px] bg-muted/30 p-5 border border-border/50 snap-center hover:bg-muted/50 transition-colors"
+              className="flex flex-col gap-5 min-w-[320px] max-w-[320px] rounded-2xl bg-slate-50 p-5 border border-slate-100 snap-center hover:bg-slate-100/80 transition-colors"
             >
               {/* 스테이지 헤더 */}
               <div className="flex flex-col gap-2">
@@ -146,7 +146,7 @@ export default async function PipelinePage({
                   <Link
                     key={deal.id}
                     href={`/ko/ws/${slug}/pipeline/${deal.id}/edit`}
-                    className="group flex flex-col gap-4 rounded-3xl border border-border bg-surface p-5 shadow-sm hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 transition-all hover-lift active-tap"
+                    className="group flex flex-col gap-4 rounded-xl border border-slate-100 bg-white p-5 shadow-sm hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-600/5 transition-all hover:translate-y-[-2px] active:scale-[0.98]"
                   >
                     <div className="flex justify-between items-start">
                       <h4 className="font-bold text-foreground leading-snug break-words pr-2">

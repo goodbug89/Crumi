@@ -50,7 +50,7 @@ export default async function ProjectsPage({
         </div>
         <Link
           href={`/ko/ws/${slug}/projects/new`}
-          className="inline-flex h-12 items-center justify-center rounded-2xl bg-primary px-8 font-bold text-primary-foreground shadow-xl shadow-primary/20 transition-all hover:bg-primary/90 hover:scale-[1.02] active:scale-95"
+          className="inline-flex h-10 items-center justify-center rounded-lg bg-emerald-600 px-6 font-bold text-sm text-white shadow-sm transition-all hover:bg-emerald-700 hover:translate-y-[-2px] active:scale-[0.98]"
         >
           {t('list.addNew')}
         </Link>
@@ -62,7 +62,7 @@ export default async function ProjectsPage({
             <Link
               href={`/ko/ws/${slug}/projects/${project.id}`}
               key={project.id}
-              className="group flex flex-col justify-between rounded-[40px] border border-border bg-surface p-8 shadow-sm transition-all hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5 hover-lift active-tap h-72 relative overflow-hidden"
+              className="group flex flex-col justify-between rounded-2xl border border-slate-100 bg-white p-7 shadow-sm transition-all hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-600/5 hover:translate-y-[-4px] active:scale-[0.98] h-72 relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:scale-125 transition-transform">
                 <span className="text-7xl">📁</span>
@@ -128,7 +128,7 @@ export default async function ProjectsPage({
             </p>
             <Link
               href={`/ko/ws/${slug}/projects/new`}
-              className="mt-10 h-14 px-12 bg-primary text-white rounded-2xl font-black shadow-xl shadow-primary/20 hover:scale-[1.05] transition-all active:scale-95"
+              className="mt-10 inline-flex h-11 items-center justify-center px-10 bg-emerald-600 text-white rounded-lg font-bold text-sm shadow-sm hover:bg-emerald-700 hover:translate-y-[-2px] transition-all active:scale-[0.98]"
             >
               {t('empty.action')}
             </Link>

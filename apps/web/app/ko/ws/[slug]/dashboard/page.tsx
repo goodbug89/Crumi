@@ -135,7 +135,7 @@ export default async function DashboardPage({
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* 영업 파이프라인 시각화 */}
-        <div className="lg:col-span-2 rounded-3xl border border-border bg-surface p-6 shadow-sm flex flex-col gap-6 hover-lift active-tap">
+        <div className="lg:col-span-2 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm flex flex-col gap-6 hover:shadow-md transition-all">
           <div className="flex items-center justify-between">
             <h3 className="font-bold text-lg flex items-center gap-2">
               <span>📈</span> {t('pipeline.title')}
@@ -223,7 +223,7 @@ export default async function DashboardPage({
         </div>
 
         {/* AI 코치 추천 */}
-        <div className="rounded-3xl border border-border bg-gradient-to-br from-primary/5 to-secondary/5 p-6 shadow-sm flex flex-col gap-4 relative overflow-hidden group hover-lift active-tap">
+        <div className="rounded-2xl border border-emerald-100 bg-emerald-50/30 p-6 shadow-sm flex flex-col gap-4 relative overflow-hidden group hover:shadow-md transition-all">
           <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:rotate-12 transition-transform">
             <span className="text-6xl">🤖</span>
           </div>
@@ -253,7 +253,7 @@ export default async function DashboardPage({
           </div>
           <Link
             href={`/ko/ws/${slug}/ai-coach`}
-            className="mt-auto w-full py-4 bg-primary text-white rounded-2xl font-bold text-sm shadow-xl shadow-primary/20 hover:bg-primary/90 active:scale-95 transition-all text-center"
+            className="mt-auto inline-flex h-11 items-center justify-center w-full bg-emerald-600 text-white rounded-lg font-bold text-sm shadow-sm hover:bg-emerald-700 transition-all active:scale-[0.98]"
           >
             {t('aiCoach.viewReport')}
           </Link>
@@ -262,7 +262,7 @@ export default async function DashboardPage({
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* 미확인 넛지 */}
-        <div className="rounded-3xl border border-border bg-surface shadow-sm overflow-hidden flex flex-col hover-lift">
+        <div className="rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden flex flex-col hover:shadow-md transition-all">
           <div className="border-b border-border p-6 bg-muted/20">
             <h3 className="font-bold text-lg flex items-center gap-2">
               <span>🔔</span> {t('nudges.title')}
@@ -298,7 +298,7 @@ export default async function DashboardPage({
                           ? `/ko/ws/${slug}/customers/${nudge.customer_id}`
                           : `/ko/ws/${slug}/projects/${nudge.project_id}`
                       }
-                      className="text-xs font-bold bg-warning text-warning-foreground px-4 py-2 rounded-xl hover:bg-warning/90 transition-all shadow-md active:scale-95"
+                      className="inline-flex items-center justify-center text-xs font-bold bg-warning text-white px-4 h-9 rounded-lg hover:brightness-110 transition-all shadow-sm active:scale-95"
                     >
                       {t('nudges.action')}
                     </Link>
@@ -319,7 +319,7 @@ export default async function DashboardPage({
         </div>
 
         {/* 최근 활동 */}
-        <div className="rounded-3xl border border-border bg-surface shadow-sm overflow-hidden flex flex-col hover-lift">
+        <div className="rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden flex flex-col hover:shadow-md transition-all">
           <div className="border-b border-border p-6 bg-muted/20 flex justify-between items-center">
             <h3 className="font-bold text-lg flex items-center gap-2">
               <span>📅</span> {t('recentActivity.title')}
@@ -390,7 +390,7 @@ function StatCard({
   trend,
 }: { title: string; value: string | number; icon: string; trend: string }) {
   return (
-    <div className="rounded-3xl border border-border bg-surface p-6 shadow-sm hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 transition-all group hover-lift active-tap">
+    <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:border-emerald-200 hover:shadow-md transition-all group active:scale-[0.98]">
       <div className="flex flex-row items-center justify-between space-y-0 pb-2">
         <h3 className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
           {title}
