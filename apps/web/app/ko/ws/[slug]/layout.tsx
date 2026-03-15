@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
+import { getTranslations } from 'next-intl/server';
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 export default async function AppLayout({
@@ -11,11 +12,16 @@ export default async function AppLayout({
 }) {
   const { slug } = await params;
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   if (!user) {
     redirect('/ko/login');
   }
+
+  const t = await getTranslations('sidebar');
+  const tc = await getTranslations('common');
 
   // 워크스페이스 권한 검증
   const { data: workspace } = await supabase
@@ -32,31 +38,59 @@ export default async function AppLayout({
 
   const role = workspace.workspace_members[0].role;
 
+  // 사용자 프로필 조회
+  const { data: profile } = await supabase
+    .from('user_profiles')
+    .select('display_name, email, avatar_url')
+    .eq('id', user.id)
+    .single();
+
   return (
     <div className="flex min-h-screen bg-background text-foreground">
       {/* 사이드바 */}
-      <aside className="fixed inset-y-0 left-0 z-20 flex w-64 flex-col border-r border-border bg-surface transition-all">
-        <div className="flex h-16 items-center border-b border-border px-4">
-          <Link href={`/ko/ws/${slug}/dashboard`} className="flex items-center gap-2 font-semibold">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+      <aside className="fixed inset-y-0 left-0 z-20 flex w-64 flex-col border-r border-border bg-surface shadow-2xl transition-all">
+        <div className="flex h-16 items-center border-b border-border px-6">
+          <Link
+            href={`/ko/ws/${slug}/dashboard`}
+            className="flex items-center gap-3 font-black group"
+          >
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary text-white shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
               {workspace.name[0]}
             </div>
-            <span className="truncate">{workspace.name}</span>
+            <span className="truncate text-lg tracking-tighter">{workspace.name}</span>
           </Link>
         </div>
-        
-        <nav className="flex-1 space-y-1 overflow-y-auto p-3">
-          <SidebarLink href={`/ko/ws/${slug}/dashboard`} label="대시보드" emoji="🏠" />
-          <SidebarLink href={`/ko/ws/${slug}/customers`} label="고객 관리" emoji="👥" />
-          <SidebarLink href={`/ko/ws/${slug}/projects`} label="프로젝트" emoji="📁" />
-          <SidebarLink href={`/ko/ws/${slug}/pipeline`} label="파이프라인" emoji="📊" />
-          <SidebarLink href={`/ko/ws/${slug}/requests`} label="기능 요청" emoji="💡" />
+
+        <nav className="flex-1 space-y-1 overflow-y-auto p-4">
+          <SidebarLink href={`/ko/ws/${slug}/dashboard`} label={t('dashboard')} emoji="🏠" />
+          <SidebarLink href={`/ko/ws/${slug}/customers`} label={t('customers')} emoji="👥" />
+          <SidebarLink href={`/ko/ws/${slug}/projects`} label={t('projects')} emoji="📁" />
+          <SidebarLink href={`/ko/ws/${slug}/pipeline`} label={t('pipeline')} emoji="📊" />
+          <SidebarLink href={`/ko/ws/${slug}/ai-coach`} label={t('aiCoach')} emoji="🤖" />
+          <SidebarLink href={`/ko/ws/${slug}/requests`} label={t('requests')} emoji="💡" />
         </nav>
 
-        <div className="border-t border-border p-3">
-          <SidebarLink href={`/ko/ws/${slug}/settings`} label="설정" emoji="⚙️" />
-          <div className="mt-2 text-xs text-muted-foreground px-3">
-            Role: {role}
+        <div className="p-4 border-t border-border flex flex-col gap-3">
+          <SidebarLink href={`/ko/ws/${slug}/settings`} label={t('settings')} emoji="⚙️" />
+
+          <div className="mt-2 p-3 bg-muted/40 rounded-3xl flex items-center gap-3 group relative overflow-hidden">
+            <div className="h-9 w-9 bg-secondary rounded-2xl flex items-center justify-center font-bold text-white shadow-md">
+              {profile?.display_name?.charAt(0) || 'U'}
+            </div>
+            <div className="flex flex-col min-w-0 flex-1">
+              <p className="text-sm font-bold truncate">{profile?.display_name || tc('user')}</p>
+              <p className="text-[10px] text-muted-foreground truncate font-medium uppercase tracking-tighter">
+                {role}
+              </p>
+            </div>
+            <form action="/api/auth/signout" method="post">
+              <button
+                type="submit"
+                className="text-muted-foreground hover:text-danger hover:scale-110 transition-all p-1"
+              >
+                <span className="text-xl">🚪</span>
+              </button>
+            </form>
           </div>
         </div>
       </aside>
@@ -66,27 +100,23 @@ export default async function AppLayout({
         {/* 상단바 */}
         <header className="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-border bg-surface/80 px-6 backdrop-blur">
           <div className="flex items-center gap-4">
-            <h1 className="text-lg font-semibold capitalize">
-              {workspace.name} 
-            </h1>
+            <h1 className="text-lg font-semibold capitalize">{workspace.name}</h1>
             <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
               {workspace.plan.toUpperCase()}
             </span>
           </div>
           <div className="flex items-center gap-4">
-            <Link 
-              href="/ko/workspace-select" 
+            <Link
+              href="/ko/workspace-select"
               className="text-sm font-medium text-muted-foreground hover:text-foreground"
             >
-              워크스페이스 변경
+              {t('switchWorkspace')}
             </Link>
           </div>
         </header>
 
         {/* 메인 뷰 */}
-        <main className="flex-1 overflow-y-auto p-6">
-          {children}
-        </main>
+        <main className="flex-1 overflow-y-auto p-6">{children}</main>
       </div>
     </div>
   );

@@ -6,35 +6,35 @@
 
 :root {
   /* Primary Colors */
-  --primary: #0F6E56;
-  --primary-foreground: #FFFFFF;
-  --secondary: #5DCAA5;
-  --secondary-foreground: #031E1A;
-  --accent: #534AB7;
-  --accent-foreground: #FFFFFF;
+  --primary: #0f6e56;
+  --primary-foreground: #ffffff;
+  --secondary: #5dcaa5;
+  --secondary-foreground: #031e1a;
+  --accent: #534ab7;
+  --accent-foreground: #ffffff;
 
   /* Semantic Colors */
   --success: #639922;
-  --warning: #EF9F27;
-  --danger: #E24B4A;
+  --warning: #ef9f27;
+  --danger: #e24b4a;
 
   /* Neutral */
-  --background: #FAFAF8;
-  --foreground: #1A1A18;
-  --surface: #FFFFFF;
-  --muted: #F5F5F0;
-  --muted-foreground: #6B6B65;
-  --border: #E5E5E0;
-  --input: #E5E5E0;
-  --ring: #0F6E56;
+  --background: #fafaf8;
+  --foreground: #1a1a18;
+  --surface: #ffffff;
+  --muted: #f5f5f0;
+  --muted-foreground: #6b6b65;
+  --border: #e5e5e0;
+  --input: #e5e5e0;
+  --ring: #0f6e56;
 
   /* Crumi Character */
-  --crumi-default: #5DCAA5;
-  --crumi-analyze: #85B7EB;
-  --crumi-celebrate: #FAC775;
-  --crumi-alert: #F5C4B3;
-  --crumi-working: #AFA9EC;
-  --crumi-sad: #D3D1C7;
+  --crumi-default: #5dcaa5;
+  --crumi-analyze: #85b7eb;
+  --crumi-celebrate: #fac775;
+  --crumi-alert: #f5c4b3;
+  --crumi-working: #afa9ec;
+  --crumi-sad: #d3d1c7;
 
   /* Sidebar */
   --sidebar-width: 256px;
@@ -52,11 +52,11 @@
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0F0F0E;
-    --foreground: #FAFAF8;
-    --surface: #1A1A18;
+    --background: #0f0f0e;
+    --foreground: #fafaf8;
+    --surface: #1a1a18;
     --muted: #252520;
-    --muted-foreground: #9B9B95;
+    --muted-foreground: #9b9b95;
     --border: #333330;
     --input: #333330;
   }
@@ -80,8 +80,8 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-sans: 'Pretendard', 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-sans: "Pretendard", "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
 }
 
 /* ============================================================
@@ -126,4 +126,62 @@ body {
 ::selection {
   background: var(--secondary);
   color: var(--secondary-foreground);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.hover-lift {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.active-tap:active {
+  transform: scale(0.96);
 }

@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export default function CreateWorkspacePage() {
   const [name, setName] = useState('');
@@ -11,6 +12,7 @@ export default function CreateWorkspacePage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const t = useTranslations('workspaceCreate');
 
   const handleSlugChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // 슬러그는 영문 소문자, 숫자, 하이픈만 허용
@@ -23,22 +25,24 @@ export default function CreateWorkspacePage() {
     setError('');
 
     if (!name.trim()) {
-      setError('워크스페이스 이름을 입력해주세요.');
+      setError(t('errors.nameRequired'));
       return;
     }
     if (!slug.trim()) {
-      setError('워크스페이스 URL을 입력해주세요.');
+      setError(t('errors.slugRequired'));
       return;
     }
 
     setLoading(true);
-    
+
     try {
       const supabase = createClient();
-      const { data: { user } } = await supabase.auth.getUser();
-      
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
       if (!user) {
-        throw new Error('인증이 필요합니다.');
+        throw new Error(t('errors.authRequired'));
       }
 
       // 1. 워크스페이스 생성
@@ -52,21 +56,20 @@ export default function CreateWorkspacePage() {
         .single();
 
       if (wsError) {
-        if (wsError.code === '23505') { // 고유 제약조건 위반 (slug 중복)
-          throw new Error('이미 사용 중인 URL입니다. 다른 URL을 입력해주세요.');
+        if (wsError.code === '23505') {
+          // 고유 제약조건 위반 (slug 중복)
+          throw new Error(t('errors.slugDuplicate'));
         }
         throw wsError;
       }
 
       // 2. 멤버 추가 (owner 역할)
-      const { error: memberError } = await supabase
-        .from('workspace_members')
-        .insert({
-          workspace_id: workspace.id,
-          user_id: user.id,
-          role: 'owner',
-          status: 'active',
-        });
+      const { error: memberError } = await supabase.from('workspace_members').insert({
+        workspace_id: workspace.id,
+        user_id: user.id,
+        role: 'owner',
+        status: 'active',
+      });
 
       if (memberError) throw memberError;
 
@@ -74,7 +77,7 @@ export default function CreateWorkspacePage() {
       router.push(`/ko/ws/${workspace.slug}/dashboard`);
       router.refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : '워크스페이스 생성 중 오류가 발생했습니다.');
+      setError(err instanceof Error ? err.message : t('errors.createFailed'));
     } finally {
       setLoading(false);
     }
@@ -88,24 +91,20 @@ export default function CreateWorkspacePage() {
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/20 text-3xl">
             ✨
           </div>
-          <h1 className="text-2xl font-bold text-foreground">워크스페이스 만들기</h1>
-          <p className="text-sm text-center text-muted-foreground">
-            팀과 함께 사용할 새로운 공간을 만듭니다.
-          </p>
+          <h1 className="text-2xl font-bold text-foreground">{t('title')}</h1>
+          <p className="text-sm text-center text-muted-foreground">{t('subtitle')}</p>
         </div>
 
         {/* Form Container */}
         <div className="rounded-2xl border border-border bg-surface p-8 shadow-sm">
           <form onSubmit={handleCreate} className="flex flex-col gap-5">
             {error && (
-              <div className="rounded-lg bg-danger/10 px-4 py-3 text-sm text-danger">
-                {error}
-              </div>
+              <div className="rounded-lg bg-danger/10 px-4 py-3 text-sm text-danger">{error}</div>
             )}
 
             <div className="flex flex-col gap-2">
               <label htmlFor="name" className="text-sm font-medium text-foreground">
-                워크스페이스 이름
+                {t('fields.name')}
               </label>
               <input
                 id="name"
@@ -117,7 +116,7 @@ export default function CreateWorkspacePage() {
                     setSlug(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ''));
                   }
                 }}
-                placeholder="예: 우리팀 CRM"
+                placeholder={t('fields.namePlaceholder')}
                 required
                 maxLength={50}
                 className="h-11 rounded-lg border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20"
@@ -126,7 +125,7 @@ export default function CreateWorkspacePage() {
 
             <div className="flex flex-col gap-2">
               <label htmlFor="slug" className="text-sm font-medium text-foreground">
-                고유 URL (영문 소문자, 숫자, 하이픈만 가능)
+                {t('fields.slug')}
               </label>
               <div className="flex rounded-lg border border-input bg-background focus-within:border-primary focus-within:ring-2 focus-within:ring-ring/20">
                 <span className="flex items-center px-3 text-sm text-muted-foreground border-r border-input bg-muted/50 rounded-l-lg">
@@ -137,7 +136,7 @@ export default function CreateWorkspacePage() {
                   type="text"
                   value={slug}
                   onChange={handleSlugChange}
-                  placeholder="our-team"
+                  placeholder={t('fields.slugPlaceholder')}
                   required
                   maxLength={50}
                   className="h-11 flex-1 bg-transparent px-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
@@ -150,14 +149,14 @@ export default function CreateWorkspacePage() {
               disabled={loading || !name || !slug}
               className="mt-2 h-11 w-full rounded-xl bg-primary font-semibold text-primary-foreground transition-all hover:bg-primary/90 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? '생성 중...' : '워크스페이스 생성'}
+              {loading ? t('submitting') : t('submit')}
             </button>
 
             <Link
               href="/ko/workspace-select"
               className="mt-1 flex h-11 items-center justify-center rounded-xl font-medium text-muted-foreground transition-colors hover:text-foreground hover:bg-muted/50"
             >
-              취소
+              {t('cancel')}
             </Link>
           </form>
         </div>

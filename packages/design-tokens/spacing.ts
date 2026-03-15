@@ -11,11 +11,11 @@ export const borderRadius = {
 
 /** UI 컴포넌트별 기본 radius */
 export const componentRadius = {
-  card: borderRadius.xl,      // 16px
-  button: borderRadius.lg,    // 12px
-  input: borderRadius.md,     // 8px
-  badge: borderRadius.full,   // pill
-  avatar: borderRadius.full,  // circle
+  card: borderRadius.xl, // 16px
+  button: borderRadius.lg, // 12px
+  input: borderRadius.md, // 8px
+  badge: borderRadius.full, // pill
+  avatar: borderRadius.full, // circle
 } as const;
 
 export const breakpoints = {

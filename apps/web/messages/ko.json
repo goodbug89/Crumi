@@ -1,21 +1,660 @@
 {
-  "Common": {
+  "common": {
     "login": "로그인",
     "register": "가입하기",
+    "startNow": "시작하기",
     "dashboard": "대시보드",
     "settings": "설정",
     "save": "저장",
     "cancel": "취소",
     "delete": "삭제",
-    "edit": "수정"
+    "edit": "수정",
+    "close": "닫기",
+    "back": "←",
+    "next": "→",
+    "loading": "로딩 중...",
+    "confirm": "확인",
+    "search": "검색",
+    "create": "생성",
+    "add": "추가",
+    "remove": "제거",
+    "viewDetail": "상세보기",
+    "noData": "데이터 없음",
+    "error": "오류가 발생했습니다.",
+    "success": "성공",
+    "poweredBy": "Powered by Crumi Intelligence",
+    "terms": "이용약관",
+    "privacy": "개인정보 처리방침",
+    "copyright": "© 2026 Crumi. All rights reserved. Built with ❤️ for Sales people.",
+    "user": "사용자",
+    "other": "기타",
+    "none": "없음"
   },
-  "Auth": {
+  "auth": {
     "title": "Crumi",
     "subtitle": "Your Sales Buddy",
     "emailLabel": "이메일",
-    "passwordLabel": "비밀번호"
+    "passwordLabel": "비밀번호",
+    "loginTitle": "로그인",
+    "loginButton": "로그인",
+    "loginLoading": "로그인 중...",
+    "loginError": "로그인 중 오류가 발생했습니다.",
+    "invalidCredentials": "이메일 또는 비밀번호가 올바르지 않습니다.",
+    "noAccount": "계정이 없으신가요?",
+    "registerFree": "무료로 가입하기",
+    "registerTitle": "회원가입",
+    "nameLabel": "이름",
+    "namePlaceholder": "홍길동",
+    "emailPlaceholder": "your@email.com",
+    "passwordPlaceholder": "6자 이상",
+    "confirmPasswordLabel": "비밀번호 확인",
+    "confirmPasswordPlaceholder": "비밀번호를 다시 입력해주세요",
+    "registerButton": "무료로 시작하기",
+    "registerLoading": "가입 중...",
+    "registerError": "회원가입 중 오류가 발생했습니다.",
+    "passwordMismatch": "비밀번호가 일치하지 않습니다.",
+    "passwordMinLength": "비밀번호는 6자 이상이어야 합니다.",
+    "alreadyRegistered": "이미 가입된 이메일입니다.",
+    "hasAccount": "이미 계정이 있으신가요?",
+    "goToLogin": "로그인",
+    "successTitle": "가입 완료!",
+    "successMessage": "입력하신 이메일로 확인 링크를 보냈습니다.",
+    "successMessage2": "이메일을 확인해주세요.",
+    "goToLoginButton": "로그인하기",
+    "metaTitle": "로그인 — Crumi",
+    "metaDescription": "Crumi에 로그인하여 고객 관리를 시작하세요."
   },
-  "Dashboard": {
-    "welcome": "Crumi에 오신 것을 환영합니다!"
+  "landing": {
+    "nav": {
+      "login": "로그인",
+      "start": "시작하기"
+    },
+    "badge": "✨ Best AI CRM Workspace",
+    "heroTitle1": "Your Sales",
+    "heroTitle2": "Buddy, Crumi",
+    "heroDescription": "고객을 잊지 마세요. Crumi가 당신의 모든 영업 활동을 기억하고, 적절한 타이밍에 넛지를 줍니다.",
+    "ctaPrimary": "지금 무료로 체험하기",
+    "ctaSecondary": "데모 보기",
+    "socialProof": "현재 1,200+명의 영업팀이 사용 중",
+    "features": {
+      "customerManagement": {
+        "title": "고객 격리 관리",
+        "description": "워크스페이스 단위의 완벽한 데이터 격리로 안전하게 고객 정보를 보호합니다."
+      },
+      "smartNudge": {
+        "title": "스마트 넛지 시스템",
+        "description": "설정한 Cooltime 기간이 지나면 담당자에게 활동을 제안하는 똑똑한 알람."
+      },
+      "visualPipeline": {
+        "title": "비주얼 파이프라인",
+        "description": "드래그 앤 드롭으로 간편하게 관리하는 영업 단계와 수주 가능성 추적."
+      }
+    }
+  },
+  "workspaceSelect": {
+    "welcomeBack": "다시 오신 것을 환영합니다",
+    "selectWorkspace": "계속하려면 워크스페이스를 선택하세요",
+    "noWorkspaces": {
+      "title": "워크스페이스를 찾을 수 없습니다",
+      "description": "아래에서 첫 번째 워크스페이스를 생성해 보세요."
+    },
+    "createNew": "새 워크스페이스 만들기",
+    "joinWithCode": "초대 코드로 참여하기",
+    "plan": "플랜"
+  },
+  "workspaceCreate": {
+    "title": "워크스페이스 만들기",
+    "subtitle": "팀과 함께 사용할 새로운 공간을 만듭니다.",
+    "fields": {
+      "name": "워크스페이스 이름",
+      "namePlaceholder": "예: 우리팀 CRM",
+      "slug": "고유 URL (영문 소문자, 숫자, 하이픈만 가능)",
+      "slugPlaceholder": "our-team"
+    },
+    "submit": "워크스페이스 생성",
+    "submitting": "생성 중...",
+    "cancel": "취소",
+    "errors": {
+      "nameRequired": "워크스페이스 이름을 입력해주세요.",
+      "slugRequired": "워크스페이스 URL을 입력해주세요.",
+      "slugDuplicate": "이미 사용 중인 URL입니다. 다른 URL을 입력해주세요.",
+      "authRequired": "인증이 필요합니다.",
+      "createFailed": "워크스페이스 생성 중 오류가 발생했습니다."
+    }
+  },
+  "join": {
+    "title": "워크스페이스 참여",
+    "description": "관리자에게 받은 초대 코드를 입력하세요.",
+    "codeLabel": "초대 코드",
+    "codePlaceholder": "ABCD-1234",
+    "submit": "참여하기",
+    "cancel": "취소",
+    "checking": "확인 중...",
+    "errorEmpty": "초대 코드를 입력해주세요.",
+    "errorPreparing": "현재 초대 코드 기능은 준비 중입니다.",
+    "invite": {
+      "title": "워크스페이스 초대",
+      "description": "{workspaceName} 팀원들이 당신을 기다리고 있습니다!",
+      "joinNow": "지금 바로 합류하기",
+      "later": "나중에 하기",
+      "agreement": "합류하기를 클릭하면 Crumi의 이용 약관 및 개인정보 처리방침에 동의하는 것으로 간주됩니다.",
+      "invalidCode": "유효하지 않은 초대 코드",
+      "invalidCodeDescription": "초대 코드가 만료되었거나 올바르지 않습니다. 관리자에게 문의하세요.",
+      "goToWorkspace": "내 워크스페이스로 이동"
+    }
+  },
+  "sidebar": {
+    "dashboard": "대시보드",
+    "customers": "고객 관리",
+    "projects": "프로젝트",
+    "pipeline": "파이프라인",
+    "aiCoach": "AI 코치",
+    "requests": "기능 요청",
+    "settings": "워크스페이스 설정",
+    "switchWorkspace": "워크스페이스 변경"
+  },
+  "dashboard": {
+    "title": "대시보드",
+    "subtitle": "{workspaceName}의 실시간 영업 성과와 AI 인사이트를 확인하세요.",
+    "stats": {
+      "activeCustomers": "활성 고객",
+      "activeProjects": "진행중 프로젝트",
+      "activeDeals": "활성 거래",
+      "expectedRevenue": "예상 수익",
+      "trendCustomers": "+2% 지난달 대비",
+      "trendProjects": "안정적",
+      "trendDeals": "+5개 신규",
+      "trendRevenue": "목표 대비 85%",
+      "unit10k": "만"
+    },
+    "pipeline": {
+      "title": "영업 파이프라인 현황",
+      "viewDetail": "상세보기",
+      "stages": {
+        "lead": "리드",
+        "contact": "제안",
+        "negotiation": "협상",
+        "won": "수주"
+      },
+      "totalAmount": "전체 거래액",
+      "avgWinRate": "평균 승률",
+      "avgDealSize": "평균 규모",
+      "conversionRate": "수주 전환율"
+    },
+    "aiCoach": {
+      "title": "AI 코치 추천",
+      "noData": "분석할 데이터가 더 필요합니다.",
+      "viewReport": "AI 코치 전체 리포트"
+    },
+    "nudges": {
+      "title": "미확인 넛지",
+      "target": "대상:",
+      "action": "조치",
+      "allProcessed": "현재 모든 넛지가 처리되었습니다.",
+      "other": "기타"
+    },
+    "recentActivity": {
+      "title": "최근 활동",
+      "record": "기록하기",
+      "empty": "활동 기록을 남겨보세요.",
+      "noDetail": "기타 상세 없음"
+    },
+    "nudgeScanner": {
+      "button": "✨ 스마트 넛지 생성",
+      "scanning": "분석 중...",
+      "newNudges": "{count}개의 새로운 넛지가 생성되었습니다!",
+      "noNewNudges": "새로운 넛지가 없습니다. 모두 잘 관리되고 있네요!"
+    }
+  },
+  "customers": {
+    "list": {
+      "title": "고객 데이터베이스",
+      "subtitle": "비즈니스 관계의 중심, {count}명의 소중한 파트너를 관리합니다.",
+      "addNew": "+ 신규 고객 등록",
+      "columns": {
+        "nameTitle": "고객명 / 직함",
+        "company": "소속 회사",
+        "communication": "커뮤니케이션",
+        "status": "상태",
+        "lastUpdate": "최근 업데이트"
+      },
+      "noPosition": "직함 미지정"
+    },
+    "empty": {
+      "title": "아직 등록된 고객이 없네요.",
+      "description": "첫 번째 고객을 등록하고 Crumi의 스마트한 관리를 시작해 보세요.",
+      "action": "지금 바로 등록하기"
+    },
+    "new": {
+      "title": "신규 고객 등록",
+      "subtitle": "Crumi에 새로운 파트너를 등록하고 관계 관리를 시작하세요.",
+      "fields": {
+        "name": "성함 / 이름",
+        "namePlaceholder": "예: 홍길동",
+        "company": "회사명 / 소속",
+        "companyPlaceholder": "예: (주)크루미",
+        "position": "직책",
+        "positionPlaceholder": "예: 마케팅 팀장",
+        "phone": "연락처",
+        "phonePlaceholder": "010-0000-0000",
+        "email": "이메일 주소",
+        "emailPlaceholder": "email@company.com",
+        "notes": "추가 메모 및 특이사항",
+        "notesPlaceholder": "고객에 대한 중요한 비즈니스 컨텍스트를 기록해 두세요."
+      },
+      "submit": "고객 프로필 생성",
+      "submitting": "등록 중...",
+      "cancel": "취소",
+      "errors": {
+        "workspaceNotFound": "워크스페이스를 찾을 수 없습니다.",
+        "saveFailed": "고객 저장 중 오류가 발생했습니다."
+      }
+    },
+    "detail": {
+      "profile": "Profile",
+      "email": "Email",
+      "phone": "Phone",
+      "createdAt": "Created At",
+      "systemNotes": "System Notes",
+      "emptyNotes": "프로필 메모가 비어있습니다. 미팅 이력이나 특이사항을 기록해 두세요.",
+      "editNotes": "Edit Notes →",
+      "projects": "Projects",
+      "connect": "+ Connect",
+      "noProjects": "No Projects Yet",
+      "liveDeals": "Live Deals",
+      "newDeal": "+ New Deal",
+      "noDeals": "No Active Deals",
+      "activityStream": "Activity Stream",
+      "win": "Win"
+    },
+    "actions": {
+      "edit": "수정",
+      "delete": "삭제",
+      "deleting": "삭제 중...",
+      "confirmDelete": "{customerName} 고객님의 정보를 삭제하시겠습니까?",
+      "deleteError": "고객 삭제 중 오류가 발생했습니다."
+    },
+    "edit": {
+      "title": "고객 정보 수정",
+      "fields": {
+        "name": "이름",
+        "namePlaceholder": "홍길동",
+        "company": "회사명",
+        "companyPlaceholder": "(주)크루미",
+        "position": "직책",
+        "positionPlaceholder": "대표",
+        "phone": "연락처",
+        "phonePlaceholder": "010-0000-0000",
+        "email": "이메일",
+        "emailPlaceholder": "email@example.com",
+        "notes": "메모",
+        "notesPlaceholder": "고객에 대한 추가 정보를 입력하세요."
+      },
+      "submit": "변경사항 저장",
+      "saving": "저장 중...",
+      "cancel": "취소",
+      "errors": {
+        "fetchFailed": "고객 정보를 불러오는 중 오류가 발생했습니다.",
+        "updateFailed": "고객 수정 중 오류가 발생했습니다."
+      }
+    }
+  },
+  "projects": {
+    "list": {
+      "title": "프로젝트 허브",
+      "subtitle": "현재 진행 중인 {count}개의 프로젝트를 관리합니다.",
+      "addNew": "+ 새 프로젝트 착수",
+      "viewProject": "View Project →",
+      "noDescription": "상세 설명이 등록되지 않았습니다. 프로젝트의 목적과 비전을 입력해 보세요."
+    },
+    "status": {
+      "planning": "Planning",
+      "inProgress": "Executing",
+      "completed": "Done",
+      "onHold": "Paused"
+    },
+    "empty": {
+      "title": "진행 중인 프로젝트가 없네요.",
+      "description": "새로운 아이디어를 구체화하고 프로젝트로 만들어 보세요!",
+      "action": "첫 프로젝트 생성"
+    },
+    "new": {
+      "title": "새 프로젝트 착수",
+      "subtitle": "새로운 비즈니스 목표를 설정하고 팀과 함께 실행을 관리하세요.",
+      "fields": {
+        "name": "프로젝트 명칭",
+        "namePlaceholder": "예: 2026 하반기 마케팅 캠페인",
+        "status": "초기 상태",
+        "statusOptions": {
+          "planning": "기획 중 (Planning)",
+          "inProgress": "진행 중 (In Progress)",
+          "onHold": "보류 (On Hold)"
+        },
+        "description": "상세 설명 및 목표",
+        "descriptionPlaceholder": "프로젝트의 목적, 기대 효과, 주요 마일스톤을 기록하세요."
+      },
+      "submit": "프로젝트 시작하기",
+      "submitting": "생성 중...",
+      "cancel": "취소",
+      "errors": {
+        "workspaceNotFound": "워크스페이스를 찾을 수 없습니다.",
+        "createFailed": "프로젝트 생성 중 오류가 발생했습니다."
+      }
+    },
+    "detail": {
+      "created": "Created",
+      "details": "Details",
+      "description": "Description",
+      "noDescription": "작성된 상세 설명이 프로젝트 정보 패널에 없습니다.",
+      "stakeholders": "Stakeholders",
+      "noStakeholders": "No Stakeholders",
+      "projectPipeline": "Project Pipeline",
+      "addDeal": "+ Add Deal",
+      "noDeals": "No Connected Deals",
+      "projectActivity": "Project Activity"
+    },
+    "actions": {
+      "edit": "수정",
+      "delete": "삭제",
+      "deleting": "삭제 중...",
+      "confirmDelete": "\"{projectName}\" 프로젝트를 삭제하시겠습니까?",
+      "deleteError": "프로젝트 삭제 중 오류가 발생했습니다."
+    },
+    "connectCustomer": {
+      "title": "프로젝트 담당 고객 연결",
+      "connect": "+ 연결",
+      "loading": "불러오는 중...",
+      "noCustomers": "연결 가능한 고객이 없습니다.",
+      "close": "닫기",
+      "connectError": "고객 연결 중 오류가 발생했습니다."
+    }
+  },
+  "pipeline": {
+    "title": "영업 파이프라인",
+    "subtitle": "현재 진행 중인 {count}개의 거래를 단계별로 관리하세요.",
+    "addNew": "+ 새 거래 추가",
+    "stages": {
+      "lead": "리드 발굴",
+      "contact": "제안 및 접촉",
+      "negotiation": "조건 협상",
+      "won": "수주 완료"
+    },
+    "deal": {
+      "amount": "Amount",
+      "winRate": "Win Rate",
+      "created": "Created",
+      "detail": "Detail →"
+    },
+    "emptyStage": "Empty Stage",
+    "empty": {
+      "title": "거래 내역이 텅 비어있습니다.",
+      "description": "파이프라인에 새로운 영업 기회를 추가하여 수주 성공률을 높여보세요.",
+      "action": "첫 거래 등록하기"
+    },
+    "new": {
+      "title": "새 거래(Deal) 기회 등록",
+      "subtitle": "파이프라인에 새로운 영업 기회를 추가하고 매출 목표를 달성하세요.",
+      "fields": {
+        "title": "딜 명칭 (Opportunity Title)",
+        "titlePlaceholder": "예: 알파테크 서버 인프라 교체 건",
+        "stage": "진행 단계",
+        "stageOptions": {
+          "lead": "리드 발굴 (Lead)",
+          "contact": "제안 및 접촉 (Proposal)",
+          "negotiation": "조건 협상 (Negotiation)",
+          "won": "계약 수주 (Closed Won)"
+        },
+        "probability": "예상 승률 (%)",
+        "amount": "예상 금액 (Deal Size)",
+        "amountPlaceholder": "10,000,000",
+        "customer": "연결된 고객",
+        "customerDefault": "-- 고객 선택 안함 --",
+        "project": "연계 프로젝트",
+        "projectDefault": "-- 프로젝트 선택 안함 --"
+      },
+      "submit": "거래 등록 완료",
+      "submitting": "등록 중...",
+      "cancel": "취소",
+      "errors": {
+        "workspaceNotFound": "워크스페이스를 찾을 수 없습니다.",
+        "createFailed": "거래 생성 중 오류가 발생했습니다."
+      }
+    }
+  },
+  "requests": {
+    "title": "커뮤니티 보이스",
+    "subtitle": "여러분의 제안이 Crumi의 다음 기능이 됩니다. 투표로 의견을 표현하세요!",
+    "addNew": "+ 새로운 아이디어 제안",
+    "suggestedBy": "Suggested by",
+    "anonymous": "Anonymous",
+    "empty": {
+      "title": "첫 번째 주인공이 되어주세요.",
+      "description": "Crumi에 필요한 기능이 무엇인가요? 당신의 소중한 의견을 기다립니다.",
+      "action": "제안 등록하기"
+    },
+    "new": {
+      "title": "새로운 아이디어 제안",
+      "fields": {
+        "titleLabel": "제목",
+        "titlePlaceholder": "예: 고객 목록에서 태그 필터링이 필요해요",
+        "category": "분류",
+        "categories": {
+          "customer": "고객 관리",
+          "pipeline": "파이프라인 및 거래",
+          "project": "프로젝트 관리",
+          "nudge": "알림(넛지) 시스템",
+          "ai": "AI 스킬",
+          "other": "기타"
+        },
+        "descriptionLabel": "상세 내용",
+        "descriptionPlaceholder": "어떤 기능인지, 왜 필요한지 자세히 알려주세요 :)"
+      },
+      "cancel": "취소",
+      "submit": "제안하기",
+      "submitting": "제출 중...",
+      "required": "*",
+      "errors": {
+        "auth": "인증 오류",
+        "workspaceNotFound": "워크스페이스를 찾을 수 없습니다.",
+        "createFailed": "요청 등록 중 오류가 발생했습니다."
+      }
+    }
+  },
+  "settings": {
+    "title": "워크스페이스 설정",
+    "subtitle": "워크스페이스의 전역 설정 및 팀 리소스를 관리합니다.",
+    "general": {
+      "title": "일반 정보",
+      "workspaceName": "Workspace Name",
+      "slug": "Slug / URL",
+      "currentPlan": "Current Plan",
+      "upgrade": "Upgrade →",
+      "editInfo": "정보수정"
+    },
+    "features": {
+      "title": "기능 활성화",
+      "nudgeSystem": "넛지 시스템",
+      "billing": "결제 및 구독"
+    },
+    "members": {
+      "title": "팀 멤버 관리",
+      "columns": {
+        "user": "사용자",
+        "role": "역할",
+        "status": "상태",
+        "joinDate": "가입일",
+        "manage": "관리"
+      },
+      "beforeLogin": "로그인 전",
+      "noEmail": "이메일 없음",
+      "me": "나",
+      "unknown": "알 수 없음",
+      "footnote1": "* 멤버를 워크스페이스에서 제외하면 해당 사용자는 더 이상 관련 데이터에 접근할 수 없습니다.",
+      "footnote2": "* Owner 역할은 다른 멤버에게 양도하기 전까지 유지됩니다."
+    },
+    "invite": {
+      "copyLink": "🔗 초대 링크 복사",
+      "copied": "✅ 복사 완료"
+    },
+    "removeMember": {
+      "button": "제외",
+      "processing": "처리중...",
+      "confirmMessage": "정말 \"{memberName}\" 멤버를 워크스페이스에서 제외하시겠습니까?\n제외된 멤버는 더 이상 워크스페이스 데이터에 접근할 수 없습니다.",
+      "error": "멤버 제외 실패: {error}"
+    },
+    "billing": {
+      "title": "결제 및 구독 관리",
+      "subtitle": "플랜을 업그레이드하여 Crumi의 모든 강력한 기능을 경험하세요.",
+      "currentSubscription": "현재 구독 정보",
+      "billingOverview": "Billing Overview",
+      "currentPlan": "Current Plan",
+      "nextBillingDate": "Next Billing Date",
+      "nextBillingValue": "Next Month 1st",
+      "paymentMethod": "Payment Method",
+      "paymentMethodValue": "None Linked",
+      "mostPopular": "Most Popular",
+      "currentlyUsing": "현재 사용중",
+      "plans": {
+        "starter": {
+          "name": "Starter",
+          "price": "₩ 0",
+          "description": "개인 및 소규모 팀을 위한 평생 무료 플랜",
+          "features": ["고객 관리 (최대 50명)", "프로젝트 3개", "기본 넛지 시스템", "커뮤니티 지원"],
+          "button": "현재 이용 중"
+        },
+        "pro": {
+          "name": "Pro",
+          "price": "₩ 29,000",
+          "period": "/월",
+          "description": "성장하는 영업팀을 위한 모든 기능",
+          "features": ["무제한 고객/프로젝트", "스마트 AI 코치 추천", "고급 파이프라인 분석", "우선 순위 지원"],
+          "button": "프로로 업그레이드"
+        },
+        "enterprise": {
+          "name": "Business",
+          "price": "₩ 99,000",
+          "period": "/월",
+          "description": "규모 있는 조직을 위한 전용 관리 도구",
+          "features": ["Pro의 모든 기능", "API 접근 권한", "전담 매니저 배정", "데이터 추출 제공"],
+          "button": "비즈니스 시작하기"
+        }
+      },
+      "annualDiscount": "구독 시작은 연 단위 결제 시 최대 20% 할인 혜택을 드립니다.",
+      "enterpriseContact": "대규모 기업 도입 문의:"
+    },
+    "cooltime": {
+      "title": "넛지 시스템 설정",
+      "subtitle": "고객이나 프로젝트와 오랫동안 소통하지 않았을 때 알림(Nudge)을 줄 기준 기간(Cooltime)을 설정합니다.",
+      "targets": {
+        "customer": "고객 관리 주기",
+        "project": "프로젝트 소통 주기",
+        "deal_stage": "기본 거래 유지 주기"
+      },
+      "nudgeAfter": "마지막 활동 이후 {days}일이 지나면 넛지를 보냅니다.",
+      "daysUnit": "일",
+      "infoTitle": "넛지 시스템이란?",
+      "infoDescription": "Crumi는 영업 담당자가 고객을 잊지 않도록 도와줍니다. 설정한 기간 내에 통화, 이메일, 미팅 등의 활동 기록이 남지 않으면 대시보드에서 해당 고객을 우선적으로 챙기도록 알림을 줍니다.",
+      "save": "설정 저장하기",
+      "saving": "저장 중...",
+      "saveSuccess": "설정이 저장되었습니다.",
+      "saveError": "저장 중 오류가 발생했습니다.",
+      "workspaceNotFound": "워크스페이스를 찾을 수 없습니다."
+    }
+  },
+  "aiCoach": {
+    "title": "AI Sales Coach",
+    "subtitle": "당신의 영업 데이터를 실시간으로 분석하여 최적의 경로를 제안합니다.",
+    "crumiCoach": "Crumi Coach",
+    "engineActive": "Analysis Engine Active",
+    "greeting": "안녕하세요! 현재 {dealCount}개의 거래와 {customerCount}명의 소중한 관계가 감지되었습니다.",
+    "hasInsights": "분석 결과, 오늘 {firstInsight}와 관련된 중요한 발견이 있네요. 확인해 볼까요?",
+    "needMoreData": "아직 분석할 데이터가 조금 더 필요합니다. 고객이나 활동 기록을 더 추가해 보세요!",
+    "askPlaceholder": "코치에게 특정 거래나 전략에 대해 물어보세요...",
+    "askCoach": "Ask Coach",
+    "insightsScan": "실시간 인사이트 스캔",
+    "noInsights": "도출된 새로운 인사이트가 없습니다.",
+    "insight": "Insight",
+    "salesHealth": "Sales Health",
+    "globalWinRate": "Global Win Rate",
+    "avgDealValue": "Avg. Deal Value",
+    "healthComment": "현재 수치로 볼 때 팀의 영업 활동이 안정적입니다. 특히 {count}개의 수주 임박 거래가 건강한 현금 흐름을 시사합니다.",
+    "coachMemory": "Coach Memory",
+    "analyzedCustomers": "분석 대상 고객: {count}명",
+    "analyzedDeals": "분석 대상 거래: {count}건",
+    "recentActivityScan": "최근 활동 데이터 스캔 완료"
+  },
+  "projectsEdit": {
+    "title": "프로젝트 수정",
+    "fields": {
+      "name": "프로젝트 이름",
+      "namePlaceholder": "2026 런칭 마케팅 컨설팅",
+      "status": "현재 상태",
+      "statusOptions": {
+        "planning": "기획중",
+        "inProgress": "진행중",
+        "completed": "완료",
+        "onHold": "보류"
+      },
+      "description": "상세 설명",
+      "descriptionPlaceholder": "프로젝트의 목적과 주요 범위를 기술해주세요."
+    },
+    "submit": "변경사항 저장",
+    "submitting": "저장 중...",
+    "cancel": "취소",
+    "errors": {
+      "loadFailed": "프로젝트 정보를 불러오는 중 오류가 발생했습니다.",
+      "updateFailed": "프로젝트 수정 중 오류가 발생했습니다."
+    }
+  },
+  "pipelineEdit": {
+    "title": "거래 수정",
+    "fields": {
+      "title": "거래 제목",
+      "titlePlaceholder": "예: 크루미 라이선스 계약",
+      "stage": "현재 단계",
+      "stageOptions": {
+        "lead": "리드 (Lead)",
+        "contact": "접촉 및 제안",
+        "negotiation": "협상 중",
+        "won": "계약 수주",
+        "lost": "계약 실패"
+      },
+      "probability": "승률 (%)",
+      "amount": "예상 금액 (₩)",
+      "amountPlaceholder": "0",
+      "customer": "연결된 고객",
+      "customerDefault": "고객 선택 안함",
+      "project": "연결된 프로젝트",
+      "projectDefault": "프로젝트 선택 안함"
+    },
+    "submit": "변경사항 저장",
+    "submitting": "저장 중...",
+    "cancel": "취소",
+    "errors": {
+      "loadFailed": "데이터를 불러오는 중 오류가 발생했습니다.",
+      "updateFailed": "거래 수정 중 오류가 발생했습니다."
+    }
+  },
+  "activities": {
+    "title": "활동 기록",
+    "addButton": "활동 기록 남기기",
+    "newRecord": "새 활동 기록",
+    "empty": "아직 기록된 활동이 없습니다. 첫 활동을 등록해보세요!",
+    "types": {
+      "call": "통화",
+      "email": "이메일",
+      "meeting": "미팅",
+      "note": "메모",
+      "task": "할일"
+    },
+    "form": {
+      "titlePlaceholder": "활동 제목 (예: 제안서 전달 통화)",
+      "descriptionPlaceholder": "상세 내용 (선택)",
+      "cancel": "취소",
+      "submit": "기록 저장",
+      "submitting": "저장 중...",
+      "saveError": "활동 기록 저장 중 오류가 발생했습니다.",
+      "authRequired": "인증이 필요합니다."
+    }
   }
 }

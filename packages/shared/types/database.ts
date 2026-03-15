@@ -213,7 +213,13 @@ export interface Nudge extends Timestamps {
 // 7. 기능 요청
 // ============================================================
 
-export type FeatureRequestStatus = 'open' | 'reviewing' | 'approved' | 'in_progress' | 'done' | 'rejected';
+export type FeatureRequestStatus =
+  | 'open'
+  | 'reviewing'
+  | 'approved'
+  | 'in_progress'
+  | 'done'
+  | 'rejected';
 export type FeatureCategory = 'customer' | 'pipeline' | 'project' | 'ai' | 'nudge' | 'other';
 
 export interface FeatureRequest extends Timestamps {

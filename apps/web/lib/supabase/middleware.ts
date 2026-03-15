@@ -1,5 +1,5 @@
 import { createServerClient } from '@supabase/ssr';
-import { NextResponse, type NextRequest } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
@@ -12,7 +12,9 @@ export async function updateSession(request: NextRequest) {
         getAll() {
           return request.cookies.getAll();
         },
-        setAll(cookiesToSet: Array<{ name: string; value: string; options?: Record<string, unknown> }>) {
+        setAll(
+          cookiesToSet: Array<{ name: string; value: string; options?: Record<string, unknown> }>,
+        ) {
           for (const { name, value } of cookiesToSet) {
             request.cookies.set(name, value);
           }
@@ -32,8 +34,7 @@ export async function updateSession(request: NextRequest) {
 
   // 인증이 필요한 페이지에 비로그인 상태로 접근 시 리다이렉트
   const isAuthPage =
-    request.nextUrl.pathname.includes('/login') ||
-    request.nextUrl.pathname.includes('/register');
+    request.nextUrl.pathname.includes('/login') || request.nextUrl.pathname.includes('/register');
   const isAppPage = request.nextUrl.pathname.includes('/ws/');
 
   if (!user && isAppPage) {
