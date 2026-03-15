@@ -67,18 +67,20 @@ export default function VoteButton({
       type="button"
       onClick={handleVote}
       disabled={voted || loading}
-      className={`flex flex-col gap-1 items-center justify-center p-3 rounded-lg border transition-all w-16 h-16 shrink-0
+      className={`flex flex-col gap-1 items-center justify-center p-2 rounded-lg border transition-all w-12 h-12 shrink-0 group/vote
         ${
           voted
-            ? 'bg-primary/10 border-primary/50 text-primary cursor-default'
-            : 'bg-muted/30 border-border hover:bg-muted/50 text-muted-foreground'
+            ? 'bg-emerald-50 border-emerald-200 text-emerald-600 cursor-default'
+            : 'bg-slate-50 border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/50 text-slate-400 hover:text-emerald-600'
         }
       `}
     >
-      <span className={`text-lg transition-transform ${loading ? 'animate-bounce' : ''}`}>
-        {voted ? '✅' : '▲'}
+      <span className={`text-base transition-all ${loading ? 'animate-pulse' : ''} ${!voted && 'group-hover/vote:-translate-y-0.5'}`}>
+        {voted ? '✓' : '▲'}
       </span>
-      <span className="font-bold">{votes}</span>
+      <span className="font-bold text-xs tabular-nums leading-none">
+        {votes}
+      </span>
     </button>
   );
 }

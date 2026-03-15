@@ -45,15 +45,15 @@ export default function LoginPage() {
   };
 
   return (
-    <form onSubmit={handleLogin} className="flex flex-col gap-5">
-      <h2 className="text-center text-xl font-semibold text-foreground">{t('loginTitle')}</h2>
+    <form onSubmit={handleLogin} className="flex flex-col gap-6">
+      <h2 className="text-xl font-bold text-slate-900 tracking-tight">{t('loginTitle')}</h2>
 
       {error && (
-        <div className="rounded-lg bg-danger/10 px-4 py-3 text-sm text-danger">{error}</div>
+        <div className="rounded-lg bg-rose-50 border border-rose-100 px-4 py-3 text-xs font-bold text-rose-600">{error}</div>
       )}
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="email" className="text-sm font-medium text-foreground">
+        <label htmlFor="email" className="text-xs font-bold text-slate-700 uppercase tracking-wider">
           {t('emailLabel')}
         </label>
         <input
@@ -63,12 +63,12 @@ export default function LoginPage() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder={t('emailPlaceholder')}
           required
-          className="h-11 rounded-lg border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20"
+          className="h-11 rounded-lg border border-slate-200 bg-slate-50 px-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all"
         />
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="password" className="text-sm font-medium text-foreground">
+        <label htmlFor="password" className="text-xs font-bold text-slate-700 uppercase tracking-wider">
           {t('passwordLabel')}
         </label>
         <input
@@ -79,21 +79,21 @@ export default function LoginPage() {
           placeholder="••••••••"
           required
           minLength={6}
-          className="h-11 rounded-lg border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20"
+          className="h-11 rounded-lg border border-slate-200 bg-slate-50 px-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all"
         />
       </div>
 
       <button
         type="submit"
         disabled={loading}
-        className="h-11 rounded-xl bg-primary font-semibold text-primary-foreground transition-all hover:bg-primary/90 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+        className="h-11 rounded-lg bg-emerald-600 font-bold text-white transition-all hover:bg-emerald-700 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-emerald-600/10 mt-2"
       >
         {loading ? t('loginLoading') : t('loginButton')}
       </button>
 
-      <p className="text-center text-sm text-muted-foreground">
+      <p className="text-center text-sm text-slate-500 font-medium">
         {t('noAccount')}{' '}
-        <Link href="/ko/register" className="font-medium text-primary hover:underline">
+        <Link href="/ko/register" className="font-bold text-emerald-600 hover:text-emerald-700">
           {t('registerFree')}
         </Link>
       </p>

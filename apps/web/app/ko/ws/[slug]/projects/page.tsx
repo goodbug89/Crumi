@@ -38,48 +38,48 @@ export default async function ProjectsPage({
     .order('created_at', { ascending: false });
 
   return (
-    <div className="flex flex-col gap-10 animate-fade-in-up pb-10">
+    <div className="flex flex-col gap-8 animate-fade-in-up pb-10">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-        <div className="flex flex-col gap-2">
-          <h2 className="text-3xl font-extrabold tracking-tight text-foreground">
+        <div className="flex flex-col gap-1.5">
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900">
             {t('list.title')}
           </h2>
-          <p className="text-muted-foreground font-medium">
+          <p className="text-slate-500 font-medium text-sm">
             {t('list.subtitle', { count: projects?.length || 0 })}
           </p>
         </div>
         <Link
           href={`/ko/ws/${slug}/projects/new`}
-          className="inline-flex h-12 items-center justify-center rounded-2xl bg-primary px-8 font-bold text-primary-foreground shadow-xl shadow-primary/20 transition-all hover:bg-primary/90 hover:scale-[1.02] active:scale-95"
+          className="inline-flex h-11 items-center justify-center rounded-lg bg-emerald-600 px-6 font-bold text-white shadow-lg shadow-emerald-600/10 transition-all hover:bg-emerald-700 active:scale-[0.98] text-sm"
         >
           {t('list.addNew')}
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects && projects.length > 0 ? (
           projects.map((project) => (
             <Link
               href={`/ko/ws/${slug}/projects/${project.id}`}
               key={project.id}
-              className="group flex flex-col justify-between rounded-[40px] border border-border bg-surface p-8 shadow-sm transition-all hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5 hover-lift active-tap h-72 relative overflow-hidden"
+              className="group flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-7 shadow-sm transition-all hover:border-emerald-300 hover:shadow-md active:scale-[0.99] h-64 relative overflow-hidden"
             >
-              <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:scale-125 transition-transform">
+              <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:scale-110 transition-transform select-none pointer-events-none">
                 <span className="text-7xl">📁</span>
               </div>
 
               <div className="z-10 flex flex-col gap-4">
                 <div className="flex items-center justify-between">
                   <span
-                    className={`rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-tighter
+                    className={`rounded-md px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider
                     ${
                       project.status === 'planning'
-                        ? 'bg-secondary/10 text-secondary'
+                        ? 'bg-indigo-50 text-indigo-700'
                         : project.status === 'in_progress'
-                          ? 'bg-primary/10 text-primary'
+                          ? 'bg-emerald-50 text-emerald-700'
                           : project.status === 'completed'
-                            ? 'bg-success/10 text-success'
-                            : 'bg-muted text-muted-foreground'
+                            ? 'bg-slate-100 text-slate-600'
+                            : 'bg-amber-50 text-amber-700'
                     }`}
                   >
                     {project.status === 'in_progress'
@@ -90,45 +90,45 @@ export default async function ProjectsPage({
                           ? t('status.completed')
                           : t('status.onHold')}
                   </span>
-                  <span className="text-[10px] font-black text-muted-foreground uppercase opacity-40">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tight">
                     {new Date(project.created_at).toLocaleDateString('ko-KR')}
                   </span>
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <h3 className="font-black text-xl text-foreground group-hover:text-primary transition-colors line-clamp-1 break-all">
+                  <h3 className="font-bold text-lg text-slate-900 group-hover:text-emerald-700 transition-colors line-clamp-1 break-all">
                     {project.name}
                   </h3>
-                  <p className="text-sm font-medium text-muted-foreground leading-relaxed line-clamp-3">
+                  <p className="text-sm font-medium text-slate-500 leading-relaxed line-clamp-3">
                     {project.description || t('list.noDescription')}
                   </p>
                 </div>
               </div>
 
-              <div className="mt-auto pt-6 border-t border-border/50 flex items-center justify-between z-10">
+              <div className="mt-auto pt-5 border-t border-slate-100 flex items-center justify-between z-10">
                 <div className="flex -space-x-2">
-                  <div className="w-7 h-7 rounded-lg bg-muted border-2 border-surface flex items-center justify-center text-[10px]">
-                    👤
+                  <div className="w-6 h-6 rounded-md bg-slate-100 border-2 border-white flex items-center justify-center text-[10px] text-slate-400 font-bold">
+                    {project.name[0]}
                   </div>
                 </div>
-                <span className="text-xs font-black text-primary group-hover:translate-x-1 transition-transform">
+                <span className="text-xs font-bold text-emerald-600 group-hover:translate-x-1 transition-transform">
                   {t('list.viewProject')}
                 </span>
               </div>
             </Link>
           ))
         ) : (
-          <div className="col-span-full flex flex-col items-center justify-center py-32 text-center rounded-[40px] border-2 border-dashed border-border/60 bg-surface/30 backdrop-blur-sm">
-            <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center text-5xl mb-6">
+          <div className="col-span-full flex flex-col items-center justify-center py-24 text-center rounded-xl border border-dashed border-slate-200 bg-slate-50/50">
+            <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center text-4xl mb-6 grayscale opacity-40">
               📂
             </div>
-            <h3 className="text-2xl font-black text-foreground">{t('empty.title')}</h3>
-            <p className="mt-2 text-muted-foreground max-w-sm font-medium">
+            <h3 className="text-xl font-bold text-slate-900">{t('empty.title')}</h3>
+            <p className="mt-2 text-slate-500 max-w-sm font-medium text-sm">
               {t('empty.description')}
             </p>
             <Link
               href={`/ko/ws/${slug}/projects/new`}
-              className="mt-10 h-14 px-12 bg-primary text-white rounded-2xl font-black shadow-xl shadow-primary/20 hover:scale-[1.05] transition-all active:scale-95"
+              className="mt-8 h-11 px-8 bg-slate-900 text-white rounded-lg font-bold text-sm shadow-lg shadow-slate-900/10 hover:bg-slate-800 transition-all active:scale-[0.98]"
             >
               {t('empty.action')}
             </Link>

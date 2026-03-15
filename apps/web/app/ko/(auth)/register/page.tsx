@@ -65,19 +65,21 @@ export default function RegisterPage() {
 
   if (success) {
     return (
-      <div className="flex flex-col items-center gap-4 py-4 text-center">
-        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-success/20 text-3xl">
+      <div className="flex flex-col items-center gap-5 py-6 text-center">
+        <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 text-3xl shadow-lg shadow-emerald-600/5">
           🎉
         </div>
-        <h2 className="text-xl font-semibold text-foreground">{t('successTitle')}</h2>
-        <p className="text-sm text-muted-foreground">
-          {t('successMessage')}
-          <br />
-          {t('successMessage2')}
-        </p>
+        <div className="flex flex-col gap-2">
+          <h2 className="text-xl font-bold text-slate-900 tracking-tight">{t('successTitle')}</h2>
+          <p className="text-sm font-medium text-slate-500 leading-relaxed">
+            {t('successMessage')}
+            <br />
+            {t('successMessage2')}
+          </p>
+        </div>
         <Link
           href="/ko/login"
-          className="mt-2 inline-flex h-11 items-center justify-center rounded-xl bg-primary px-8 font-semibold text-primary-foreground transition-all hover:bg-primary/90"
+          className="mt-4 inline-flex h-11 items-center justify-center rounded-lg bg-emerald-600 px-10 font-bold text-white transition-all hover:bg-emerald-700 active:scale-[0.98] shadow-lg shadow-emerald-600/10"
         >
           {t('goToLoginButton')}
         </Link>
@@ -86,15 +88,15 @@ export default function RegisterPage() {
   }
 
   return (
-    <form onSubmit={handleRegister} className="flex flex-col gap-5">
-      <h2 className="text-center text-xl font-semibold text-foreground">{t('registerTitle')}</h2>
+    <form onSubmit={handleRegister} className="flex flex-col gap-6">
+      <h2 className="text-xl font-bold text-slate-900 tracking-tight">{t('registerTitle')}</h2>
 
       {error && (
-        <div className="rounded-lg bg-danger/10 px-4 py-3 text-sm text-danger">{error}</div>
+        <div className="rounded-lg bg-rose-50 border border-rose-100 px-4 py-3 text-xs font-bold text-rose-600">{error}</div>
       )}
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="displayName" className="text-sm font-medium text-foreground">
+        <label htmlFor="displayName" className="text-xs font-bold text-slate-700 uppercase tracking-wider">
           {t('nameLabel')}
         </label>
         <input
@@ -104,12 +106,12 @@ export default function RegisterPage() {
           onChange={(e) => setDisplayName(e.target.value)}
           placeholder={t('namePlaceholder')}
           required
-          className="h-11 rounded-lg border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20"
+          className="h-11 rounded-lg border border-slate-200 bg-slate-50 px-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all"
         />
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="email" className="text-sm font-medium text-foreground">
+        <label htmlFor="email" className="text-xs font-bold text-slate-700 uppercase tracking-wider">
           {t('emailLabel')}
         </label>
         <input
@@ -119,12 +121,12 @@ export default function RegisterPage() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder={t('emailPlaceholder')}
           required
-          className="h-11 rounded-lg border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20"
+          className="h-11 rounded-lg border border-slate-200 bg-slate-50 px-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all"
         />
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="password" className="text-sm font-medium text-foreground">
+        <label htmlFor="password" className="text-xs font-bold text-slate-700 uppercase tracking-wider">
           {t('passwordLabel')}
         </label>
         <input
@@ -135,12 +137,12 @@ export default function RegisterPage() {
           placeholder={t('passwordPlaceholder')}
           required
           minLength={6}
-          className="h-11 rounded-lg border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20"
+          className="h-11 rounded-lg border border-slate-200 bg-slate-50 px-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all"
         />
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="confirmPassword" className="text-sm font-medium text-foreground">
+        <label htmlFor="confirmPassword" className="text-xs font-bold text-slate-700 uppercase tracking-wider">
           {t('confirmPasswordLabel')}
         </label>
         <input
@@ -151,21 +153,21 @@ export default function RegisterPage() {
           placeholder={t('confirmPasswordPlaceholder')}
           required
           minLength={6}
-          className="h-11 rounded-lg border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20"
+          className="h-11 rounded-lg border border-slate-200 bg-slate-50 px-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all"
         />
       </div>
 
       <button
         type="submit"
         disabled={loading}
-        className="h-11 rounded-xl bg-primary font-semibold text-primary-foreground transition-all hover:bg-primary/90 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+        className="h-11 rounded-lg bg-emerald-600 font-bold text-white transition-all hover:bg-emerald-700 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-emerald-600/10 mt-2"
       >
         {loading ? t('registerLoading') : t('registerButton')}
       </button>
 
-      <p className="text-center text-sm text-muted-foreground">
+      <p className="text-center text-sm text-slate-500 font-medium">
         {t('hasAccount')}{' '}
-        <Link href="/ko/login" className="font-medium text-primary hover:underline">
+        <Link href="/ko/login" className="font-bold text-emerald-600 hover:text-emerald-700">
           {t('goToLogin')}
         </Link>
       </p>

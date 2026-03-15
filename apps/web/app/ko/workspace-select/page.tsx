@@ -60,80 +60,80 @@ export default async function WorkspaceSelectPage() {
     });
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#F8F9FA] p-6 animate-fade-in">
-      <div className="w-full max-w-xl">
+    <div className="flex min-h-screen items-center justify-center bg-slate-50 p-6 animate-fade-in">
+      <div className="w-full max-w-lg">
         {/* 헤더 */}
-        <div className="mb-12 flex flex-col items-center gap-4 text-center">
-          <div className="flex h-20 w-20 items-center justify-center rounded-[32px] bg-primary text-white text-4xl shadow-2xl shadow-primary/20 animate-float">
-            💎
+        <div className="mb-10 flex flex-col items-center gap-5 text-center">
+          <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-slate-900 text-white text-2xl shadow-xl shadow-slate-900/10">
+            C
           </div>
-          <div className="flex flex-col gap-1">
-            <h1 className="text-4xl font-black tracking-tight text-foreground">
+          <div className="flex flex-col gap-2">
+            <h1 className="text-3xl font-bold tracking-tight text-slate-900">
               {t('welcomeBack')}
             </h1>
-            <p className="text-base font-bold text-muted-foreground uppercase tracking-widest text-[10px]">
+            <p className="text-sm font-semibold text-slate-500 uppercase tracking-widest text-[11px]">
               {t('selectWorkspace')}
             </p>
           </div>
         </div>
 
         {/* 워크스페이스 목록 */}
-        <div className="grid grid-cols-1 gap-4">
+        <div className="grid grid-cols-1 gap-3">
           {workspaces.map((ws) => (
             <Link
               key={ws.id}
               href={`/ko/ws/${ws.slug}/dashboard`}
-              className="group flex items-center gap-6 rounded-[32px] border border-border bg-white p-6 shadow-sm transition-all hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 hover-lift active-tap"
+              className="group flex items-center gap-5 rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-emerald-300 hover:shadow-md active:scale-[0.99]"
             >
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-muted font-black text-2xl text-primary transition-transform group-hover:scale-110">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-slate-100 font-bold text-lg text-slate-700 group-hover:bg-emerald-50 group-hover:text-emerald-700 transition-colors">
                 {ws.name[0]}
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="text-xl font-bold text-foreground truncate">{ws.name}</h3>
-                <div className="flex items-center gap-2 mt-1">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">
+                <h3 className="text-base font-bold text-slate-900 truncate">{ws.name}</h3>
+                <div className="flex items-center gap-2 mt-0.5">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
                     {ws.role}
                   </span>
-                  <span className="text-muted-foreground/30 text-xs">•</span>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-primary/70">
+                  <span className="text-slate-200 text-xs">•</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600">
                     {ws.plan} {t('plan')}
                   </span>
                 </div>
               </div>
-              <span className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground group-hover:bg-primary group-hover:text-white transition-all transform group-hover:translate-x-1">
+              <span className="h-8 w-8 flex items-center justify-center rounded-lg bg-slate-50 text-slate-400 group-hover:bg-emerald-600 group-hover:text-white transition-all">
                 →
               </span>
             </Link>
           ))}
 
           {workspaces.length === 0 && (
-            <div className="flex flex-col items-center gap-6 rounded-[40px] border border-dashed border-border bg-surface p-12 text-center">
-              <div className="text-5xl grayscale opacity-50">🏝️</div>
+            <div className="flex flex-col items-center gap-6 rounded-xl border border-dashed border-slate-300 bg-white p-12 text-center">
+              <div className="text-4xl grayscale opacity-30">🏝️</div>
               <div className="flex flex-col gap-1">
-                <p className="text-lg font-bold text-foreground">{t('noWorkspaces.title')}</p>
-                <p className="text-sm text-muted-foreground">{t('noWorkspaces.description')}</p>
+                <p className="text-base font-bold text-slate-900">{t('noWorkspaces.title')}</p>
+                <p className="text-xs font-medium text-slate-500">{t('noWorkspaces.description')}</p>
               </div>
             </div>
           )}
         </div>
 
         {/* 액션 버튼 */}
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/ko/workspace-create"
-            className="h-14 flex-1 flex items-center justify-center rounded-2xl bg-primary px-8 font-black text-white shadow-xl shadow-primary/10 hover:bg-primary/90 hover:scale-[1.02] active:scale-95 transition-all"
+            className="h-12 flex-1 flex items-center justify-center rounded-lg bg-emerald-600 px-8 font-bold text-white shadow-lg shadow-emerald-600/10 hover:bg-emerald-700 active:scale-[0.98] transition-all text-sm"
           >
             {t('createNew')}
           </Link>
           <Link
             href="/ko/join"
-            className="h-14 flex-1 flex items-center justify-center rounded-2xl border-2 border-border bg-white px-8 font-extrabold text-foreground hover:bg-muted active:scale-95 transition-all"
+            className="h-12 flex-1 flex items-center justify-center rounded-lg border border-slate-200 bg-white px-8 font-bold text-slate-900 hover:bg-slate-50 active:scale-[0.98] transition-all text-sm"
           >
             {t('joinWithCode')}
           </Link>
         </div>
 
-        <p className="mt-12 text-center text-[10px] font-black text-muted-foreground/40 uppercase tracking-[0.3em]">
+        <p className="mt-12 text-center text-[10px] font-bold text-slate-300 uppercase tracking-[0.2em]">
           {tc('poweredBy')}
         </p>
       </div>
