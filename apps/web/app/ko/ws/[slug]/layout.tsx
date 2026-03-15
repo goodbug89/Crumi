@@ -76,13 +76,15 @@ export default async function AppLayout({
         <div className="p-4 border-t border-slate-100 flex flex-col gap-1">
           <SidebarLink href={`/ko/ws/${slug}/settings`} label={t('settings')} emoji="⚙️" />
 
-          <div className="mt-4 p-3 bg-slate-50 rounded-xl flex items-center gap-3">
-            <div className="h-8 w-8 bg-slate-200 rounded-lg flex items-center justify-center font-bold text-slate-700 text-xs">
-              {profile?.display_name?.charAt(0) || 'U'}
+          <div className="mt-2 p-3 bg-muted/40 rounded-3xl flex items-center gap-3 group relative overflow-hidden">
+            <div className="h-9 w-9 bg-secondary rounded-2xl flex items-center justify-center font-bold text-white shadow-md">
+              {(profile?.display_name || user.user_metadata?.display_name || tc('user')).charAt(0)}
             </div>
             <div className="flex flex-col min-w-0 flex-1">
-              <p className="text-xs font-bold truncate text-slate-900 leading-none mb-1">{profile?.display_name || tc('user')}</p>
-              <p className="text-[10px] text-slate-500 truncate font-semibold uppercase tracking-wider">
+              <p className="text-sm font-bold truncate">
+                {profile?.display_name || user.user_metadata?.display_name || tc('user')}
+              </p>
+              <p className="text-[10px] text-muted-foreground truncate font-medium uppercase tracking-tighter">
                 {role}
               </p>
             </div>
