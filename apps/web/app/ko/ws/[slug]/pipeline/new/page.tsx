@@ -1,40 +1,53 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter, useParams } from 'next/navigation';
-import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function NewDealPage() {
   const router = useRouter();
   const params = useParams();
+  const searchParams = useSearchParams();
   const slug = params.slug as string;
-  
+  const t = useTranslations('pipeline');
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  
-  // 연관 데이터 목록 상태 (고객, 프로젝트)
-  const [customers, setCustomers] = useState<{id: string, name: string}[]>([]);
-  const [projects, setProjects] = useState<{id: string, name: string}[]>([]);
+
+  const [customers, setCustomers] = useState<{ id: string; name: string }[]>([]);
+  const [projects, setProjects] = useState<{ id: string; name: string }[]>([]);
 
   const [formData, setFormData] = useState({
     title: '',
     stage: 'lead',
     amount: '',
     probability: '50',
-    customer_id: '',
-    project_id: '',
+    customer_id: searchParams.get('customer_id') || '',
+    project_id: searchParams.get('project_id') || '',
   });
 
   useEffect(() => {
-    // 폼 로드 시 워크스페이스에 속한 고객 및 프로젝트 목록 패치
     const fetchData = async () => {
       const supabase = createClient();
-      const { data: workspace } = await supabase.from('workspaces').select('id').eq('slug', slug).single();
-      
+      const { data: workspace } = await supabase
+        .from('workspaces')
+        .select('id')
+        .eq('slug', slug)
+        .single();
+
       if (workspace) {
-        const { data: cData } = await supabase.from('customers').select('id, name').eq('workspace_id', workspace.id);
-        const { data: pData } = await supabase.from('projects').select('id, name').eq('workspace_id', workspace.id);
+        const { data: cData } = await supabase
+          .from('customers')
+          .select('id, name')
+          .eq('workspace_id', workspace.id)
+          .is('deleted_at', null);
+        const { data: pData } = await supabase
+          .from('projects')
+          .select('id, name')
+          .eq('workspace_id', workspace.id)
+          .is('deleted_at', null);
         if (cData) setCustomers(cData);
         if (pData) setProjects(pData);
       }
@@ -56,57 +69,65 @@ export default function NewDealPage() {
 
     try {
       const supabase = createClient();
-      const { data: workspace } = await supabase.from('workspaces').select('id').eq('slug', slug).single();
-      if (!workspace) throw new Error('워크스페이스를 찾을 수 없습니다.');
+      const { data: workspace } = await supabase
+        .from('workspaces')
+        .select('id')
+        .eq('slug', slug)
+        .single();
+      if (!workspace) throw new Error(t('new.errors.workspaceNotFound'));
 
-      const { error: insertError } = await supabase
-        .from('deals')
-        .insert({
-          workspace_id: workspace.id,
-          title: formData.title,
-          stage: formData.stage,
-          currency: 'KRW',
-          amount: formData.amount ? parseInt(formData.amount, 10) : null,
-          probability: parseInt(formData.probability, 10) || 0,
-          customer_id: formData.customer_id || null,
-          project_id: formData.project_id || null,
-        });
+      const { error: insertError } = await supabase.from('deals').insert({
+        workspace_id: workspace.id,
+        title: formData.title,
+        stage: formData.stage,
+        currency: 'KRW',
+        amount: formData.amount ? Number.parseInt(formData.amount, 10) : null,
+        probability: Number.parseInt(formData.probability, 10) || 0,
+        customer_id: formData.customer_id || null,
+        project_id: formData.project_id || null,
+      });
 
       if (insertError) throw insertError;
 
       router.push(`/ko/ws/${slug}/pipeline`);
       router.refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : '거래(Deal) 생성 중 오류가 발생했습니다.');
+      setError(err instanceof Error ? err.message : t('new.errors.createFailed'));
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="max-w-2xl mx-auto flex flex-col gap-6">
-      <div className="flex items-center gap-4">
-        <Link 
-          href={`/ko/ws/${slug}/pipeline`}
-          className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface text-muted-foreground hover:bg-muted"
-        >
-          ←
-        </Link>
-        <h2 className="text-2xl font-bold tracking-tight text-foreground">새 거래(Deal) 생성</h2>
+    <div className="max-w-3xl mx-auto flex flex-col gap-10 animate-fade-in-up pb-20">
+      <div className="flex flex-col gap-2">
+        <div className="flex items-center gap-4">
+          <Link
+            href={`/ko/ws/${slug}/pipeline`}
+            className="flex h-10 w-10 items-center justify-center rounded-2xl border border-border bg-surface text-muted-foreground hover:bg-muted transition-all"
+          >
+            ←
+          </Link>
+          <h2 className="text-3xl font-black tracking-tight text-foreground">{t('new.title')}</h2>
+        </div>
+        <p className="text-muted-foreground font-medium ml-14">{t('new.subtitle')}</p>
       </div>
 
-      <div className="rounded-xl border border-border bg-surface shadow-sm overflow-hidden">
-        <form onSubmit={handleSubmit} className="p-6 flex flex-col gap-6">
+      <div className="rounded-[40px] border border-border bg-surface shadow-2xl shadow-black/[0.03] overflow-hidden">
+        <form onSubmit={handleSubmit} className="p-10 flex flex-col gap-10">
           {error && (
-            <div className="rounded-lg bg-danger/10 px-4 py-3 text-sm text-danger">
+            <div className="rounded-2xl bg-danger/10 px-6 py-4 text-sm font-bold text-danger border border-danger/20">
               {error}
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="flex flex-col gap-2 md:col-span-2">
-              <label htmlFor="title" className="text-sm font-medium text-foreground">
-                거래명 (기회 제목) <span className="text-danger">*</span>
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-3">
+              <label
+                htmlFor="title"
+                className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 ml-1"
+              >
+                {t('new.fields.title')} <span className="text-danger">*</span>
               </label>
               <input
                 id="title"
@@ -114,122 +135,142 @@ export default function NewDealPage() {
                 type="text"
                 value={formData.title}
                 onChange={handleChange}
-                placeholder="엔터프라이즈 라이선스 확장건"
+                placeholder={t('new.fields.titlePlaceholder')}
                 required
-                className="h-11 rounded-lg border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20"
+                className="h-16 w-full rounded-2xl border border-border bg-muted/20 px-8 text-lg font-black text-foreground placeholder:text-muted-foreground/40 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all shadow-inner"
               />
             </div>
 
-            <div className="flex flex-col gap-2">
-              <label htmlFor="stage" className="text-sm font-medium text-foreground">
-                현재 파이프라인 단계
-              </label>
-              <select
-                id="stage"
-                name="stage"
-                value={formData.stage}
-                onChange={handleChange}
-                className="h-11 rounded-lg border border-input bg-background px-3 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20 appearance-none"
-              >
-                <option value="lead">리드 (Lead)</option>
-                <option value="contact">접촉 및 제안</option>
-                <option value="negotiation">협상 중</option>
-                <option value="won">계약 수주</option>
-              </select>
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label htmlFor="probability" className="text-sm font-medium text-foreground">
-                예상 승률 (%)
-              </label>
-              <input
-                id="probability"
-                name="probability"
-                type="number"
-                min="0"
-                max="100"
-                value={formData.probability}
-                onChange={handleChange}
-                className="h-11 rounded-lg border border-input bg-background px-3 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20"
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label htmlFor="amount" className="text-sm font-medium text-foreground">
-                예상 금액 (KRW)
-              </label>
-              <div className="flex rounded-lg border border-input bg-background focus-within:border-primary focus-within:ring-2 focus-within:ring-ring/20">
-                <span className="flex items-center px-3 text-sm text-muted-foreground border-r border-input bg-muted/50 rounded-l-lg">
-                  ₩
-                </span>
-                <input
-                  id="amount"
-                  name="amount"
-                  type="number"
-                  value={formData.amount}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="flex flex-col gap-3">
+                <label
+                  htmlFor="stage"
+                  className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 ml-1"
+                >
+                  {t('new.fields.stage')}
+                </label>
+                <select
+                  id="stage"
+                  name="stage"
+                  value={formData.stage}
                   onChange={handleChange}
-                  placeholder="1000000"
-                  className="h-11 flex-1 bg-transparent px-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
-                />
+                  className="h-14 w-full rounded-2xl border border-border bg-muted/20 px-6 font-bold text-foreground focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all appearance-none cursor-pointer"
+                >
+                  <option value="lead">{t('new.fields.stageOptions.lead')}</option>
+                  <option value="contact">{t('new.fields.stageOptions.contact')}</option>
+                  <option value="negotiation">{t('new.fields.stageOptions.negotiation')}</option>
+                  <option value="won">{t('new.fields.stageOptions.won')}</option>
+                </select>
               </div>
-            </div>
 
-            <div className="flex flex-col gap-2 md:col-span-2 pt-4 border-t border-border border-dashed mt-2">
-              <h4 className="text-sm font-medium text-foreground mb-1">연관 정보 (선택)</h4>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="customer_id" className="text-xs font-medium text-muted-foreground">
-                    연결된 고객
-                  </label>
-                  <select
-                    id="customer_id"
-                    name="customer_id"
-                    value={formData.customer_id}
+              <div className="flex flex-col gap-3">
+                <label
+                  htmlFor="probability"
+                  className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 ml-1"
+                >
+                  {t('new.fields.probability')}
+                </label>
+                <div className="relative">
+                  <input
+                    id="probability"
+                    name="probability"
+                    type="number"
+                    min="0"
+                    max="100"
+                    value={formData.probability}
                     onChange={handleChange}
-                    className="h-11 rounded-lg border border-input bg-background px-3 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20 appearance-none"
-                  >
-                    <option value="">-- 고객 선택 안함 --</option>
-                    {customers.map((c) => (
-                      <option key={c.id} value={c.id}>{c.name}</option>
-                    ))}
-                  </select>
+                    className="h-14 w-full rounded-2xl border border-border bg-muted/20 px-6 font-bold text-foreground focus:border-primary transition-all shadow-inner"
+                  />
+                  <span className="absolute right-6 top-1/2 -translate-y-1/2 text-muted-foreground font-black">
+                    %
+                  </span>
                 </div>
+              </div>
 
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="project_id" className="text-xs font-medium text-muted-foreground">
-                    관련 프로젝트
-                  </label>
-                  <select
-                    id="project_id"
-                    name="project_id"
-                    value={formData.project_id}
+              <div className="flex flex-col gap-3 md:col-span-2">
+                <label
+                  htmlFor="amount"
+                  className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 ml-1"
+                >
+                  {t('new.fields.amount')}
+                </label>
+                <div className="relative">
+                  <span className="absolute left-6 top-1/2 -translate-y-1/2 text-muted-foreground font-black">
+                    ₩
+                  </span>
+                  <input
+                    id="amount"
+                    name="amount"
+                    type="number"
+                    value={formData.amount}
                     onChange={handleChange}
-                    className="h-11 rounded-lg border border-input bg-background px-3 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20 appearance-none"
-                  >
-                    <option value="">-- 프로젝트 선택 안함 --</option>
-                    {projects.map((p) => (
-                      <option key={p.id} value={p.id}>{p.name}</option>
-                    ))}
-                  </select>
+                    placeholder={t('new.fields.amountPlaceholder')}
+                    className="h-16 w-full rounded-2xl border border-border bg-muted/20 pl-12 pr-6 text-xl font-black text-primary focus:border-primary transition-all shadow-inner"
+                  />
                 </div>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <label
+                  htmlFor="customer_id"
+                  className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 ml-1"
+                >
+                  {t('new.fields.customer')}
+                </label>
+                <select
+                  id="customer_id"
+                  name="customer_id"
+                  value={formData.customer_id}
+                  onChange={handleChange}
+                  className="h-14 w-full rounded-2xl border border-border bg-muted/20 px-6 font-bold text-foreground focus:border-primary transition-all appearance-none cursor-pointer"
+                >
+                  <option value="">{t('new.fields.customerDefault')}</option>
+                  {customers.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <label
+                  htmlFor="project_id"
+                  className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 ml-1"
+                >
+                  {t('new.fields.project')}
+                </label>
+                <select
+                  id="project_id"
+                  name="project_id"
+                  value={formData.project_id}
+                  onChange={handleChange}
+                  className="h-14 w-full rounded-2xl border border-border bg-muted/20 px-6 font-bold text-foreground focus:border-primary transition-all appearance-none cursor-pointer"
+                >
+                  <option value="">{t('new.fields.projectDefault')}</option>
+                  {projects.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.name}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
           </div>
 
-          <div className="mt-4 flex justify-end gap-3 pt-4 border-t border-border">
+          <div className="flex items-center justify-end gap-4 pt-6 border-t border-border/50">
             <Link
               href={`/ko/ws/${slug}/pipeline`}
-              className="inline-flex h-11 items-center justify-center rounded-xl border border-border bg-background px-6 font-semibold text-foreground transition-all hover:bg-muted"
+              className="h-14 px-8 flex items-center justify-center rounded-2xl font-bold text-muted-foreground hover:bg-muted transition-all"
             >
-              취소
+              {t('new.cancel')}
             </Link>
             <button
               type="submit"
               disabled={loading || !formData.title}
-              className="inline-flex h-11 items-center justify-center rounded-xl bg-primary px-6 font-semibold text-primary-foreground transition-all hover:bg-primary/90 disabled:opacity-50"
+              className="h-14 px-12 bg-primary text-white rounded-2xl font-black text-lg shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50"
             >
-              {loading ? '생성 중...' : '거래 생성하기'}
+              {loading ? t('new.submitting') : t('new.submit')}
             </button>
           </div>
         </form>

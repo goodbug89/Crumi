@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
-import { redirect } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 export default async function ProjectsPage({
   params,
@@ -9,16 +10,20 @@ export default async function ProjectsPage({
 }) {
   const { slug } = await params;
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   if (!user) {
     redirect('/ko/login');
   }
 
+  const t = await getTranslations('projects');
+
   // 워크스페이스 조회
   const { data: workspace } = await supabase
     .from('workspaces')
-    .select('id')
+    .select('id, name')
     .eq('slug', slug)
     .single();
 
@@ -29,68 +34,103 @@ export default async function ProjectsPage({
     .from('projects')
     .select('*')
     .eq('workspace_id', workspace.id)
+    .is('deleted_at', null)
     .order('created_at', { ascending: false });
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-bold tracking-tight text-foreground">프로젝트 관리</h2>
-          <p className="text-muted-foreground mt-1 text-sm">
-            고객과 연계된 프로젝트를 생성하고 관리합니다.
+    <div className="flex flex-col gap-10 animate-fade-in-up pb-10">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-3xl font-extrabold tracking-tight text-foreground">
+            {t('list.title')}
+          </h2>
+          <p className="text-muted-foreground font-medium">
+            {t('list.subtitle', { count: projects?.length || 0 })}
           </p>
         </div>
         <Link
           href={`/ko/ws/${slug}/projects/new`}
-          className="inline-flex h-10 items-center justify-center rounded-xl bg-primary px-4 font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 active:scale-[0.98]"
+          className="inline-flex h-12 items-center justify-center rounded-2xl bg-primary px-8 font-bold text-primary-foreground shadow-xl shadow-primary/20 transition-all hover:bg-primary/90 hover:scale-[1.02] active:scale-95"
         >
-          + 프로젝트 생성
+          {t('list.addNew')}
         </Link>
       </div>
 
-      <div className="rounded-xl border border-border bg-surface shadow-sm overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects && projects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-            {projects.map((project) => (
-              <Link 
-                href={`/ko/ws/${slug}/projects/${project.id}`} 
-                key={project.id}
-                className="group flex flex-col justify-between rounded-xl border border-border bg-background p-5 shadow-sm transition-all hover:border-primary/50 hover:shadow-md h-40"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className={`rounded-full px-2 py-1 text-[10px] font-medium 
-                      ${project.status === 'planning' ? 'bg-secondary/10 text-secondary' : 
-                        project.status === 'in_progress' ? 'bg-primary/10 text-primary' : 
-                        project.status === 'completed' ? 'bg-success/10 text-success' : 
-                        'bg-muted text-muted-foreground'}`}
-                    >
-                      {project.status === 'in_progress' ? '진행중' :
-                       project.status === 'planning' ? '기획중' :
-                       project.status === 'completed' ? '완료' : '보류'}
-                    </span>
-                    <span className="text-muted-foreground text-xs">{new Date(project.created_at).toLocaleDateString()}</span>
-                  </div>
-                  <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors line-clamp-1">{project.name}</h3>
-                  <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
-                    {project.description || '프로젝트 설명이 없습니다.'}
+          projects.map((project) => (
+            <Link
+              href={`/ko/ws/${slug}/projects/${project.id}`}
+              key={project.id}
+              className="group flex flex-col justify-between rounded-[40px] border border-border bg-surface p-8 shadow-sm transition-all hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5 hover-lift active-tap h-72 relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:scale-125 transition-transform">
+                <span className="text-7xl">📁</span>
+              </div>
+
+              <div className="z-10 flex flex-col gap-4">
+                <div className="flex items-center justify-between">
+                  <span
+                    className={`rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-tighter
+                    ${
+                      project.status === 'planning'
+                        ? 'bg-secondary/10 text-secondary'
+                        : project.status === 'in_progress'
+                          ? 'bg-primary/10 text-primary'
+                          : project.status === 'completed'
+                            ? 'bg-success/10 text-success'
+                            : 'bg-muted text-muted-foreground'
+                    }`}
+                  >
+                    {project.status === 'in_progress'
+                      ? t('status.inProgress')
+                      : project.status === 'planning'
+                        ? t('status.planning')
+                        : project.status === 'completed'
+                          ? t('status.completed')
+                          : t('status.onHold')}
+                  </span>
+                  <span className="text-[10px] font-black text-muted-foreground uppercase opacity-40">
+                    {new Date(project.created_at).toLocaleDateString('ko-KR')}
+                  </span>
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <h3 className="font-black text-xl text-foreground group-hover:text-primary transition-colors line-clamp-1 break-all">
+                    {project.name}
+                  </h3>
+                  <p className="text-sm font-medium text-muted-foreground leading-relaxed line-clamp-3">
+                    {project.description || t('list.noDescription')}
                   </p>
                 </div>
-              </Link>
-            ))}
-          </div>
+              </div>
+
+              <div className="mt-auto pt-6 border-t border-border/50 flex items-center justify-between z-10">
+                <div className="flex -space-x-2">
+                  <div className="w-7 h-7 rounded-lg bg-muted border-2 border-surface flex items-center justify-center text-[10px]">
+                    👤
+                  </div>
+                </div>
+                <span className="text-xs font-black text-primary group-hover:translate-x-1 transition-transform">
+                  {t('list.viewProject')}
+                </span>
+              </div>
+            </Link>
+          ))
         ) : (
-          <div className="flex flex-col items-center justify-center py-16 text-center">
-            <div className="text-4xl">📁</div>
-            <h3 className="mt-4 text-lg font-semibold text-foreground">진행 중인 프로젝트가 없습니다.</h3>
-            <p className="mt-2 text-sm text-muted-foreground">
-              고객 문제 해결을 위한 새로운 프로젝트를 시동해보세요!
+          <div className="col-span-full flex flex-col items-center justify-center py-32 text-center rounded-[40px] border-2 border-dashed border-border/60 bg-surface/30 backdrop-blur-sm">
+            <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center text-5xl mb-6">
+              📂
+            </div>
+            <h3 className="text-2xl font-black text-foreground">{t('empty.title')}</h3>
+            <p className="mt-2 text-muted-foreground max-w-sm font-medium">
+              {t('empty.description')}
             </p>
             <Link
               href={`/ko/ws/${slug}/projects/new`}
-              className="mt-6 inline-flex h-10 items-center justify-center rounded-xl border border-border bg-background px-4 font-semibold text-foreground shadow-sm transition-all hover:bg-muted active:scale-[0.98]"
+              className="mt-10 h-14 px-12 bg-primary text-white rounded-2xl font-black shadow-xl shadow-primary/20 hover:scale-[1.05] transition-all active:scale-95"
             >
-              프로젝트 생성하기
+              {t('empty.action')}
             </Link>
           </div>
         )}

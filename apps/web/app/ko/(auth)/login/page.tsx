@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { createClient } from '@/lib/supabase/client';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { createClient } from '@/lib/supabase/client';
+import { useState } from 'react';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -11,6 +12,7 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const t = useTranslations('auth');
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,7 +29,7 @@ export default function LoginPage() {
       if (authError) {
         setError(
           authError.message === 'Invalid login credentials'
-            ? '이메일 또는 비밀번호가 올바르지 않습니다.'
+            ? t('invalidCredentials')
             : authError.message,
         );
         return;
@@ -36,7 +38,7 @@ export default function LoginPage() {
       router.push('/ko/workspace-select');
       router.refresh();
     } catch {
-      setError('로그인 중 오류가 발생했습니다.');
+      setError(t('loginError'));
     } finally {
       setLoading(false);
     }
@@ -44,24 +46,22 @@ export default function LoginPage() {
 
   return (
     <form onSubmit={handleLogin} className="flex flex-col gap-5">
-      <h2 className="text-center text-xl font-semibold text-foreground">로그인</h2>
+      <h2 className="text-center text-xl font-semibold text-foreground">{t('loginTitle')}</h2>
 
       {error && (
-        <div className="rounded-lg bg-danger/10 px-4 py-3 text-sm text-danger">
-          {error}
-        </div>
+        <div className="rounded-lg bg-danger/10 px-4 py-3 text-sm text-danger">{error}</div>
       )}
 
       <div className="flex flex-col gap-2">
         <label htmlFor="email" className="text-sm font-medium text-foreground">
-          이메일
+          {t('emailLabel')}
         </label>
         <input
           id="email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="your@email.com"
+          placeholder={t('emailPlaceholder')}
           required
           className="h-11 rounded-lg border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20"
         />
@@ -69,7 +69,7 @@ export default function LoginPage() {
 
       <div className="flex flex-col gap-2">
         <label htmlFor="password" className="text-sm font-medium text-foreground">
-          비밀번호
+          {t('passwordLabel')}
         </label>
         <input
           id="password"
@@ -88,13 +88,13 @@ export default function LoginPage() {
         disabled={loading}
         className="h-11 rounded-xl bg-primary font-semibold text-primary-foreground transition-all hover:bg-primary/90 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {loading ? '로그인 중...' : '로그인'}
+        {loading ? t('loginLoading') : t('loginButton')}
       </button>
 
       <p className="text-center text-sm text-muted-foreground">
-        계정이 없으신가요?{' '}
+        {t('noAccount')}{' '}
         <Link href="/ko/register" className="font-medium text-primary hover:underline">
-          무료로 가입하기
+          {t('registerFree')}
         </Link>
       </p>
     </form>

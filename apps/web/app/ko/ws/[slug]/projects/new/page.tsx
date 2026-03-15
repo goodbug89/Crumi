@@ -1,25 +1,29 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter, useParams } from 'next/navigation';
-import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useParams, useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export default function NewProjectPage() {
   const router = useRouter();
   const params = useParams();
   const slug = params.slug as string;
-  
+  const t = useTranslations('projects');
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    status: 'planning', // planning, in_progress, completed, put_on_hold
+    status: 'planning',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -33,59 +37,61 @@ export default function NewProjectPage() {
 
     try {
       const supabase = createClient();
-      
       const { data: workspace } = await supabase
         .from('workspaces')
         .select('id')
         .eq('slug', slug)
         .single();
-        
-      if (!workspace) throw new Error('워크스페이스를 찾을 수 없습니다.');
+      if (!workspace) throw new Error(t('new.errors.workspaceNotFound'));
 
-      const { error: insertError } = await supabase
-        .from('projects')
-        .insert({
-          workspace_id: workspace.id,
-          name: formData.name,
-          description: formData.description || null,
-          status: formData.status as any,
-        });
+      const { error: insertError } = await supabase.from('projects').insert({
+        workspace_id: workspace.id,
+        name: formData.name,
+        description: formData.description || null,
+        status: formData.status,
+      });
 
       if (insertError) throw insertError;
 
       router.push(`/ko/ws/${slug}/projects`);
       router.refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : '프로젝트 생성 중 오류가 발생했습니다.');
+      setError(err instanceof Error ? err.message : t('new.errors.createFailed'));
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="max-w-2xl mx-auto flex flex-col gap-6">
-      <div className="flex items-center gap-4">
-        <Link 
-          href={`/ko/ws/${slug}/projects`}
-          className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface text-muted-foreground hover:bg-muted"
-        >
-          ←
-        </Link>
-        <h2 className="text-2xl font-bold tracking-tight text-foreground">새 프로젝트 생성</h2>
+    <div className="max-w-3xl mx-auto flex flex-col gap-10 animate-fade-in-up pb-20">
+      <div className="flex flex-col gap-2">
+        <div className="flex items-center gap-4">
+          <Link
+            href={`/ko/ws/${slug}/projects`}
+            className="flex h-10 w-10 items-center justify-center rounded-2xl border border-border bg-surface text-muted-foreground hover:bg-muted transition-all"
+          >
+            ←
+          </Link>
+          <h2 className="text-3xl font-black tracking-tight text-foreground">{t('new.title')}</h2>
+        </div>
+        <p className="text-muted-foreground font-medium ml-14">{t('new.subtitle')}</p>
       </div>
 
-      <div className="rounded-xl border border-border bg-surface shadow-sm overflow-hidden">
-        <form onSubmit={handleSubmit} className="p-6 flex flex-col gap-6">
+      <div className="rounded-[40px] border border-border bg-surface shadow-2xl shadow-black/[0.03] overflow-hidden">
+        <form onSubmit={handleSubmit} className="p-10 flex flex-col gap-10">
           {error && (
-            <div className="rounded-lg bg-danger/10 px-4 py-3 text-sm text-danger">
+            <div className="rounded-2xl bg-danger/10 px-6 py-4 text-sm font-bold text-danger border border-danger/20">
               {error}
             </div>
           )}
 
-          <div className="flex flex-col gap-6">
-            <div className="flex flex-col gap-2">
-              <label htmlFor="name" className="text-sm font-medium text-foreground">
-                프로젝트 이름 <span className="text-danger">*</span>
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-3">
+              <label
+                htmlFor="name"
+                className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 ml-1"
+              >
+                {t('new.fields.name')} <span className="text-danger">*</span>
               </label>
               <input
                 id="name"
@@ -93,59 +99,64 @@ export default function NewProjectPage() {
                 type="text"
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="2026 런칭 마케팅 컨설팅"
+                placeholder={t('new.fields.namePlaceholder')}
                 required
-                className="h-11 rounded-lg border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20"
+                className="h-16 w-full rounded-2xl border border-border bg-muted/20 px-8 text-lg font-black text-foreground placeholder:text-muted-foreground/40 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all shadow-inner"
               />
             </div>
 
-            <div className="flex flex-col gap-2">
-              <label htmlFor="status" className="text-sm font-medium text-foreground">
-                현재 상태
+            <div className="flex flex-col gap-3">
+              <label
+                htmlFor="status"
+                className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 ml-1"
+              >
+                {t('new.fields.status')}
               </label>
               <select
                 id="status"
                 name="status"
                 value={formData.status}
                 onChange={handleChange}
-                className="h-11 rounded-lg border border-input bg-background px-3 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20 appearance-none"
+                className="h-14 w-full rounded-2xl border border-border bg-muted/20 px-6 font-bold text-foreground focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all appearance-none cursor-pointer"
               >
-                <option value="planning">기획중</option>
-                <option value="in_progress">진행중</option>
-                <option value="completed">완료</option>
-                <option value="put_on_hold">보류</option>
+                <option value="planning">{t('new.fields.statusOptions.planning')}</option>
+                <option value="in_progress">{t('new.fields.statusOptions.inProgress')}</option>
+                <option value="on_hold">{t('new.fields.statusOptions.onHold')}</option>
               </select>
             </div>
 
-            <div className="flex flex-col gap-2">
-              <label htmlFor="description" className="text-sm font-medium text-foreground">
-                상세 설명
+            <div className="flex flex-col gap-3">
+              <label
+                htmlFor="description"
+                className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 ml-1"
+              >
+                {t('new.fields.description')}
               </label>
               <textarea
                 id="description"
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
-                placeholder="프로젝트의 목적과 주요 범위를 기술해주세요."
-                rows={5}
-                className="rounded-lg border border-input bg-background px-3 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20 resize-none"
+                placeholder={t('new.fields.descriptionPlaceholder')}
+                rows={6}
+                className="w-full rounded-[32px] border border-border bg-muted/20 px-8 py-6 text-sm font-medium text-foreground placeholder:text-muted-foreground/40 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all resize-none shadow-inner"
               />
             </div>
           </div>
 
-          <div className="mt-4 flex justify-end gap-3 pt-4 border-t border-border">
+          <div className="flex items-center justify-end gap-4 pt-6 border-t border-border/50">
             <Link
               href={`/ko/ws/${slug}/projects`}
-              className="inline-flex h-11 items-center justify-center rounded-xl border border-border bg-background px-6 font-semibold text-foreground transition-all hover:bg-muted"
+              className="h-14 px-8 flex items-center justify-center rounded-2xl font-bold text-muted-foreground hover:bg-muted transition-all"
             >
-              취소
+              {t('new.cancel')}
             </Link>
             <button
               type="submit"
               disabled={loading || !formData.name}
-              className="inline-flex h-11 items-center justify-center rounded-xl bg-primary px-6 font-semibold text-primary-foreground transition-all hover:bg-primary/90 disabled:opacity-50"
+              className="h-14 px-12 bg-primary text-white rounded-2xl font-black text-lg shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50"
             >
-              {loading ? '생성 중...' : '프로젝트 생성하기'}
+              {loading ? t('new.submitting') : t('new.submit')}
             </button>
           </div>
         </form>

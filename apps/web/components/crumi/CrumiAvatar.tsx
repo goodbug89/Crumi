@@ -35,7 +35,7 @@ export function CrumiAvatar({ state = 'default', size = 'md', className = '' }: 
   };
 
   return (
-    <div 
+    <div
       className={`flex items-center justify-center rounded-full shadow-sm transition-all duration-300 ${sizeClasses[size]} ${className}`}
       style={{ backgroundColor: `var(--crumi-${state}, var(--crumi-default))` }}
     >

@@ -1,70 +1,139 @@
+import { getTranslations } from 'next-intl/server';
+import Image from 'next/image';
 import Link from 'next/link';
 
-export default function Home() {
+export default async function Home() {
+  const t = await getTranslations('landing');
+  const tCommon = await getTranslations('common');
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-background">
-      <main className="flex max-w-2xl flex-col items-center gap-8 px-6 py-16 text-center">
-        {/* 크루미 캐릭터 (임시 이모지) */}
-        <div className="flex h-32 w-32 items-center justify-center rounded-full bg-secondary/20 text-6xl">
-          💬
+    <div className="flex min-h-screen flex-col bg-background selection:bg-primary/20">
+      {/* 네비게이션 */}
+      <nav className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto w-full">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold">
+            C
+          </div>
+          <span className="text-xl font-bold tracking-tight">Crumi</span>
         </div>
-
-        {/* 타이틀 */}
-        <div className="flex flex-col gap-3">
-          <h1 className="text-4xl font-bold tracking-tight text-foreground">
-            Crumi
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Your Sales Buddy — 함께 성장하는 영업 파트너
-          </p>
-        </div>
-
-        {/* 설명 */}
-        <p className="max-w-md text-base leading-relaxed text-muted-foreground">
-          사용자 주도로 진화하는 글로벌 CRM 플랫폼.
-          고객 관리, 프로젝트 추적, 영업 파이프라인을
-          하나의 공간에서 관리하세요.
-        </p>
-
-        {/* CTA 버튼 */}
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <Link
-            href="/ko/register"
-            className="inline-flex h-12 items-center justify-center rounded-xl bg-primary px-8 text-base font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md active:scale-[0.98]"
-          >
-            무료로 시작하기
-          </Link>
+        <div className="flex items-center gap-6">
           <Link
             href="/ko/login"
-            className="inline-flex h-12 items-center justify-center rounded-xl border border-border bg-surface px-8 text-base font-semibold text-foreground transition-all hover:bg-muted active:scale-[0.98]"
+            className="text-sm font-medium hover:text-primary transition-colors"
           >
-            로그인
+            {t('nav.login')}
+          </Link>
+          <Link
+            href="/ko/register"
+            className="h-10 px-5 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 transition-all"
+          >
+            {t('nav.start')}
           </Link>
         </div>
+      </nav>
 
-        {/* 핵심 기능 */}
-        <div className="mt-8 grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
+      <main className="flex-1 flex flex-col items-center justify-center relative overflow-hidden">
+        {/* 히어로 배경 장식 */}
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/5 rounded-full blur-[120px]" />
+
+        <div className="flex max-w-6xl w-full flex-col lg:flex-row items-center gap-12 px-6 py-20 z-10">
+          {/* 캐릭터 및 시각 요소 */}
+          <div className="flex-1 flex flex-col items-center lg:items-end order-2 lg:order-1">
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[450px] lg:h-[450px] animate-float">
+              <Image
+                src="/crumi_character_mascot.png"
+                alt="Crumi Mascot"
+                fill
+                className="object-contain drop-shadow-2xl"
+                priority
+              />
+            </div>
+          </div>
+
+          {/* 텍스트 영역 */}
+          <div className="flex-1 flex flex-col items-center lg:items-start gap-8 text-center lg:text-left order-1 lg:order-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
+              {t('badge')}
+            </div>
+
+            <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-foreground leading-[1.1]">
+              {t('heroTitle1')} <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+                {t('heroTitle2')}
+              </span>
+            </h1>
+
+            <p className="max-w-md text-lg sm:text-xl leading-relaxed text-muted-foreground">
+              {t('heroDescription')}
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <Link
+                href="/ko/register"
+                className="inline-flex h-14 items-center justify-center rounded-2xl bg-primary px-10 text-lg font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98]"
+              >
+                {t('ctaPrimary')}
+              </Link>
+              <Link
+                href="/ko/login"
+                className="inline-flex h-14 items-center justify-center rounded-2xl border border-border bg-surface px-10 text-lg font-bold text-foreground transition-all hover:bg-muted active:scale-[0.98]"
+              >
+                {t('ctaSecondary')}
+              </Link>
+            </div>
+
+            <div className="flex items-center gap-4 text-sm text-muted-foreground pt-4">
+              <div className="flex -space-x-2">
+                {[1, 2, 3, 4].map((i) => (
+                  <div
+                    key={i}
+                    className="w-8 h-8 rounded-full border-2 border-background bg-muted flex items-center justify-center text-[10px]"
+                  >
+                    👤
+                  </div>
+                ))}
+              </div>
+              <span>{t('socialProof')}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* 핵심 기능 카드 세션 */}
+        <div className="w-full max-w-7xl mx-auto px-6 pb-24 grid grid-cols-1 md:grid-cols-3 gap-8">
           <FeatureCard
             emoji="👥"
-            title="고객 관리"
-            desc="모든 고객 정보를 한 곳에서"
+            title={t('features.customerManagement.title')}
+            desc={t('features.customerManagement.description')}
           />
           <FeatureCard
             emoji="🔔"
-            title="스마트 넛지"
-            desc="방치되는 고객이 없도록"
+            title={t('features.smartNudge.title')}
+            desc={t('features.smartNudge.description')}
           />
           <FeatureCard
             emoji="📊"
-            title="파이프라인"
-            desc="영업 단계를 시각적으로"
+            title={t('features.visualPipeline.title')}
+            desc={t('features.visualPipeline.description')}
           />
         </div>
       </main>
 
       {/* 푸터 */}
-      <footer className="py-6 text-sm text-muted-foreground">
-        © 2026 Crumi. All rights reserved.
+      <footer className="border-t border-border py-10">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-2 opacity-50">
+            <div className="w-6 h-6 bg-primary rounded flex items-center justify-center text-[10px] text-white">
+              C
+            </div>
+            <span className="text-sm font-bold">Crumi</span>
+          </div>
+          <div className="text-sm text-muted-foreground">{tCommon('copyright')}</div>
+          <div className="flex items-center gap-4 text-xs font-semibold text-muted-foreground">
+            <Link href="#">{tCommon('terms')}</Link>
+            <Link href="#">{tCommon('privacy')}</Link>
+          </div>
+        </div>
       </footer>
     </div>
   );
@@ -72,10 +141,12 @@ export default function Home() {
 
 function FeatureCard({ emoji, title, desc }: { emoji: string; title: string; desc: string }) {
   return (
-    <div className="flex flex-col items-center gap-2 rounded-2xl border border-border bg-surface p-6 shadow-sm transition-shadow hover:shadow-md">
-      <span className="text-3xl">{emoji}</span>
-      <h3 className="font-semibold text-foreground">{title}</h3>
-      <p className="text-sm text-muted-foreground">{desc}</p>
+    <div className="group relative flex flex-col gap-4 rounded-3xl border border-border bg-surface p-8 transition-all hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1">
+      <div className="w-14 h-14 rounded-2xl bg-muted flex items-center justify-center text-3xl group-hover:bg-primary/10 transition-colors">
+        {emoji}
+      </div>
+      <h3 className="text-xl font-bold text-foreground">{title}</h3>
+      <p className="text-base text-muted-foreground leading-relaxed">{desc}</p>
     </div>
   );
 }

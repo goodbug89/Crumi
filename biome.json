@@ -33,14 +33,6 @@
     }
   },
   "files": {
-    "ignore": [
-      "node_modules",
-      ".next",
-      ".turbo",
-      "dist",
-      "build",
-      "coverage",
-      "*.json"
-    ]
+    "ignore": ["node_modules", ".next", ".turbo", "dist", "build", "coverage", "*.json"]
   }
 }

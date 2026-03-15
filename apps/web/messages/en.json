@@ -1,21 +1,660 @@
 {
-  "Common": {
+  "common": {
     "login": "Login",
     "register": "Register",
+    "startNow": "Get Started",
     "dashboard": "Dashboard",
     "settings": "Settings",
     "save": "Save",
     "cancel": "Cancel",
     "delete": "Delete",
-    "edit": "Edit"
+    "edit": "Edit",
+    "close": "Close",
+    "back": "←",
+    "next": "→",
+    "loading": "Loading...",
+    "confirm": "Confirm",
+    "search": "Search",
+    "create": "Create",
+    "add": "Add",
+    "remove": "Remove",
+    "viewDetail": "View Details",
+    "noData": "No Data",
+    "error": "An error occurred.",
+    "success": "Success",
+    "poweredBy": "Powered by Crumi Intelligence",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "copyright": "© 2026 Crumi. All rights reserved. Built with ❤️ for Sales people.",
+    "user": "User",
+    "other": "Other",
+    "none": "None"
   },
-  "Auth": {
+  "auth": {
     "title": "Crumi",
     "subtitle": "Your Sales Buddy",
     "emailLabel": "Email",
-    "passwordLabel": "Password"
+    "passwordLabel": "Password",
+    "loginTitle": "Login",
+    "loginButton": "Login",
+    "loginLoading": "Logging in...",
+    "loginError": "An error occurred during login.",
+    "invalidCredentials": "Invalid email or password.",
+    "noAccount": "Don't have an account?",
+    "registerFree": "Sign up for free",
+    "registerTitle": "Sign Up",
+    "nameLabel": "Name",
+    "namePlaceholder": "John Doe",
+    "emailPlaceholder": "your@email.com",
+    "passwordPlaceholder": "At least 6 characters",
+    "confirmPasswordLabel": "Confirm Password",
+    "confirmPasswordPlaceholder": "Re-enter your password",
+    "registerButton": "Start for Free",
+    "registerLoading": "Signing up...",
+    "registerError": "An error occurred during registration.",
+    "passwordMismatch": "Passwords do not match.",
+    "passwordMinLength": "Password must be at least 6 characters.",
+    "alreadyRegistered": "This email is already registered.",
+    "hasAccount": "Already have an account?",
+    "goToLogin": "Login",
+    "successTitle": "Registration Complete!",
+    "successMessage": "We've sent a confirmation link to your email.",
+    "successMessage2": "Please check your email.",
+    "goToLoginButton": "Go to Login",
+    "metaTitle": "Login — Crumi",
+    "metaDescription": "Login to Crumi to start managing your customers."
   },
-  "Dashboard": {
-    "welcome": "Welcome to Crumi!"
+  "landing": {
+    "nav": {
+      "login": "Login",
+      "start": "Get Started"
+    },
+    "badge": "✨ Best AI CRM Workspace",
+    "heroTitle1": "Your Sales",
+    "heroTitle2": "Buddy, Crumi",
+    "heroDescription": "Never forget your customers. Crumi remembers all your sales activities and nudges you at the right time.",
+    "ctaPrimary": "Try for Free Now",
+    "ctaSecondary": "View Demo",
+    "socialProof": "Currently used by 1,200+ sales teams",
+    "features": {
+      "customerManagement": {
+        "title": "Isolated Customer Management",
+        "description": "Securely protect customer data with complete workspace-level data isolation."
+      },
+      "smartNudge": {
+        "title": "Smart Nudge System",
+        "description": "Intelligent reminders that suggest activities when the configured cooltime period expires."
+      },
+      "visualPipeline": {
+        "title": "Visual Pipeline",
+        "description": "Easily manage sales stages and track deal probabilities with drag-and-drop."
+      }
+    }
+  },
+  "workspaceSelect": {
+    "welcomeBack": "Welcome back",
+    "selectWorkspace": "Select your workspace to continue",
+    "noWorkspaces": {
+      "title": "No Workspaces Found",
+      "description": "Start by creating your first workspace below."
+    },
+    "createNew": "Create New Workspace",
+    "joinWithCode": "Join with Invite Code",
+    "plan": "Plan"
+  },
+  "workspaceCreate": {
+    "title": "Create Workspace",
+    "subtitle": "Create a new space to use with your team.",
+    "fields": {
+      "name": "Workspace Name",
+      "namePlaceholder": "e.g., Our Team CRM",
+      "slug": "Unique URL (lowercase letters, numbers, hyphens only)",
+      "slugPlaceholder": "our-team"
+    },
+    "submit": "Create Workspace",
+    "submitting": "Creating...",
+    "cancel": "Cancel",
+    "errors": {
+      "nameRequired": "Please enter a workspace name.",
+      "slugRequired": "Please enter a workspace URL.",
+      "slugDuplicate": "This URL is already in use. Please try a different URL.",
+      "authRequired": "Authentication is required.",
+      "createFailed": "An error occurred while creating the workspace."
+    }
+  },
+  "join": {
+    "title": "Join Workspace",
+    "description": "Enter the invite code you received from your admin.",
+    "codeLabel": "Invite Code",
+    "codePlaceholder": "ABCD-1234",
+    "submit": "Join",
+    "cancel": "Cancel",
+    "checking": "Checking...",
+    "errorEmpty": "Please enter an invite code.",
+    "errorPreparing": "The invite code feature is currently being prepared.",
+    "invite": {
+      "title": "Workspace Invitation",
+      "description": "Your teammates at {workspaceName} are waiting for you!",
+      "joinNow": "Join Now",
+      "later": "Maybe Later",
+      "agreement": "By clicking Join, you agree to Crumi's Terms of Service and Privacy Policy.",
+      "invalidCode": "Invalid Invite Code",
+      "invalidCodeDescription": "The invite code has expired or is incorrect. Please contact your admin.",
+      "goToWorkspace": "Go to My Workspaces"
+    }
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "customers": "Customers",
+    "projects": "Projects",
+    "pipeline": "Pipeline",
+    "aiCoach": "AI Coach",
+    "requests": "Feature Requests",
+    "settings": "Workspace Settings",
+    "switchWorkspace": "Switch Workspace"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "View real-time sales performance and AI insights for {workspaceName}.",
+    "stats": {
+      "activeCustomers": "Active Customers",
+      "activeProjects": "Active Projects",
+      "activeDeals": "Active Deals",
+      "expectedRevenue": "Expected Revenue",
+      "trendCustomers": "+2% vs last month",
+      "trendProjects": "Stable",
+      "trendDeals": "+5 new",
+      "trendRevenue": "85% of target",
+      "unit10k": "0K"
+    },
+    "pipeline": {
+      "title": "Sales Pipeline Overview",
+      "viewDetail": "View Details",
+      "stages": {
+        "lead": "Lead",
+        "contact": "Proposal",
+        "negotiation": "Negotiation",
+        "won": "Won"
+      },
+      "totalAmount": "Total Deal Value",
+      "avgWinRate": "Avg Win Rate",
+      "avgDealSize": "Avg Deal Size",
+      "conversionRate": "Conversion Rate"
+    },
+    "aiCoach": {
+      "title": "AI Coach Recommendations",
+      "noData": "More data is needed for analysis.",
+      "viewReport": "View Full AI Coach Report"
+    },
+    "nudges": {
+      "title": "Pending Nudges",
+      "target": "Target:",
+      "action": "Act",
+      "allProcessed": "All nudges have been processed.",
+      "other": "Other"
+    },
+    "recentActivity": {
+      "title": "Recent Activity",
+      "record": "Record",
+      "empty": "Start recording your activities.",
+      "noDetail": "No additional details"
+    },
+    "nudgeScanner": {
+      "button": "✨ Generate Smart Nudges",
+      "scanning": "Analyzing...",
+      "newNudges": "{count} new nudges have been generated!",
+      "noNewNudges": "No new nudges. Everything is well managed!"
+    }
+  },
+  "customers": {
+    "list": {
+      "title": "Customer Database",
+      "subtitle": "Manage {count} valuable partners at the core of your business relationships.",
+      "addNew": "+ Add New Customer",
+      "columns": {
+        "nameTitle": "Name / Title",
+        "company": "Company",
+        "communication": "Communication",
+        "status": "Status",
+        "lastUpdate": "Last Updated"
+      },
+      "noPosition": "No title assigned"
+    },
+    "empty": {
+      "title": "No customers registered yet.",
+      "description": "Register your first customer and start Crumi's smart management.",
+      "action": "Register Now"
+    },
+    "new": {
+      "title": "Register New Customer",
+      "subtitle": "Register a new partner in Crumi and start managing the relationship.",
+      "fields": {
+        "name": "Full Name",
+        "namePlaceholder": "e.g., John Smith",
+        "company": "Company / Organization",
+        "companyPlaceholder": "e.g., Crumi Inc.",
+        "position": "Position",
+        "positionPlaceholder": "e.g., Marketing Manager",
+        "phone": "Phone Number",
+        "phonePlaceholder": "+1-000-000-0000",
+        "email": "Email Address",
+        "emailPlaceholder": "email@company.com",
+        "notes": "Additional Notes",
+        "notesPlaceholder": "Record important business context about the customer."
+      },
+      "submit": "Create Customer Profile",
+      "submitting": "Registering...",
+      "cancel": "Cancel",
+      "errors": {
+        "workspaceNotFound": "Workspace not found.",
+        "saveFailed": "An error occurred while saving the customer."
+      }
+    },
+    "detail": {
+      "profile": "Profile",
+      "email": "Email",
+      "phone": "Phone",
+      "createdAt": "Created At",
+      "systemNotes": "System Notes",
+      "emptyNotes": "Profile notes are empty. Record meeting history or notable details.",
+      "editNotes": "Edit Notes →",
+      "projects": "Projects",
+      "connect": "+ Connect",
+      "noProjects": "No Projects Yet",
+      "liveDeals": "Live Deals",
+      "newDeal": "+ New Deal",
+      "noDeals": "No Active Deals",
+      "activityStream": "Activity Stream",
+      "win": "Win"
+    },
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "deleting": "Deleting...",
+      "confirmDelete": "Are you sure you want to delete {customerName}'s information?",
+      "deleteError": "An error occurred while deleting the customer."
+    },
+    "edit": {
+      "title": "Edit Customer",
+      "fields": {
+        "name": "Name",
+        "namePlaceholder": "John Smith",
+        "company": "Company",
+        "companyPlaceholder": "Crumi Inc.",
+        "position": "Position",
+        "positionPlaceholder": "CEO",
+        "phone": "Phone",
+        "phonePlaceholder": "+1-000-000-0000",
+        "email": "Email",
+        "emailPlaceholder": "email@example.com",
+        "notes": "Notes",
+        "notesPlaceholder": "Enter additional information about the customer."
+      },
+      "submit": "Save Changes",
+      "saving": "Saving...",
+      "cancel": "Cancel",
+      "errors": {
+        "fetchFailed": "An error occurred while loading customer information.",
+        "updateFailed": "An error occurred while updating the customer."
+      }
+    }
+  },
+  "projects": {
+    "list": {
+      "title": "Project Hub",
+      "subtitle": "Manage {count} projects currently in progress.",
+      "addNew": "+ Start New Project",
+      "viewProject": "View Project →",
+      "noDescription": "No description provided. Enter the project's purpose and vision."
+    },
+    "status": {
+      "planning": "Planning",
+      "inProgress": "Executing",
+      "completed": "Done",
+      "onHold": "Paused"
+    },
+    "empty": {
+      "title": "No projects in progress.",
+      "description": "Bring your new ideas to life by creating a project!",
+      "action": "Create First Project"
+    },
+    "new": {
+      "title": "Start New Project",
+      "subtitle": "Set new business goals and manage execution with your team.",
+      "fields": {
+        "name": "Project Name",
+        "namePlaceholder": "e.g., H2 2026 Marketing Campaign",
+        "status": "Initial Status",
+        "statusOptions": {
+          "planning": "Planning",
+          "inProgress": "In Progress",
+          "onHold": "On Hold"
+        },
+        "description": "Description & Goals",
+        "descriptionPlaceholder": "Record the project's purpose, expected outcomes, and key milestones."
+      },
+      "submit": "Start Project",
+      "submitting": "Creating...",
+      "cancel": "Cancel",
+      "errors": {
+        "workspaceNotFound": "Workspace not found.",
+        "createFailed": "An error occurred while creating the project."
+      }
+    },
+    "detail": {
+      "created": "Created",
+      "details": "Details",
+      "description": "Description",
+      "noDescription": "No description has been written in the project info panel.",
+      "stakeholders": "Stakeholders",
+      "noStakeholders": "No Stakeholders",
+      "projectPipeline": "Project Pipeline",
+      "addDeal": "+ Add Deal",
+      "noDeals": "No Connected Deals",
+      "projectActivity": "Project Activity"
+    },
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "deleting": "Deleting...",
+      "confirmDelete": "Are you sure you want to delete the \"{projectName}\" project?",
+      "deleteError": "An error occurred while deleting the project."
+    },
+    "connectCustomer": {
+      "title": "Connect Customer to Project",
+      "connect": "+ Connect",
+      "loading": "Loading...",
+      "noCustomers": "No customers available to connect.",
+      "close": "Close",
+      "connectError": "An error occurred while connecting the customer."
+    }
+  },
+  "pipeline": {
+    "title": "Sales Pipeline",
+    "subtitle": "Manage {count} deals by stage.",
+    "addNew": "+ Add New Deal",
+    "stages": {
+      "lead": "Lead Discovery",
+      "contact": "Proposal & Contact",
+      "negotiation": "Negotiation",
+      "won": "Closed Won"
+    },
+    "deal": {
+      "amount": "Amount",
+      "winRate": "Win Rate",
+      "created": "Created",
+      "detail": "Detail →"
+    },
+    "emptyStage": "Empty Stage",
+    "empty": {
+      "title": "No deals in the pipeline.",
+      "description": "Add new sales opportunities to your pipeline and boost your win rate.",
+      "action": "Register First Deal"
+    },
+    "new": {
+      "title": "Register New Deal Opportunity",
+      "subtitle": "Add a new sales opportunity to your pipeline and hit your revenue targets.",
+      "fields": {
+        "title": "Deal Title (Opportunity Title)",
+        "titlePlaceholder": "e.g., AlphaTech Server Infrastructure Replacement",
+        "stage": "Stage",
+        "stageOptions": {
+          "lead": "Lead Discovery (Lead)",
+          "contact": "Proposal & Contact (Proposal)",
+          "negotiation": "Negotiation",
+          "won": "Closed Won"
+        },
+        "probability": "Win Probability (%)",
+        "amount": "Expected Amount (Deal Size)",
+        "amountPlaceholder": "10,000,000",
+        "customer": "Associated Customer",
+        "customerDefault": "-- No customer selected --",
+        "project": "Associated Project",
+        "projectDefault": "-- No project selected --"
+      },
+      "submit": "Complete Deal Registration",
+      "submitting": "Registering...",
+      "cancel": "Cancel",
+      "errors": {
+        "workspaceNotFound": "Workspace not found.",
+        "createFailed": "An error occurred while creating the deal."
+      }
+    }
+  },
+  "requests": {
+    "title": "Community Voice",
+    "subtitle": "Your suggestions become Crumi's next features. Express your opinion by voting!",
+    "addNew": "+ Suggest a New Idea",
+    "suggestedBy": "Suggested by",
+    "anonymous": "Anonymous",
+    "empty": {
+      "title": "Be the first one to share!",
+      "description": "What features does Crumi need? We look forward to your valuable input.",
+      "action": "Submit a Suggestion"
+    },
+    "new": {
+      "title": "Suggest a New Idea",
+      "fields": {
+        "titleLabel": "Title",
+        "titlePlaceholder": "e.g., Need tag filtering in the customer list",
+        "category": "Category",
+        "categories": {
+          "customer": "Customer Management",
+          "pipeline": "Pipeline & Deals",
+          "project": "Project Management",
+          "nudge": "Nudge System",
+          "ai": "AI Skills",
+          "other": "Other"
+        },
+        "descriptionLabel": "Details",
+        "descriptionPlaceholder": "Please describe the feature and why it's needed :)"
+      },
+      "cancel": "Cancel",
+      "submit": "Submit",
+      "submitting": "Submitting...",
+      "required": "*",
+      "errors": {
+        "auth": "Authentication error",
+        "workspaceNotFound": "Workspace not found.",
+        "createFailed": "An error occurred while submitting the request."
+      }
+    }
+  },
+  "settings": {
+    "title": "Workspace Settings",
+    "subtitle": "Manage global settings and team resources for your workspace.",
+    "general": {
+      "title": "General Info",
+      "workspaceName": "Workspace Name",
+      "slug": "Slug / URL",
+      "currentPlan": "Current Plan",
+      "upgrade": "Upgrade →",
+      "editInfo": "Edit Info"
+    },
+    "features": {
+      "title": "Feature Activation",
+      "nudgeSystem": "Nudge System",
+      "billing": "Billing & Subscription"
+    },
+    "members": {
+      "title": "Team Member Management",
+      "columns": {
+        "user": "User",
+        "role": "Role",
+        "status": "Status",
+        "joinDate": "Join Date",
+        "manage": "Manage"
+      },
+      "beforeLogin": "Not logged in",
+      "noEmail": "No email",
+      "me": "Me",
+      "unknown": "Unknown",
+      "footnote1": "* Removing a member from the workspace will revoke their access to all related data.",
+      "footnote2": "* The Owner role is retained until it is transferred to another member."
+    },
+    "invite": {
+      "copyLink": "🔗 Copy Invite Link",
+      "copied": "✅ Copied!"
+    },
+    "removeMember": {
+      "button": "Remove",
+      "processing": "Processing...",
+      "confirmMessage": "Are you sure you want to remove \"{memberName}\" from this workspace?\nRemoved members will no longer have access to workspace data.",
+      "error": "Failed to remove member: {error}"
+    },
+    "billing": {
+      "title": "Billing & Subscription",
+      "subtitle": "Upgrade your plan to experience all of Crumi's powerful features.",
+      "currentSubscription": "Current Subscription",
+      "billingOverview": "Billing Overview",
+      "currentPlan": "Current Plan",
+      "nextBillingDate": "Next Billing Date",
+      "nextBillingValue": "Next Month 1st",
+      "paymentMethod": "Payment Method",
+      "paymentMethodValue": "None Linked",
+      "mostPopular": "Most Popular",
+      "currentlyUsing": "Currently Using",
+      "plans": {
+        "starter": {
+          "name": "Starter",
+          "price": "$ 0",
+          "description": "Free forever plan for individuals and small teams",
+          "features": ["Customer management (up to 50)", "3 projects", "Basic nudge system", "Community support"],
+          "button": "Currently Using"
+        },
+        "pro": {
+          "name": "Pro",
+          "price": "$ 29",
+          "period": "/mo",
+          "description": "All features for growing sales teams",
+          "features": ["Unlimited customers/projects", "Smart AI Coach recommendations", "Advanced pipeline analytics", "Priority support"],
+          "button": "Upgrade to Pro"
+        },
+        "enterprise": {
+          "name": "Business",
+          "price": "$ 99",
+          "period": "/mo",
+          "description": "Dedicated management tools for larger organizations",
+          "features": ["All Pro features", "API access", "Dedicated account manager", "Data export"],
+          "button": "Start Business"
+        }
+      },
+      "annualDiscount": "Get up to 20% off with annual billing.",
+      "enterpriseContact": "Enterprise inquiries:"
+    },
+    "cooltime": {
+      "title": "Nudge System Settings",
+      "subtitle": "Set the cooltime period (in days) that triggers nudge reminders when there's been no activity with customers or projects.",
+      "targets": {
+        "customer": "Customer Follow-up Cycle",
+        "project": "Project Communication Cycle",
+        "deal_stage": "Default Deal Maintenance Cycle"
+      },
+      "nudgeAfter": "A nudge will be sent {days} days after the last activity.",
+      "daysUnit": "days",
+      "infoTitle": "What is the Nudge System?",
+      "infoDescription": "Crumi helps sales reps never forget a customer. If no activity (calls, emails, meetings) is recorded within the set period, the dashboard will prioritize that customer for follow-up.",
+      "save": "Save Settings",
+      "saving": "Saving...",
+      "saveSuccess": "Settings saved successfully.",
+      "saveError": "An error occurred while saving.",
+      "workspaceNotFound": "Workspace not found."
+    }
+  },
+  "aiCoach": {
+    "title": "AI Sales Coach",
+    "subtitle": "Analyzes your sales data in real-time and suggests the optimal path.",
+    "crumiCoach": "Crumi Coach",
+    "engineActive": "Analysis Engine Active",
+    "greeting": "Hello! We've detected {dealCount} deals and {customerCount} valuable relationships.",
+    "hasInsights": "Our analysis found an important discovery related to {firstInsight}. Shall we take a look?",
+    "needMoreData": "We need a bit more data to analyze. Try adding more customers or activity records!",
+    "askPlaceholder": "Ask your coach about a specific deal or strategy...",
+    "askCoach": "Ask Coach",
+    "insightsScan": "Real-time Insight Scan",
+    "noInsights": "No new insights detected.",
+    "insight": "Insight",
+    "salesHealth": "Sales Health",
+    "globalWinRate": "Global Win Rate",
+    "avgDealValue": "Avg. Deal Value",
+    "healthComment": "Based on current metrics, your team's sales activity is stable. Notably, {count} near-close deals suggest a healthy cash flow.",
+    "coachMemory": "Coach Memory",
+    "analyzedCustomers": "Customers analyzed: {count}",
+    "analyzedDeals": "Deals analyzed: {count}",
+    "recentActivityScan": "Recent activity data scan completed"
+  },
+  "projectsEdit": {
+    "title": "Edit Project",
+    "fields": {
+      "name": "Project Name",
+      "namePlaceholder": "2026 Launch Marketing Consulting",
+      "status": "Current Status",
+      "statusOptions": {
+        "planning": "Planning",
+        "inProgress": "In Progress",
+        "completed": "Completed",
+        "onHold": "On Hold"
+      },
+      "description": "Description",
+      "descriptionPlaceholder": "Describe the project's purpose and key scope."
+    },
+    "submit": "Save Changes",
+    "submitting": "Saving...",
+    "cancel": "Cancel",
+    "errors": {
+      "loadFailed": "An error occurred while loading the project.",
+      "updateFailed": "An error occurred while updating the project."
+    }
+  },
+  "pipelineEdit": {
+    "title": "Edit Deal",
+    "fields": {
+      "title": "Deal Title",
+      "titlePlaceholder": "e.g., Crumi License Agreement",
+      "stage": "Current Stage",
+      "stageOptions": {
+        "lead": "Lead",
+        "contact": "Proposal & Contact",
+        "negotiation": "Negotiation",
+        "won": "Closed Won",
+        "lost": "Closed Lost"
+      },
+      "probability": "Win Rate (%)",
+      "amount": "Expected Amount",
+      "amountPlaceholder": "0",
+      "customer": "Associated Customer",
+      "customerDefault": "No customer selected",
+      "project": "Associated Project",
+      "projectDefault": "No project selected"
+    },
+    "submit": "Save Changes",
+    "submitting": "Saving...",
+    "cancel": "Cancel",
+    "errors": {
+      "loadFailed": "An error occurred while loading data.",
+      "updateFailed": "An error occurred while updating the deal."
+    }
+  },
+  "activities": {
+    "title": "Activity Log",
+    "addButton": "Record Activity",
+    "newRecord": "New Activity Record",
+    "empty": "No activities recorded yet. Register your first activity!",
+    "types": {
+      "call": "Call",
+      "email": "Email",
+      "meeting": "Meeting",
+      "note": "Note",
+      "task": "Task"
+    },
+    "form": {
+      "titlePlaceholder": "Activity title (e.g., Proposal delivery call)",
+      "descriptionPlaceholder": "Details (optional)",
+      "cancel": "Cancel",
+      "submit": "Save Record",
+      "submitting": "Saving...",
+      "saveError": "An error occurred while saving the activity record.",
+      "authRequired": "Authentication is required."
+    }
   }
 }

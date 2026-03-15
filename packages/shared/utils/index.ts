@@ -1,4 +1,4 @@
-import { clsx, type ClassValue } from 'clsx';
+import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 /** Tailwind CSS 클래스 병합 유틸리티 */
@@ -74,7 +74,9 @@ export function calculateCooltimeProgress(
 }
 
 /** 쿨타임 진행률 → 넛지 긴급도 */
-export function getUrgencyFromProgress(progress: number): 'info' | 'warning' | 'urgent' | 'critical' {
+export function getUrgencyFromProgress(
+  progress: number,
+): 'info' | 'warning' | 'urgent' | 'critical' {
   if (progress >= 4) return 'critical';
   if (progress >= 2) return 'urgent';
   if (progress >= 1) return 'warning';
