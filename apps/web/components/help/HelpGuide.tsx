@@ -1,18 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-
-interface GuideContent {
-  title: string;
-  intro: string;
-  sections: {
-    title: string;
-    description: string;
-  }[];
-  imageUrl?: string;
-}
 
 export default function HelpGuide() {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,18 +25,19 @@ export default function HelpGuide() {
   if (currentType === 'general' && !pathname.includes('/ws/')) return null;
 
   return (
-    <>
+    <div className="flex items-center justify-center">
       <button
+        type="button"
         onClick={() => setIsOpen(true)}
-        className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-emerald-50 hover:text-emerald-600 transition-all active:scale-95 border border-slate-200"
+        className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-50 text-slate-500 hover:bg-emerald-50 hover:text-emerald-600 transition-all active:scale-95 border border-slate-200 shadow-sm"
         title="도움말 보기"
       >
-        <span className="text-sm font-bold">?</span>
+        <span className="text-xs font-bold leading-none">?</span>
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-2xl p-8 animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-2xl p-8 animate-in zoom-in-95 duration-200 border border-slate-200">
             <button
               onClick={() => setIsOpen(false)}
               className="absolute top-6 right-6 text-slate-400 hover:text-slate-600 p-2 rounded-lg hover:bg-slate-100 transition-all font-bold"
@@ -57,7 +48,7 @@ export default function HelpGuide() {
             <div className="flex flex-col gap-8">
               <div className="flex flex-col gap-2">
                 <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">Guide & Tips</span>
-                <h2 className="text-2xl font-bold text-slate-900">{t(`${currentType}.title`)}</h2>
+                <h2 className="text-2xl font-bold text-slate-900 leading-tight">{t(`${currentType}.title`)}</h2>
                 <p className="text-slate-500 font-medium leading-relaxed">{t(`${currentType}.intro`)}</p>
               </div>
 
@@ -117,7 +108,7 @@ export default function HelpGuide() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

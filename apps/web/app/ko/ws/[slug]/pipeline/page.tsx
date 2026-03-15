@@ -90,7 +90,7 @@ export default async function PipelinePage({
         <div className="flex items-center gap-3">
           <Link
             href={`/ko/ws/${slug}/pipeline/new`}
-            className="inline-flex h-11 items-center justify-center rounded-lg bg-emerald-600 px-6 font-bold text-white shadow-lg shadow-emerald-600/10 transition-all hover:bg-emerald-700 active:scale-[0.98] text-sm"
+            className="inline-flex h-10 items-center justify-center rounded-lg bg-emerald-600 px-6 font-bold text-sm text-white shadow-sm transition-all hover:bg-emerald-700 hover:translate-y-[-2px] active:scale-[0.98]"
           >
             {t('addNew')}
           </Link>
@@ -108,7 +108,7 @@ export default async function PipelinePage({
           </p>
           <Link
             href={`/ko/ws/${slug}/pipeline/new`}
-            className="mt-8 h-11 px-8 bg-slate-900 text-white rounded-lg font-bold text-sm hover:bg-slate-800 active:scale-[0.98] transition-all"
+            className="mt-8 inline-flex h-11 items-center justify-center px-8 bg-emerald-600 text-white rounded-lg font-bold text-sm shadow-sm hover:bg-emerald-700 hover:translate-y-[-2px] active:scale-[0.98] transition-all"
           >
             {t('empty.action')}
           </Link>
@@ -118,7 +118,7 @@ export default async function PipelinePage({
           {pipelineData.map((stage) => (
             <div
               key={stage.id}
-              className="flex flex-col gap-5 min-w-[320px] max-w-[320px] rounded-xl bg-slate-100/50 p-4 border border-slate-200/50 snap-center"
+              className="flex flex-col gap-5 min-w-[320px] max-w-[320px] rounded-2xl bg-slate-50 p-5 border border-slate-100 snap-center hover:bg-slate-100/80 transition-colors"
             >
               {/* 스테이지 헤더 */}
               <div className="flex flex-col gap-2.5 px-1 pt-1">
@@ -146,7 +146,7 @@ export default async function PipelinePage({
                   <Link
                     key={deal.id}
                     href={`/ko/ws/${slug}/pipeline/${deal.id}/edit`}
-                    className="group flex flex-col gap-4 rounded-lg border border-slate-200 bg-white p-5 shadow-sm hover:border-emerald-300 hover:shadow-md transition-all active:scale-[0.99]"
+                    className="group flex flex-col gap-4 rounded-xl border border-slate-100 bg-white p-5 shadow-sm hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-600/5 transition-all hover:translate-y-[-2px] active:scale-[0.98]"
                   >
                     <div className="flex justify-between items-start gap-2">
                       <h4 className="font-bold text-slate-900 leading-snug break-words pr-2 text-sm group-hover:text-emerald-700 transition-colors">
