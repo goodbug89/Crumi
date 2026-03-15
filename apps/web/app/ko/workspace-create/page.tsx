@@ -47,7 +47,6 @@ export default function CreateWorkspacePage() {
         .insert({
           name: name.trim(),
           slug,
-          owner_id: user.id,
         })
         .select()
         .single();
