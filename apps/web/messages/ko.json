@@ -1,0 +1,21 @@
+{
+  "Common": {
+    "login": "로그인",
+    "register": "가입하기",
+    "dashboard": "대시보드",
+    "settings": "설정",
+    "save": "저장",
+    "cancel": "취소",
+    "delete": "삭제",
+    "edit": "수정"
+  },
+  "Auth": {
+    "title": "Crumi",
+    "subtitle": "Your Sales Buddy",
+    "emailLabel": "이메일",
+    "passwordLabel": "비밀번호"
+  },
+  "Dashboard": {
+    "welcome": "Crumi에 오신 것을 환영합니다!"
+  }
+}

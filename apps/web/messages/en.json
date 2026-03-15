@@ -1,0 +1,21 @@
+{
+  "Common": {
+    "login": "Login",
+    "register": "Register",
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit"
+  },
+  "Auth": {
+    "title": "Crumi",
+    "subtitle": "Your Sales Buddy",
+    "emailLabel": "Email",
+    "passwordLabel": "Password"
+  },
+  "Dashboard": {
+    "welcome": "Welcome to Crumi!"
+  }
+}

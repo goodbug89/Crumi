@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Crumi 디자인 시스템 — CSS 변수
+   ============================================================ */
+
+:root {
+  /* Primary Colors */
+  --primary: #0F6E56;
+  --primary-foreground: #FFFFFF;
+  --secondary: #5DCAA5;
+  --secondary-foreground: #031E1A;
+  --accent: #534AB7;
+  --accent-foreground: #FFFFFF;
+
+  /* Semantic Colors */
+  --success: #639922;
+  --warning: #EF9F27;
+  --danger: #E24B4A;
+
+  /* Neutral */
+  --background: #FAFAF8;
+  --foreground: #1A1A18;
+  --surface: #FFFFFF;
+  --muted: #F5F5F0;
+  --muted-foreground: #6B6B65;
+  --border: #E5E5E0;
+  --input: #E5E5E0;
+  --ring: #0F6E56;
+
+  /* Crumi Character */
+  --crumi-default: #5DCAA5;
+  --crumi-analyze: #85B7EB;
+  --crumi-celebrate: #FAC775;
+  --crumi-alert: #F5C4B3;
+  --crumi-working: #AFA9EC;
+  --crumi-sad: #D3D1C7;
+
+  /* Sidebar */
+  --sidebar-width: 256px;
+  --sidebar-collapsed: 64px;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-full: 9999px;
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0F0F0E;
+    --foreground: #FAFAF8;
+    --surface: #1A1A18;
+    --muted: #252520;
+    --muted-foreground: #9B9B95;
+    --border: #333330;
+    --input: #333330;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-sans: 'Pretendard', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ============================================================
+   Base Styles
+   ============================================================ */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* Focus Ring */
+*:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Selection */
+::selection {
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+}
