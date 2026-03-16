@@ -36,6 +36,6 @@ export const config = {
      *
      * 주의: 다국어(i18n) 설정 시에는 /(ko|en)/... 와 같은 패턴도 포함해야 합니다.
      */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 };
