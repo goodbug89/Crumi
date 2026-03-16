@@ -60,35 +60,35 @@ export default async function AICoachPage({
       : 0;
 
   return (
-    <div className="flex flex-col gap-10 animate-fade-in-up pb-10">
-      <div className="flex flex-col gap-2">
-        <h2 className="text-3xl font-extrabold tracking-tight text-foreground">{t('title')}</h2>
-        <p className="text-muted-foreground font-medium">{t('subtitle')}</p>
+    <div className="flex flex-col gap-8 animate-fade-in-up pb-10">
+      <div className="flex flex-col gap-1.5">
+        <h2 className="text-3xl font-bold tracking-tight text-slate-900">{t('title')}</h2>
+        <p className="text-slate-500 font-medium text-sm">{t('subtitle')}</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         {/* Coach Interface */}
         <div className="lg:col-span-2 flex flex-col gap-6">
-          <div className="rounded-[40px] border border-border bg-surface p-8 shadow-2xl shadow-black/[0.03] flex flex-col gap-8 relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-8 opacity-5">
-              <span className="text-9xl">🤖</span>
+          <div className="rounded-xl border border-slate-200 bg-white p-8 shadow-sm flex flex-col gap-8 relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-8 opacity-[0.03] select-none pointer-events-none">
+              <span className="text-[12rem]">🤖</span>
             </div>
 
             <div className="flex items-center gap-4 z-10">
-              <div className="h-12 w-12 rounded-2xl bg-primary text-white flex items-center justify-center text-2xl shadow-lg shadow-primary/20 animate-float">
+              <div className="h-10 w-10 rounded-lg bg-emerald-600 text-white flex items-center justify-center text-xl shadow-lg shadow-emerald-600/10 transition-transform">
                 🤖
               </div>
               <div className="flex flex-col">
-                <h3 className="font-black text-xl">{t('crumiCoach')}</h3>
-                <p className="text-xs font-bold text-success uppercase tracking-widest">
+                <h3 className="font-bold text-lg text-slate-900">{t('crumiCoach')}</h3>
+                <p className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">
                   {t('engineActive')}
                 </p>
               </div>
             </div>
 
             <div className="flex flex-col gap-4 z-10">
-              <div className="bg-muted/40 p-6 rounded-[28px] border border-border/50">
-                <p className="text-sm font-medium leading-relaxed">
+              <div className="bg-slate-50 p-6 rounded-lg border border-slate-100">
+                <p className="text-sm font-semibold text-slate-700 leading-relaxed">
                   {t('greeting', {
                     dealCount: deals?.length || 0,
                     customerCount: customers?.length || 0,
@@ -105,11 +105,11 @@ export default async function AICoachPage({
               <div className="relative">
                 <textarea
                   placeholder={t('askPlaceholder')}
-                  className="w-full h-32 bg-muted/20 border border-border rounded-3xl p-5 text-sm font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none shadow-inner"
+                  className="w-full h-32 bg-slate-50 border border-slate-200 rounded-lg p-4 text-sm font-medium focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all resize-none"
                 />
                 <button
                   type="button"
-                  className="absolute bottom-4 right-4 h-10 px-6 bg-primary text-white rounded-2xl font-black text-xs shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all"
+                  className="absolute bottom-3 right-3 h-9 px-5 bg-slate-900 text-white rounded-md font-bold text-xs hover:bg-slate-800 transition-all active:scale-[0.98]"
                 >
                   {t('askCoach')}
                 </button>
@@ -117,9 +117,9 @@ export default async function AICoachPage({
             </div>
           </div>
 
-          <div className="rounded-[40px] border border-border bg-surface p-8 shadow-sm flex flex-col gap-6">
-            <h3 className="font-black text-xl flex items-center gap-2">
-              <span>🧠</span> {t('insightsScan')}
+          <div className="rounded-xl border border-slate-200 bg-white p-8 shadow-sm flex flex-col gap-6">
+            <h3 className="font-bold text-lg flex items-center gap-2.5 text-slate-900">
+              <span className="text-xl">🧠</span> {t('insightsScan')}
             </h3>
             <div className="flex flex-col gap-4">
               {insights.length > 0 ? (
@@ -132,16 +132,16 @@ export default async function AICoachPage({
                     insightLabel={t('insight')}
                     color={
                       insight.type === 'URGENT'
-                        ? 'text-danger bg-danger/5 border-danger/10'
+                        ? 'text-rose-700 bg-rose-50/50 border-rose-100'
                         : insight.type === 'OPPORTUNITY'
-                          ? 'text-success bg-success/5 border-success/10'
-                          : 'text-primary bg-primary/5 border-primary/10'
+                          ? 'text-emerald-700 bg-emerald-50/50 border-emerald-100'
+                          : 'text-indigo-700 bg-indigo-50/50 border-indigo-100'
                     }
                   />
                 ))
               ) : (
-                <div className="py-20 text-center border-2 border-dashed border-border rounded-[32px] bg-muted/10">
-                  <p className="text-sm font-bold text-muted-foreground">{t('noInsights')}</p>
+                <div className="py-20 text-center border-2 border-dashed border-slate-100 rounded-lg bg-slate-50/30">
+                  <p className="text-sm font-bold text-slate-400">{t('noInsights')}</p>
                 </div>
               )}
             </div>
@@ -150,24 +150,30 @@ export default async function AICoachPage({
 
         {/* Sales Health sidebar */}
         <div className="lg:col-span-1 flex flex-col gap-6">
-          <div className="rounded-[40px] border border-border bg-gradient-to-br from-primary to-primary/80 p-8 shadow-xl shadow-primary/20 text-white flex flex-col gap-6">
-            <h3 className="font-black text-lg">{t('salesHealth')}</h3>
-            <div className="flex flex-col gap-4">
+          <div className="rounded-xl bg-slate-900 p-8 shadow-xl shadow-slate-900/10 text-white flex flex-col gap-8 relative overflow-hidden">
+            <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl" />
+
+            <h3 className="font-bold text-lg text-slate-100">{t('salesHealth')}</h3>
+            <div className="flex flex-col gap-6 z-10">
               <div className="flex flex-col">
-                <span className="text-xs font-bold uppercase opacity-60 tracking-widest">
+                <span className="text-[11px] font-bold uppercase opacity-50 tracking-wider">
                   {t('globalWinRate')}
                 </span>
-                <span className="text-4xl font-black">{winRate}%</span>
+                <span className="text-4xl font-bold mt-1 tabular-nums tracking-tight">
+                  {winRate}%
+                </span>
               </div>
               <div className="flex flex-col">
-                <span className="text-xs font-bold uppercase opacity-60 tracking-widest">
+                <span className="text-[11px] font-bold uppercase opacity-50 tracking-wider">
                   {t('avgDealValue')}
                 </span>
-                <span className="text-2xl font-black">₩ {avgDealSize.toLocaleString()}</span>
+                <span className="text-2xl font-bold mt-1 tabular-nums tracking-tight">
+                  ₩ {avgDealSize.toLocaleString()}
+                </span>
               </div>
             </div>
-            <div className="mt-4 p-4 bg-white/10 rounded-2xl border border-white/20">
-              <p className="text-[10px] font-bold leading-relaxed italic opacity-90">
+            <div className="mt-4 p-4 bg-white/5 rounded-lg border border-white/10 z-10 backdrop-blur-sm">
+              <p className="text-[11px] font-semibold leading-relaxed italic text-emerald-100 opacity-90">
                 &quot;
                 {t('healthComment', {
                   count: insights.filter((i) => i.type === 'OPPORTUNITY').length,
@@ -177,19 +183,20 @@ export default async function AICoachPage({
             </div>
           </div>
 
-          <div className="rounded-[40px] border border-border bg-surface p-8 shadow-sm flex flex-col gap-4">
-            <h3 className="font-black text-lg">{t('coachMemory')}</h3>
-            <div className="flex flex-col gap-3">
-              <div className="text-xs font-medium text-muted-foreground leading-relaxed flex items-start gap-2">
-                <span className="text-primary">•</span>{' '}
+          <div className="rounded-xl border border-slate-200 bg-white p-8 shadow-sm flex flex-col gap-5">
+            <h3 className="font-bold text-base text-slate-900">{t('coachMemory')}</h3>
+            <div className="flex flex-col gap-3.5">
+              <div className="text-xs font-semibold text-slate-500 leading-relaxed flex items-start gap-3">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 mt-1.5" />
                 <span>{t('analyzedCustomers', { count: customers?.length || 0 })}</span>
               </div>
-              <div className="text-xs font-medium text-muted-foreground leading-relaxed flex items-start gap-2">
-                <span className="text-primary">•</span>{' '}
+              <div className="text-xs font-semibold text-slate-500 leading-relaxed flex items-start gap-3">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 mt-1.5" />
                 <span>{t('analyzedDeals', { count: deals?.length || 0 })}</span>
               </div>
-              <div className="text-xs font-medium text-muted-foreground leading-relaxed flex items-start gap-2">
-                <span className="text-primary">•</span> <span>{t('recentActivityScan')}</span>
+              <div className="text-xs font-semibold text-slate-500 leading-relaxed flex items-start gap-3">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 mt-1.5" />{' '}
+                <span>{t('recentActivityScan')}</span>
               </div>
             </div>
           </div>

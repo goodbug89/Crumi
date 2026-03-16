@@ -9,23 +9,23 @@ export default async function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-background selection:bg-primary/20">
       {/* 네비게이션 */}
-      <nav className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto w-full">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold">
+      <nav className="flex items-center justify-between px-6 py-6 max-w-7xl mx-auto w-full">
+        <div className="flex items-center gap-2.5 group cursor-pointer">
+          <div className="w-7 h-7 bg-slate-900 rounded-md flex items-center justify-center text-white text-xs font-bold transition-colors group-hover:bg-emerald-600">
             C
           </div>
-          <span className="text-xl font-bold tracking-tight">Crumi</span>
+          <span className="text-lg font-bold tracking-tight text-slate-900">Crumi</span>
         </div>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-8">
           <Link
             href="/ko/login"
-            className="text-sm font-medium hover:text-primary transition-colors"
+            className="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors"
           >
             {t('nav.login')}
           </Link>
           <Link
             href="/ko/register"
-            className="h-10 px-5 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 transition-all"
+            className="h-10 px-6 bg-slate-900 text-white rounded-lg text-sm font-bold hover:bg-slate-800 transition-all active:scale-[0.98] shadow-sm"
           >
             {t('nav.start')}
           </Link>
@@ -53,31 +53,29 @@ export default async function Home() {
 
           {/* 텍스트 영역 */}
           <div className="flex-1 flex flex-col items-center lg:items-start gap-8 text-center lg:text-left order-1 lg:order-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-bold uppercase tracking-widest border border-emerald-100/50">
               {t('badge')}
             </div>
 
-            <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-foreground leading-[1.1]">
+            <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-slate-900 leading-[1.05]">
               {t('heroTitle1')} <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-                {t('heroTitle2')}
-              </span>
+              <span className="text-emerald-600">{t('heroTitle2')}</span>
             </h1>
 
-            <p className="max-w-md text-lg sm:text-xl leading-relaxed text-muted-foreground">
+            <p className="max-w-lg text-lg sm:text-xl leading-relaxed text-slate-500 font-medium">
               {t('heroDescription')}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <Link
                 href="/ko/register"
-                className="inline-flex h-14 items-center justify-center rounded-2xl bg-primary px-10 text-lg font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98]"
+                className="inline-flex h-14 items-center justify-center rounded-lg bg-emerald-600 px-10 text-base font-bold text-white shadow-xl shadow-emerald-600/10 transition-all hover:bg-emerald-700 active:scale-[0.98]"
               >
                 {t('ctaPrimary')}
               </Link>
               <Link
                 href="/ko/login"
-                className="inline-flex h-14 items-center justify-center rounded-2xl border border-border bg-surface px-10 text-lg font-bold text-foreground transition-all hover:bg-muted active:scale-[0.98]"
+                className="inline-flex h-14 items-center justify-center rounded-lg border border-slate-200 bg-white px-10 text-base font-bold text-slate-900 transition-all hover:bg-slate-50 active:scale-[0.98]"
               >
                 {t('ctaSecondary')}
               </Link>
@@ -141,12 +139,14 @@ export default async function Home() {
 
 function FeatureCard({ emoji, title, desc }: { emoji: string; title: string; desc: string }) {
   return (
-    <div className="group relative flex flex-col gap-4 rounded-3xl border border-border bg-surface p-8 transition-all hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1">
-      <div className="w-14 h-14 rounded-2xl bg-muted flex items-center justify-center text-3xl group-hover:bg-primary/10 transition-colors">
+    <div className="group relative flex flex-col gap-5 rounded-xl border border-slate-200 bg-white p-8 transition-all hover:border-emerald-200 hover:shadow-xl hover:shadow-slate-200/50">
+      <div className="w-12 h-12 rounded-lg bg-slate-50 flex items-center justify-center text-2xl group-hover:bg-emerald-50 transition-colors">
         {emoji}
       </div>
-      <h3 className="text-xl font-bold text-foreground">{title}</h3>
-      <p className="text-base text-muted-foreground leading-relaxed">{desc}</p>
+      <div>
+        <h3 className="text-lg font-bold text-slate-900 mb-2">{title}</h3>
+        <p className="text-sm text-slate-500 leading-relaxed font-medium">{desc}</p>
+      </div>
     </div>
   );
 }

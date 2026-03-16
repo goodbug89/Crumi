@@ -43,11 +43,11 @@ export default async function FeatureRequestsPage({
     .order('created_at', { ascending: false });
 
   return (
-    <div className="flex flex-col gap-10 animate-fade-in-up pb-10">
+    <div className="flex flex-col gap-8 animate-fade-in-up pb-10">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-        <div className="flex flex-col gap-2">
-          <h2 className="text-3xl font-extrabold tracking-tight text-foreground">{t('title')}</h2>
-          <p className="text-muted-foreground font-medium">{t('subtitle')}</p>
+        <div className="flex flex-col gap-1.5">
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900">{t('title')}</h2>
+          <p className="text-slate-500 font-medium text-sm">{t('subtitle')}</p>
         </div>
         <Link
           href={`/ko/ws/${slug}/requests/new`}
@@ -57,7 +57,7 @@ export default async function FeatureRequestsPage({
         </Link>
       </div>
 
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-4">
         {requests && requests.length > 0 ? (
           requests.map((req) => (
             <div
@@ -75,37 +75,37 @@ export default async function FeatureRequestsPage({
                 />
               </div>
 
-              <div className="flex-1 flex flex-col gap-4">
-                <div className="flex flex-col gap-1.5 min-w-0">
-                  <div className="flex items-center gap-3">
-                    <h3 className="font-black text-xl text-foreground group-hover:text-primary transition-colors truncate">
+              <div className="flex-1 flex flex-col gap-4 min-w-0">
+                <div className="flex flex-col gap-2 min-w-0">
+                  <div className="flex items-start justify-between gap-4">
+                    <h3 className="font-bold text-lg text-slate-900 group-hover:text-emerald-700 transition-colors truncate">
                       {req.title}
                     </h3>
                     <span
-                      className={`text-[10px] px-2.5 py-0.5 rounded-full uppercase font-black tracking-widest
+                      className={`shrink-0 text-[10px] px-2 py-0.5 rounded-md uppercase font-bold tracking-wider mt-1
                       ${
                         req.status === 'done'
-                          ? 'bg-success/10 text-success'
+                          ? 'bg-emerald-50 text-emerald-700'
                           : req.status === 'in_progress'
-                            ? 'bg-primary/10 text-primary'
+                            ? 'bg-blue-50 text-blue-700'
                             : req.status === 'reviewing'
-                              ? 'bg-secondary/10 text-secondary'
-                              : 'bg-muted text-muted-foreground'
+                              ? 'bg-amber-50 text-amber-700'
+                              : 'bg-slate-100 text-slate-500'
                       }
                     `}
                     >
                       {req.status}
                     </span>
                   </div>
-                  <p className="text-sm font-medium text-muted-foreground leading-relaxed line-clamp-2">
+                  <p className="text-sm font-medium text-slate-500 leading-relaxed line-clamp-2">
                     {req.description}
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between mt-auto pt-4 border-t border-border/50 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
+                <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-100 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                   <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 rounded-md bg-muted flex items-center justify-center text-[8px]">
-                      👤
+                    <div className="w-5 h-5 rounded bg-slate-100 flex items-center justify-center text-[8px] font-bold text-slate-500">
+                      {req.title[0]}
                     </div>
                     <span>
                       {t('suggestedBy')}{' '}
@@ -113,18 +113,20 @@ export default async function FeatureRequestsPage({
                         t('anonymous')}
                     </span>
                   </div>
-                  <span>{new Date(req.created_at).toLocaleDateString('ko-KR')}</span>
+                  <span className="tabular-nums">
+                    {new Date(req.created_at).toLocaleDateString('ko-KR')}
+                  </span>
                 </div>
               </div>
             </div>
           ))
         ) : (
-          <div className="flex flex-col items-center justify-center py-32 text-center rounded-[40px] border-2 border-dashed border-border/60 bg-surface/30 backdrop-blur-sm">
-            <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center text-5xl mb-6">
+          <div className="flex flex-col items-center justify-center py-24 text-center rounded-xl border border-dashed border-slate-200 bg-slate-50/50">
+            <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center text-4xl mb-6 grayscale opacity-40">
               💡
             </div>
-            <h3 className="text-2xl font-black text-foreground">{t('empty.title')}</h3>
-            <p className="mt-2 text-muted-foreground max-w-sm font-medium">
+            <h3 className="text-xl font-bold text-slate-900">{t('empty.title')}</h3>
+            <p className="mt-2 text-slate-500 max-w-sm font-medium text-sm leading-relaxed">
               {t('empty.description')}
             </p>
             <Link

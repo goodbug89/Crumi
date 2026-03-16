@@ -81,9 +81,9 @@ export default async function PipelinePage({
   return (
     <div className="flex flex-col gap-8 h-full animate-fade-in-up pb-10">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h2 className="text-3xl font-extrabold tracking-tight text-foreground">{t('title')}</h2>
-          <p className="text-muted-foreground mt-1 text-sm font-medium">
+        <div className="flex flex-col gap-1.5">
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900">{t('title')}</h2>
+          <p className="text-slate-500 text-sm font-medium">
             {t('subtitle', { count: deals?.length || 0 })}
           </p>
         </div>
@@ -98,12 +98,12 @@ export default async function PipelinePage({
       </div>
 
       {deals?.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-24 text-center border-border border-dashed border-2 rounded-[40px] bg-surface/30 backdrop-blur-sm">
-          <div className="h-24 w-24 bg-primary/10 rounded-full flex items-center justify-center text-5xl mb-6">
+        <div className="flex flex-col items-center justify-center py-24 text-center border-slate-200 border-dashed border rounded-xl bg-slate-50/50">
+          <div className="h-20 w-20 bg-slate-100 rounded-full flex items-center justify-center text-4xl mb-6 grayscale opacity-40">
             📊
           </div>
-          <h3 className="text-2xl font-black text-foreground">{t('empty.title')}</h3>
-          <p className="mt-2 text-muted-foreground max-w-sm font-medium leading-relaxed">
+          <h3 className="text-xl font-bold text-slate-900">{t('empty.title')}</h3>
+          <p className="mt-2 text-slate-500 max-w-sm font-medium leading-relaxed text-sm">
             {t('empty.description')}
           </p>
           <Link
@@ -121,55 +121,57 @@ export default async function PipelinePage({
               className="flex flex-col gap-5 min-w-[320px] max-w-[320px] rounded-2xl bg-slate-50 p-5 border border-slate-100 snap-center hover:bg-slate-100/80 transition-colors"
             >
               {/* 스테이지 헤더 */}
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2.5 px-1 pt-1">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2.5">
                     <span
-                      className={`w-8 h-8 rounded-xl ${stage.color} flex items-center justify-center text-sm shadow-sm`}
+                      className={`w-8 h-8 rounded-lg ${stage.color} flex items-center justify-center text-sm shadow-sm font-bold`}
                     >
                       {stage.emoji}
                     </span>
-                    <h3 className="font-black text-foreground tracking-tight">{stage.name}</h3>
+                    <h3 className="font-bold text-slate-800 tracking-tight text-sm">
+                      {stage.name}
+                    </h3>
                   </div>
-                  <span className="text-[10px] font-black text-muted-foreground/60 tracking-widest bg-background/50 px-2 py-1 rounded-full border border-border/40">
+                  <span className="text-[11px] font-bold text-slate-500 bg-white px-2 py-0.5 rounded-md border border-slate-200">
                     {stage.deals.length}
                   </span>
                 </div>
-                <p className="text-[10px] font-black uppercase text-primary/80 tracking-widest ml-10">
+                <p className="text-[11px] font-bold uppercase text-emerald-600 tracking-wider ml-10">
                   ₩ {stage.totalAmount.toLocaleString()}
                 </p>
               </div>
 
               {/* 거래 카드 리스트 */}
-              <div className="flex flex-col gap-4 min-h-[400px]">
+              <div className="flex flex-col gap-3 min-h-[400px]">
                 {stage.deals.map((deal) => (
                   <Link
                     key={deal.id}
                     href={`/ko/ws/${slug}/pipeline/${deal.id}/edit`}
                     className="group flex flex-col gap-4 rounded-xl border border-slate-100 bg-white p-5 shadow-sm hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-600/5 transition-all hover:translate-y-[-2px] active:scale-[0.98]"
                   >
-                    <div className="flex justify-between items-start">
-                      <h4 className="font-bold text-foreground leading-snug break-words pr-2">
+                    <div className="flex justify-between items-start gap-2">
+                      <h4 className="font-bold text-slate-900 leading-snug break-words pr-2 text-sm group-hover:text-emerald-700 transition-colors">
                         {deal.title}
                       </h4>
                       <div
-                        className={`h-1.5 w-1.5 rounded-full ${stage.color} shadow-sm group-hover:scale-150 transition-transform`}
+                        className={`h-2 w-2 rounded-full ${stage.color} shrink-0 mt-1 shadow-sm`}
                       />
                     </div>
 
                     {(deal.customers || deal.projects) && (
-                      <div className="flex flex-col gap-1.5">
+                      <div className="flex flex-col gap-2">
                         {deal.customers && (
-                          <div className="flex items-center gap-2 text-[11px] font-bold text-muted-foreground">
-                            <span className="opacity-70">👤</span>{' '}
+                          <div className="flex items-center gap-2 text-[11px] font-semibold text-slate-500">
+                            <span className="opacity-70">👤</span>
                             <span className="truncate">
                               {(deal.customers as { name: string }).name}
                             </span>
                           </div>
                         )}
                         {deal.projects && (
-                          <div className="flex items-center gap-2 text-[11px] font-bold text-muted-foreground">
-                            <span className="opacity-70">📂</span>{' '}
+                          <div className="flex items-center gap-2 text-[11px] font-semibold text-slate-500">
+                            <span className="opacity-70">📂</span>
                             <span className="truncate">
                               {(deal.projects as { name: string }).name}
                             </span>
@@ -180,34 +182,34 @@ export default async function PipelinePage({
 
                     <div className="flex items-end justify-between mt-1">
                       <div className="flex flex-col">
-                        <p className="text-[9px] font-black text-muted-foreground/40 uppercase tracking-widest mb-0.5">
+                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">
                           {t('deal.amount')}
                         </p>
-                        <p className="font-black text-primary text-base">
+                        <p className="font-bold text-slate-900 text-base tabular-nums tracking-tight">
                           ₩ {deal.amount ? deal.amount.toLocaleString() : '0'}
                         </p>
                       </div>
                       <div className="flex flex-col items-end">
-                        <p className="text-[9px] font-black text-muted-foreground/40 uppercase tracking-widest mb-0.5">
+                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">
                           {t('deal.winRate')}
                         </p>
-                        <div className="flex items-center gap-1.5 font-black text-[11px]">
-                          <div className="w-12 h-1.5 bg-muted rounded-full overflow-hidden">
+                        <div className="flex items-center gap-2 font-bold text-[11px] text-slate-600">
+                          <div className="w-12 h-1.5 bg-slate-100 rounded-full overflow-hidden">
                             <div
-                              className="h-full bg-secondary"
+                              className="h-full bg-emerald-500 transition-all duration-1000"
                               style={{ width: `${deal.probability}%` }}
                             />
                           </div>
-                          <span>{deal.probability}%</span>
+                          <span className="tabular-nums">{deal.probability}%</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between text-[9px] font-bold text-muted-foreground/60 border-t border-border/50 pt-3 mt-1">
-                      <span className="uppercase tracking-tighter">
+                    <div className="flex items-center justify-between text-[10px] font-semibold text-slate-400 border-t border-slate-100 pt-3 mt-1">
+                      <span className="uppercase tracking-wide">
                         {t('deal.created')} {new Date(deal.created_at).toLocaleDateString('ko-KR')}
                       </span>
-                      <span className="group-hover:text-primary transition-colors">
+                      <span className="group-hover:text-emerald-600 transition-colors font-bold">
                         {t('deal.detail')}
                       </span>
                     </div>
@@ -215,8 +217,8 @@ export default async function PipelinePage({
                 ))}
 
                 {stage.deals.length === 0 && (
-                  <div className="flex-1 flex flex-col items-center justify-center rounded-3xl border border-dashed border-border/60 bg-transparent py-20 text-center px-4">
-                    <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/40">
+                  <div className="flex-1 flex flex-col items-center justify-center rounded-lg border border-dashed border-slate-200 bg-white/30 py-20 text-center px-4">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-slate-300">
                       {t('emptyStage')}
                     </p>
                   </div>

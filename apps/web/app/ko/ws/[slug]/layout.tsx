@@ -1,9 +1,8 @@
+import HelpGuide from '@/components/help/HelpGuide';
 import { createClient } from '@/lib/supabase/server';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-
-import HelpGuide from '@/components/help/HelpGuide';
 
 export default async function AppLayout({
   children,
@@ -50,11 +49,11 @@ export default async function AppLayout({
   return (
     <div className="flex min-h-screen bg-background text-foreground">
       {/* 사이드바 */}
-      <aside className="fixed inset-y-0 left-0 z-20 flex w-64 flex-col border-r border-border bg-surface shadow-2xl transition-all">
-        <div className="flex h-16 items-center border-b border-border px-6">
+      <aside className="fixed inset-y-0 left-0 z-20 flex w-64 flex-col border-r border-slate-200 bg-white">
+        <div className="flex h-16 items-center px-6">
           <Link
             href={`/ko/ws/${slug}/dashboard`}
-            className="flex items-center gap-3 font-black group"
+            className="flex items-center gap-3 font-semibold group"
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-600 text-white shadow-lg shadow-emerald-600/20 group-hover:scale-110 transition-transform">
               {workspace.name[0]}
@@ -65,7 +64,7 @@ export default async function AppLayout({
           </Link>
         </div>
 
-        <nav className="flex-1 space-y-1 overflow-y-auto p-4">
+        <nav className="flex-1 space-y-0.5 px-3 py-4">
           <SidebarLink href={`/ko/ws/${slug}/dashboard`} label={t('dashboard')} emoji="🏠" />
           <SidebarLink href={`/ko/ws/${slug}/customers`} label={t('customers')} emoji="👥" />
           <SidebarLink href={`/ko/ws/${slug}/projects`} label={t('projects')} emoji="📁" />
@@ -74,7 +73,7 @@ export default async function AppLayout({
           <SidebarLink href={`/ko/ws/${slug}/requests`} label={t('requests')} emoji="💡" />
         </nav>
 
-        <div className="p-4 border-t border-border flex flex-col gap-3">
+        <div className="p-4 border-t border-slate-100 flex flex-col gap-1">
           <SidebarLink href={`/ko/ws/${slug}/settings`} label={t('settings')} emoji="⚙️" />
 
           <div className="mt-2 p-3 bg-muted/40 rounded-3xl flex items-center gap-3 group relative overflow-hidden">
@@ -104,9 +103,9 @@ export default async function AppLayout({
             <form action="/api/auth/signout" method="post">
               <button
                 type="submit"
-                className="text-muted-foreground hover:text-danger hover:scale-110 transition-all p-1"
+                className="text-slate-400 hover:text-red-500 transition-colors p-1.5 hover:bg-white rounded-md"
               >
-                <span className="text-xl">🚪</span>
+                <span className="text-sm">🚪</span>
               </button>
             </form>
           </div>
@@ -147,9 +146,9 @@ function SidebarLink({ href, label, emoji }: { href: string; label: string; emoj
   return (
     <Link
       href={href}
-      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+      className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-all hover:bg-slate-100 hover:text-slate-900 active:scale-[0.98]"
     >
-      <span className="text-lg">{emoji}</span>
+      <span className="text-base grayscale group-hover:grayscale-0">{emoji}</span>
       {label}
     </Link>
   );

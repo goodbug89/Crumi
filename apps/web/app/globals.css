@@ -5,60 +5,62 @@
    ============================================================ */
 
 :root {
-  /* Primary Colors */
-  --primary: #0f6e56;
+  /* Neutral Palette (Slate/Zinc) */
+  --background: #ffffff;
+  --foreground: #020617;
+  --surface: #ffffff;
+  --muted: #f8fafc;
+  --muted-foreground: #64748b;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+
+  /* Brand Colors (Emerald/Indigo) */
+  --primary: #059669; /* Emerald 600 */
   --primary-foreground: #ffffff;
-  --secondary: #5dcaa5;
-  --secondary-foreground: #031e1a;
-  --accent: #534ab7;
+  --secondary: #f1f5f9; /* Slate 100 */
+  --secondary-foreground: #0f172a;
+  --accent: #6366f1; /* Indigo 500 */
   --accent-foreground: #ffffff;
 
-  /* Semantic Colors */
-  --success: #639922;
-  --warning: #ef9f27;
-  --danger: #e24b4a;
+  /* Semantic */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --ring: #10b981;
 
-  /* Neutral */
-  --background: #fafaf8;
-  --foreground: #1a1a18;
-  --surface: #ffffff;
-  --muted: #f5f5f0;
-  --muted-foreground: #6b6b65;
-  --border: #e5e5e0;
-  --input: #e5e5e0;
-  --ring: #0f6e56;
-
-  /* Crumi Character */
-  --crumi-default: #5dcaa5;
-  --crumi-analyze: #85b7eb;
-  --crumi-celebrate: #fac775;
-  --crumi-alert: #f5c4b3;
-  --crumi-working: #afa9ec;
-  --crumi-sad: #d3d1c7;
+  /* Crumi Character (Refined) */
+  --crumi-default: #10b981;
+  --crumi-analyze: #3b82f6;
+  --crumi-celebrate: #f59e0b;
+  --crumi-alert: #f43f5e;
+  --crumi-working: #6366f1;
+  --crumi-sad: #94a3b8;
 
   /* Sidebar */
-  --sidebar-width: 256px;
-  --sidebar-collapsed: 64px;
+  --sidebar-width: 260px;
+  --sidebar-collapsed: 68px;
 
-  /* Border Radius */
-  --radius-sm: 4px;
+  /* Border Radius (Rationalized) */
+  --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
-  --radius-2xl: 20px;
+  --radius-2xl: 24px;
   --radius-full: 9999px;
 }
 
-/* Dark Mode */
+/* Dark Mode (Zinc-based for better contrast) */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0f0f0e;
-    --foreground: #fafaf8;
-    --surface: #1a1a18;
-    --muted: #252520;
-    --muted-foreground: #9b9b95;
-    --border: #333330;
-    --input: #333330;
+    --background: #09090b;
+    --foreground: #fafafa;
+    --surface: #09090b;
+    --muted: #18181b;
+    --muted-foreground: #a1a1aa;
+    --border: #27272a;
+    --input: #27272a;
+    --secondary: #18181b;
+    --secondary-foreground: #fafafa;
   }
 }
 

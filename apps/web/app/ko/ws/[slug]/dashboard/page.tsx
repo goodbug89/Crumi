@@ -102,8 +102,8 @@ export default async function DashboardPage({
     <div className="flex flex-col gap-8 max-w-7xl mx-auto w-full pb-12 animate-fade-in-up">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-extrabold tracking-tight text-foreground">{t('title')}</h2>
-          <p className="text-muted-foreground mt-1 text-sm">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground">{t('title')}</h2>
+          <p className="text-slate-500 mt-1.5 text-sm font-medium">
             {t('subtitle', { workspaceName: workspace.name })}
           </p>
         </div>
@@ -113,7 +113,7 @@ export default async function DashboardPage({
       </div>
 
       {/* 주요 통계 (KPIS) */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
           title={t('stats.activeCustomers')}
           value={customerCount || 0}
@@ -144,58 +144,58 @@ export default async function DashboardPage({
         {/* 영업 파이프라인 시각화 */}
         <div className="lg:col-span-2 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm flex flex-col gap-6 hover:shadow-md transition-all">
           <div className="flex items-center justify-between">
-            <h3 className="font-bold text-lg flex items-center gap-2">
-              <span>📈</span> {t('pipeline.title')}
+            <h3 className="font-semibold text-lg flex items-center gap-2">
+              <span className="text-xl">📈</span> {t('pipeline.title')}
             </h3>
             <Link
               href={`/ko/ws/${slug}/pipeline`}
-              className="text-xs text-primary hover:underline font-semibold"
+              className="text-xs text-primary hover:underline font-semibold bg-primary/5 px-2.5 py-1 rounded-md"
             >
               {t('pipeline.viewDetail')}
             </Link>
           </div>
 
-          <div className="flex items-end gap-2 sm:gap-4 h-48 px-2 border-b border-border pb-2">
+          <div className="flex items-end gap-3 sm:gap-6 h-48 px-4 border-b border-slate-100 pb-4">
             <Bar
               label={t('pipeline.stages.lead')}
               count={dealsByStage.lead}
               max={maxDeals}
-              color="bg-muted-foreground/20"
+              color="bg-slate-100"
             />
             <Bar
               label={t('pipeline.stages.contact')}
               count={dealsByStage.contact}
               max={maxDeals}
-              color="bg-secondary/40"
+              color="bg-slate-200"
             />
             <Bar
               label={t('pipeline.stages.negotiation')}
               count={dealsByStage.negotiation}
               max={maxDeals}
-              color="bg-primary/60"
+              color="bg-primary/40"
             />
             <Bar
               label={t('pipeline.stages.won')}
               count={dealsByStage.won}
               max={maxDeals}
-              color="bg-success text-white"
+              color="bg-primary text-white"
             />
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 px-2">
             <div className="text-center">
-              <p className="text-[10px] text-muted-foreground uppercase font-bold">
+              <p className="text-[11px] text-slate-500 uppercase font-bold tracking-wide mb-1">
                 {t('pipeline.totalAmount')}
               </p>
-              <p className="text-lg font-bold">
+              <p className="text-lg font-bold text-slate-900">
                 ₩ {deals.reduce((acc, d) => acc + (d.amount || 0), 0).toLocaleString()}
               </p>
             </div>
-            <div className="text-center border-l border-border">
-              <p className="text-[10px] text-muted-foreground uppercase font-bold">
+            <div className="text-center border-l border-slate-100">
+              <p className="text-[11px] text-slate-500 uppercase font-bold tracking-wide mb-1">
                 {t('pipeline.avgWinRate')}
               </p>
-              <p className="text-lg font-bold">
+              <p className="text-lg font-bold text-slate-900">
                 {deals.length > 0
                   ? Math.round(
                       deals.reduce((acc, d) => acc + (d.probability || 0), 0) / deals.length,
@@ -204,11 +204,11 @@ export default async function DashboardPage({
                 %
               </p>
             </div>
-            <div className="text-center border-l border-border hidden sm:block border-dashed">
-              <p className="text-[10px] text-muted-foreground uppercase font-bold">
+            <div className="text-center border-l border-slate-100 hidden sm:block">
+              <p className="text-[11px] text-slate-500 uppercase font-bold tracking-wide mb-1">
                 {t('pipeline.avgDealSize')}
               </p>
-              <p className="text-lg font-bold">
+              <p className="text-lg font-bold text-slate-900">
                 ₩{' '}
                 {deals.length > 0
                   ? Math.round(
@@ -218,11 +218,11 @@ export default async function DashboardPage({
                 {t('stats.unit10k')}
               </p>
             </div>
-            <div className="text-center border-l border-border hidden sm:block border-dashed">
-              <p className="text-[10px] text-muted-foreground uppercase font-bold">
+            <div className="text-center border-l border-slate-100 hidden sm:block">
+              <p className="text-[11px] text-slate-500 uppercase font-bold tracking-wide mb-1">
                 {t('pipeline.conversionRate')}
               </p>
-              <p className="text-lg font-bold">
+              <p className="text-lg font-bold text-slate-900">
                 {deals.length > 0 ? Math.round((dealsByStage.won / deals.length) * 100) : 0}%
               </p>
             </div>
@@ -234,28 +234,26 @@ export default async function DashboardPage({
           <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:rotate-12 transition-transform">
             <span className="text-6xl">🤖</span>
           </div>
-          <h3 className="font-bold text-lg flex items-center gap-2 z-10">
-            <span>✨</span> {t('aiCoach.title')}
+          <h3 className="font-semibold text-lg flex items-center gap-2 z-10">
+            <span className="text-xl">✨</span> {t('aiCoach.title')}
           </h3>
-          <div className="flex flex-col gap-3 z-10">
+          <div className="flex flex-col gap-4 z-10 flex-1">
             {insights.length > 0 ? (
               insights.slice(0, 2).map((insight) => (
                 <div
                   key={insight.title}
-                  className="p-3 bg-white/80 backdrop-blur-sm rounded-2xl border border-primary/10 shadow-sm transition-all hover:scale-[1.02]"
+                  className="p-4 bg-white/90 backdrop-blur-sm rounded-lg border border-emerald-100 shadow-sm transition-all hover:border-emerald-200"
                 >
-                  <p className="text-[9px] font-black text-primary/60 mb-0.5 uppercase tracking-widest">
+                  <p className="text-[10px] font-bold text-emerald-600 mb-1.5 uppercase tracking-wider">
                     {insight.type}
                   </p>
-                  <p className="text-xs font-bold leading-relaxed line-clamp-2">
+                  <p className="text-sm font-semibold text-slate-900 leading-snug">
                     {insight.message}
                   </p>
                 </div>
               ))
             ) : (
-              <p className="text-xs text-muted-foreground italic p-4 text-center">
-                {t('aiCoach.noData')}
-              </p>
+              <p className="text-sm text-slate-500 italic p-4 text-center">{t('aiCoach.noData')}</p>
             )}
           </div>
           <Link
@@ -430,13 +428,13 @@ function StatCard({
         <h3 className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
           {title}
         </h3>
-        <span className="text-xl group-hover:rotate-12 transition-transform">{icon}</span>
+        <span className="text-2xl group-hover:scale-110 transition-transform">{icon}</span>
       </div>
-      <div className="mt-2">
-        <div className="text-4xl font-black text-foreground tabular-nums tracking-tighter">
-          {value}
-        </div>
-        <p className="text-[10px] font-bold text-success mt-1">{trend}</p>
+      <div>
+        <div className="text-3xl font-bold text-slate-900 tabular-nums tracking-tight">{value}</div>
+        <p className="text-[11px] font-bold text-emerald-600 mt-1.5 flex items-center gap-1">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" /> {trend}
+        </p>
       </div>
     </div>
   );
@@ -450,15 +448,15 @@ function Bar({
 }: { label: string; count: number; max: number; color: string }) {
   const height = (count / max) * 100;
   return (
-    <div className="flex-1 flex flex-col items-center gap-2 group h-full justify-end">
-      <div className="text-[10px] font-black mb-1 opacity-0 group-hover:opacity-100 transition-opacity bg-background px-1.5 py-0.5 rounded-md border border-border shadow-sm">
+    <div className="flex-1 flex flex-col items-center gap-3 group h-full justify-end">
+      <div className="text-[11px] font-bold mb-1 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900 text-white px-2 py-0.5 rounded shadow-sm">
         {count}
       </div>
       <div
-        className={`w-full max-w-[48px] rounded-t-2xl transition-all duration-700 ease-in-out cursor-pointer ${color} hover:brightness-110 shadow-sm`}
+        className={`w-full max-w-[44px] rounded-t-md transition-all duration-700 ease-in-out cursor-pointer ${color} hover:brightness-95`}
         style={{ height: `${Math.max(height, 8)}%` }}
       />
-      <span className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mt-1">
+      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
         {label}
       </span>
     </div>
