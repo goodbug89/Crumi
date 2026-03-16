@@ -59,7 +59,9 @@ export default async function AppLayout({
             <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-600 text-white shadow-lg shadow-emerald-600/20 group-hover:scale-110 transition-transform">
               {workspace.name[0]}
             </div>
-            <span className="truncate text-lg tracking-tighter text-slate-800 font-black">{workspace.name}</span>
+            <span className="truncate text-lg tracking-tighter text-slate-800 font-black">
+              {workspace.name}
+            </span>
           </Link>
         </div>
 
@@ -77,19 +79,23 @@ export default async function AppLayout({
 
           <div className="mt-2 p-3 bg-muted/40 rounded-3xl flex items-center gap-3 group relative overflow-hidden">
             <div className="h-9 w-9 bg-secondary rounded-2xl flex items-center justify-center font-bold text-white shadow-md">
-              {(profile?.display_name || 
-                user.user_metadata?.display_name || 
-                user.user_metadata?.full_name || 
-                user.email?.split('@')[0] || 
-                'U').charAt(0).toUpperCase()}
+              {(
+                profile?.display_name ||
+                user.user_metadata?.display_name ||
+                user.user_metadata?.full_name ||
+                user.email?.split('@')[0] ||
+                'U'
+              )
+                .charAt(0)
+                .toUpperCase()}
             </div>
             <div className="flex flex-col min-w-0 flex-1">
               <p className="text-sm font-bold truncate">
-                {profile?.display_name || 
-                 user.user_metadata?.display_name || 
-                 user.user_metadata?.full_name || 
-                 user.email?.split('@')[0] || 
-                 tc('user')}
+                {profile?.display_name ||
+                  user.user_metadata?.display_name ||
+                  user.user_metadata?.full_name ||
+                  user.email?.split('@')[0] ||
+                  tc('user')}
               </p>
               <p className="text-[10px] text-muted-foreground truncate font-medium uppercase tracking-tighter">
                 {role}

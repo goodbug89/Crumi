@@ -49,10 +49,12 @@ export default function ActivityTimeline({
   const fetchActivities = useCallback(async () => {
     try {
       const supabase = createClient();
-      
+
       // 현재 사용자 정보 가져오기 (이미 있으면 생략 가능하지만 필터링 위해 필요)
       if (!currentUserId) {
-        const { data: { user } } = await supabase.auth.getUser();
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
         if (user) setCurrentUserId(user.id);
       }
 
@@ -65,7 +67,7 @@ export default function ActivityTimeline({
       if (customerId) query = query.eq('customer_id', customerId);
       if (projectId) query = query.eq('project_id', projectId);
       if (dealId) query = query.eq('deal_id', dealId);
-      
+
       if (filter === 'mine' && currentUserId) {
         query = query.eq('user_id', currentUserId);
       }
@@ -91,6 +93,7 @@ export default function ActivityTimeline({
           <h3 className="font-bold text-lg">{t('title')}</h3>
           <div className="flex items-center bg-muted/50 p-1 rounded-lg border border-border/50">
             <button
+              type="button"
               onClick={() => setFilter('all')}
               className={`px-3 py-1 text-xs font-bold rounded-md transition-all ${
                 filter === 'all'
@@ -101,6 +104,7 @@ export default function ActivityTimeline({
               {t('filterAll')}
             </button>
             <button
+              type="button"
               onClick={() => setFilter('mine')}
               className={`px-3 py-1 text-xs font-bold rounded-md transition-all ${
                 filter === 'mine'
@@ -169,7 +173,9 @@ export default function ActivityTimeline({
                         {config.label}
                       </span>
                       <span className="text-[10px] text-muted-foreground font-medium">
-                        {t('authorBy', { name: activity.user_profiles?.display_name || 'Anonymous' })}
+                        {t('authorBy', {
+                          name: activity.user_profiles?.display_name || 'Anonymous',
+                        })}
                       </span>
                     </div>
                   </div>
