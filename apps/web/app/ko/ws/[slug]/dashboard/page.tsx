@@ -7,11 +7,17 @@ import NudgeScanner from './NudgeScanner';
 
 export default async function DashboardPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { slug } = await params;
+  const sp = await searchParams;
+  const activeFilter = sp.activities === 'mine' ? 'mine' : 'all';
+
   const t = await getTranslations('dashboard');
+  const tActivities = await getTranslations('activities');
   const tCommon = await getTranslations('common');
   const supabase = await createClient();
   const {
@@ -65,8 +71,9 @@ export default async function DashboardPage({
       .limit(3),
     supabase
       .from('activities')
-      .select('*, customers(name), projects(name)')
+      .select('*, customers(name), projects(name), user_profiles(display_name)')
       .eq('workspace_id', workspace.id)
+      .match(activeFilter === 'mine' ? { user_id: user.id } : {})
       .order('created_at', { ascending: false })
       .limit(5),
     supabase.from('deals').select('*').eq('workspace_id', workspace.id).is('deleted_at', null),
@@ -324,12 +331,36 @@ export default async function DashboardPage({
             <h3 className="font-bold text-lg flex items-center gap-2">
               <span>📅</span> {t('recentActivity.title')}
             </h3>
-            <Link
-              href={`/ko/ws/${slug}/dashboard`}
-              className="text-xs text-primary hover:underline font-bold"
-            >
-              {t('recentActivity.record')}
-            </Link>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center bg-muted/50 p-1 rounded-lg border border-border/50">
+                <Link
+                  href={`/ko/ws/${slug}/dashboard?activities=all`}
+                  className={`px-3 py-1 text-[10px] font-bold rounded-md transition-all ${
+                    activeFilter === 'all'
+                      ? 'bg-white text-emerald-600 shadow-sm'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  {tActivities('filterAll')}
+                </Link>
+                <Link
+                  href={`/ko/ws/${slug}/dashboard?activities=mine`}
+                  className={`px-3 py-1 text-[10px] font-bold rounded-md transition-all ${
+                    activeFilter === 'mine'
+                      ? 'bg-white text-emerald-600 shadow-sm'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  {tActivities('filterMine')}
+                </Link>
+              </div>
+              <Link
+                href={`/ko/ws/${slug}/dashboard`}
+                className="text-xs text-primary hover:underline font-bold"
+              >
+                {t('recentActivity.record')}
+              </Link>
+            </div>
           </div>
 
           <div className="p-6 flex-1 flex flex-col gap-1 overflow-y-auto">
@@ -361,7 +392,11 @@ export default async function DashboardPage({
                     <p className="text-xs text-muted-foreground truncate font-medium mt-0.5">
                       {activity.customers?.name ||
                         activity.projects?.name ||
-                        t('recentActivity.noDetail')}
+                        t('recentActivity.noDetail')}{' '}
+                      <span className="opacity-30 mx-1">•</span>{' '}
+                      <span className="text-emerald-600/70">
+                        {activity.user_profiles?.display_name || 'Anonymous'}
+                      </span>
                     </p>
                   </div>
                 </div>
