@@ -59,9 +59,7 @@ export default async function Home() {
 
             <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-slate-900 leading-[1.05]">
               {t('heroTitle1')} <br />
-              <span className="text-emerald-600">
-                {t('heroTitle2')}
-              </span>
+              <span className="text-emerald-600">{t('heroTitle2')}</span>
             </h1>
 
             <p className="max-w-lg text-lg sm:text-xl leading-relaxed text-slate-500 font-medium">

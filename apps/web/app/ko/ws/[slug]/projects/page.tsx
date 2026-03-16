@@ -41,9 +41,7 @@ export default async function ProjectsPage({
     <div className="flex flex-col gap-8 animate-fade-in-up pb-10">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
         <div className="flex flex-col gap-1.5">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900">
-            {t('list.title')}
-          </h2>
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900">{t('list.title')}</h2>
           <p className="text-slate-500 font-medium text-sm">
             {t('list.subtitle', { count: projects?.length || 0 })}
           </p>

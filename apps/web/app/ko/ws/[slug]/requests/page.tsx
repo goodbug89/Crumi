@@ -113,7 +113,9 @@ export default async function FeatureRequestsPage({
                         t('anonymous')}
                     </span>
                   </div>
-                  <span className="tabular-nums">{new Date(req.created_at).toLocaleDateString('ko-KR')}</span>
+                  <span className="tabular-nums">
+                    {new Date(req.created_at).toLocaleDateString('ko-KR')}
+                  </span>
                 </div>
               </div>
             </div>

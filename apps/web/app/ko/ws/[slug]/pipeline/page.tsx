@@ -129,7 +129,9 @@ export default async function PipelinePage({
                     >
                       {stage.emoji}
                     </span>
-                    <h3 className="font-bold text-slate-800 tracking-tight text-sm">{stage.name}</h3>
+                    <h3 className="font-bold text-slate-800 tracking-tight text-sm">
+                      {stage.name}
+                    </h3>
                   </div>
                   <span className="text-[11px] font-bold text-slate-500 bg-white px-2 py-0.5 rounded-md border border-slate-200">
                     {stage.deals.length}
