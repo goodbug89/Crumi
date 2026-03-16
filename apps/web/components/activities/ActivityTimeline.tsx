@@ -14,6 +14,9 @@ interface Activity {
   created_at: string;
   completed_at: string;
   user_id: string;
+  user_profiles?: {
+    display_name: string;
+  };
 }
 
 interface ActivityTimelineProps {
@@ -32,6 +35,8 @@ export default function ActivityTimeline({
   const t = useTranslations('activities');
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState<'all' | 'mine'>('all');
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
 
   const TYPE_CONFIG: Record<string, { icon: typeof Phone; color: string; label: string }> = {
     call: { icon: Phone, color: 'bg-blue-500/10 text-blue-500', label: t('types.call') },
@@ -44,15 +49,26 @@ export default function ActivityTimeline({
   const fetchActivities = useCallback(async () => {
     try {
       const supabase = createClient();
+      
+      // 현재 사용자 정보 가져오기 (이미 있으면 생략 가능하지만 필터링 위해 필요)
+      if (!currentUserId) {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) setCurrentUserId(user.id);
+      }
+
       let query = supabase
         .from('activities')
-        .select('*')
+        .select('*, user_profiles(display_name)')
         .eq('workspace_id', workspaceId)
         .order('created_at', { ascending: false });
 
       if (customerId) query = query.eq('customer_id', customerId);
       if (projectId) query = query.eq('project_id', projectId);
       if (dealId) query = query.eq('deal_id', dealId);
+      
+      if (filter === 'mine' && currentUserId) {
+        query = query.eq('user_id', currentUserId);
+      }
 
       const { data, error } = await query;
       if (error) throw error;
@@ -62,7 +78,7 @@ export default function ActivityTimeline({
     } finally {
       setLoading(false);
     }
-  }, [workspaceId, customerId, projectId, dealId]);
+  }, [workspaceId, customerId, projectId, dealId, filter, currentUserId]);
 
   useEffect(() => {
     fetchActivities();
@@ -71,7 +87,31 @@ export default function ActivityTimeline({
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
-        <h3 className="font-semibold text-lg">{t('title')}</h3>
+        <div className="flex items-center gap-4">
+          <h3 className="font-bold text-lg">{t('title')}</h3>
+          <div className="flex items-center bg-muted/50 p-1 rounded-lg border border-border/50">
+            <button
+              onClick={() => setFilter('all')}
+              className={`px-3 py-1 text-xs font-bold rounded-md transition-all ${
+                filter === 'all'
+                  ? 'bg-white text-emerald-600 shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              {t('filterAll')}
+            </button>
+            <button
+              onClick={() => setFilter('mine')}
+              className={`px-3 py-1 text-xs font-bold rounded-md transition-all ${
+                filter === 'mine'
+                  ? 'bg-white text-emerald-600 shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              {t('filterMine')}
+            </button>
+          </div>
+        </div>
         <ActivityForm
           workspaceId={workspaceId}
           customerId={customerId}
@@ -124,9 +164,12 @@ export default function ActivityTimeline({
                         {activity.description}
                       </p>
                     )}
-                    <div className="mt-1">
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground uppercase font-medium">
+                    <div className="mt-1.5 flex items-center gap-2">
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground uppercase font-black tracking-tighter">
                         {config.label}
+                      </span>
+                      <span className="text-[10px] text-muted-foreground font-medium">
+                        {t('authorBy', { name: activity.user_profiles?.display_name || 'Anonymous' })}
                       </span>
                     </div>
                   </div>
