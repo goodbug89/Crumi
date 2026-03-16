@@ -174,28 +174,44 @@ export default async function DashboardPage({
             </Link>
           </div>
 
-          {/* CSS div 기반 수평 바 차트 */}
-          <div className="space-y-2 py-2">
-            {stageData.map((stage) => (
-              <div key={stage.name} className="flex items-center gap-3">
-                <div className="w-20 shrink-0 text-right text-[12px] text-muted-foreground">
-                  {stage.name}
-                </div>
-                <div className="h-4 flex-1 overflow-hidden rounded-sm bg-muted">
-                  <div
-                    className="h-full rounded-sm"
-                    style={{
-                      width: `${Math.max((stage.count / maxCount) * 100, stage.count > 0 ? 4 : 0)}%`,
-                      backgroundColor: stage.color,
-                    }}
-                  />
-                </div>
-                <div className="w-5 shrink-0 text-right text-[12px] font-semibold tabular-nums text-foreground">
-                  {stage.count}
-                </div>
-              </div>
-            ))}
-          </div>
+          {/* SVG 수평 바 차트 */}
+          <svg
+            width="100%"
+            height="120"
+            viewBox="0 0 400 120"
+            preserveAspectRatio="none"
+            role="img"
+          >
+            <title>Pipeline overview chart</title>
+            {stageData.map((stage, idx) => {
+              const barWidth = Math.max((stage.count / maxCount) * 290, 2);
+              const y = idx * 28 + 6;
+              return (
+                <g key={stage.name}>
+                  {/* 배경 바 */}
+                  <rect x="72" y={y + 1} width="290" height="14" rx="3" fill="#f1f3f5" />
+                  {/* 값 바 */}
+                  <rect x="72" y={y + 1} width={barWidth} height="14" rx="3" fill={stage.color} />
+                  {/* 라벨 */}
+                  <text x="0" y={y + 12} fontSize="11" fill="#64748b" fontFamily="inherit">
+                    {stage.name}
+                  </text>
+                  {/* 수치 */}
+                  <text
+                    x="392"
+                    y={y + 12}
+                    fontSize="11"
+                    fill="#020617"
+                    textAnchor="end"
+                    fontFamily="inherit"
+                    fontWeight="600"
+                  >
+                    {stage.count}
+                  </text>
+                </g>
+              );
+            })}
+          </svg>
         </div>
 
         {/* Deal Summary */}
