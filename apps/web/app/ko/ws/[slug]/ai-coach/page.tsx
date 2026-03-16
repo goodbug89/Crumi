@@ -152,20 +152,24 @@ export default async function AICoachPage({
         <div className="lg:col-span-1 flex flex-col gap-6">
           <div className="rounded-xl bg-slate-900 p-8 shadow-xl shadow-slate-900/10 text-white flex flex-col gap-8 relative overflow-hidden">
             <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl" />
-            
+
             <h3 className="font-bold text-lg text-slate-100">{t('salesHealth')}</h3>
             <div className="flex flex-col gap-6 z-10">
               <div className="flex flex-col">
                 <span className="text-[11px] font-bold uppercase opacity-50 tracking-wider">
                   {t('globalWinRate')}
                 </span>
-                <span className="text-4xl font-bold mt-1 tabular-nums tracking-tight">{winRate}%</span>
+                <span className="text-4xl font-bold mt-1 tabular-nums tracking-tight">
+                  {winRate}%
+                </span>
               </div>
               <div className="flex flex-col">
                 <span className="text-[11px] font-bold uppercase opacity-50 tracking-wider">
                   {t('avgDealValue')}
                 </span>
-                <span className="text-2xl font-bold mt-1 tabular-nums tracking-tight">₩ {avgDealSize.toLocaleString()}</span>
+                <span className="text-2xl font-bold mt-1 tabular-nums tracking-tight">
+                  ₩ {avgDealSize.toLocaleString()}
+                </span>
               </div>
             </div>
             <div className="mt-4 p-4 bg-white/5 rounded-lg border border-white/10 z-10 backdrop-blur-sm">
@@ -191,7 +195,8 @@ export default async function AICoachPage({
                 <span>{t('analyzedDeals', { count: deals?.length || 0 })}</span>
               </div>
               <div className="text-xs font-semibold text-slate-500 leading-relaxed flex items-start gap-3">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 mt-1.5" /> <span>{t('recentActivityScan')}</span>
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 mt-1.5" />{' '}
+                <span>{t('recentActivityScan')}</span>
               </div>
             </div>
           </div>

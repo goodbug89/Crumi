@@ -92,11 +92,16 @@ export default function RegisterPage() {
       <h2 className="text-xl font-bold text-slate-900 tracking-tight">{t('registerTitle')}</h2>
 
       {error && (
-        <div className="rounded-lg bg-rose-50 border border-rose-100 px-4 py-3 text-xs font-bold text-rose-600">{error}</div>
+        <div className="rounded-lg bg-rose-50 border border-rose-100 px-4 py-3 text-xs font-bold text-rose-600">
+          {error}
+        </div>
       )}
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="displayName" className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+        <label
+          htmlFor="displayName"
+          className="text-xs font-bold text-slate-700 uppercase tracking-wider"
+        >
           {t('nameLabel')}
         </label>
         <input
@@ -111,7 +116,10 @@ export default function RegisterPage() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="email" className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+        <label
+          htmlFor="email"
+          className="text-xs font-bold text-slate-700 uppercase tracking-wider"
+        >
           {t('emailLabel')}
         </label>
         <input
@@ -126,7 +134,10 @@ export default function RegisterPage() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="password" className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+        <label
+          htmlFor="password"
+          className="text-xs font-bold text-slate-700 uppercase tracking-wider"
+        >
           {t('passwordLabel')}
         </label>
         <input
@@ -142,7 +153,10 @@ export default function RegisterPage() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="confirmPassword" className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+        <label
+          htmlFor="confirmPassword"
+          className="text-xs font-bold text-slate-700 uppercase tracking-wider"
+        >
           {t('confirmPasswordLabel')}
         </label>
         <input

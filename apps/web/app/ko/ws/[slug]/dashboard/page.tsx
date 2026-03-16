@@ -253,9 +253,7 @@ export default async function DashboardPage({
                 </div>
               ))
             ) : (
-              <p className="text-sm text-slate-500 italic p-4 text-center">
-                {t('aiCoach.noData')}
-              </p>
+              <p className="text-sm text-slate-500 italic p-4 text-center">{t('aiCoach.noData')}</p>
             )}
           </div>
           <Link
@@ -433,9 +431,7 @@ function StatCard({
         <span className="text-2xl group-hover:scale-110 transition-transform">{icon}</span>
       </div>
       <div>
-        <div className="text-3xl font-bold text-slate-900 tabular-nums tracking-tight">
-          {value}
-        </div>
+        <div className="text-3xl font-bold text-slate-900 tabular-nums tracking-tight">{value}</div>
         <p className="text-[11px] font-bold text-emerald-600 mt-1.5 flex items-center gap-1">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" /> {trend}
         </p>

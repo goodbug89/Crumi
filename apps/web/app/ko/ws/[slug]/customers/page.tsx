@@ -43,9 +43,7 @@ export default async function CustomersPage({
     <div className="flex flex-col gap-8 animate-fade-in-up pb-10">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
         <div className="flex flex-col gap-1.5">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900">
-            {t('list.title')}
-          </h2>
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900">{t('list.title')}</h2>
           <p className="text-slate-500 font-medium text-sm">
             {t('list.subtitle', { count: customers?.length || 0 })}
           </p>
@@ -104,10 +102,10 @@ export default async function CustomersPage({
                       <td className="px-6 py-4">
                         <div className="flex flex-col gap-1.5">
                           <div className="flex items-center gap-2 text-[11px] font-semibold text-slate-500">
-                             {customer.email || 'N/A'}
+                            {customer.email || 'N/A'}
                           </div>
                           <div className="flex items-center gap-2 text-[11px] font-semibold text-slate-500">
-                             {customer.phone || 'N/A'}
+                            {customer.phone || 'N/A'}
                           </div>
                         </div>
                       </td>

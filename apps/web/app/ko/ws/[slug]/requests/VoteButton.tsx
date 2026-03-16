@@ -75,12 +75,12 @@ export default function VoteButton({
         }
       `}
     >
-      <span className={`text-base transition-all ${loading ? 'animate-pulse' : ''} ${!voted && 'group-hover/vote:-translate-y-0.5'}`}>
+      <span
+        className={`text-base transition-all ${loading ? 'animate-pulse' : ''} ${!voted && 'group-hover/vote:-translate-y-0.5'}`}
+      >
         {voted ? '✓' : '▲'}
       </span>
-      <span className="font-bold text-xs tabular-nums leading-none">
-        {votes}
-      </span>
+      <span className="font-bold text-xs tabular-nums leading-none">{votes}</span>
     </button>
   );
 }

@@ -68,9 +68,7 @@ export default async function WorkspaceSelectPage() {
             C
           </div>
           <div className="flex flex-col gap-2">
-            <h1 className="text-3xl font-bold tracking-tight text-slate-900">
-              {t('welcomeBack')}
-            </h1>
+            <h1 className="text-3xl font-bold tracking-tight text-slate-900">{t('welcomeBack')}</h1>
             <p className="text-sm font-semibold text-slate-500 uppercase tracking-widest text-[11px]">
               {t('selectWorkspace')}
             </p>
@@ -111,7 +109,9 @@ export default async function WorkspaceSelectPage() {
               <div className="text-4xl grayscale opacity-30">🏝️</div>
               <div className="flex flex-col gap-1">
                 <p className="text-base font-bold text-slate-900">{t('noWorkspaces.title')}</p>
-                <p className="text-xs font-medium text-slate-500">{t('noWorkspaces.description')}</p>
+                <p className="text-xs font-medium text-slate-500">
+                  {t('noWorkspaces.description')}
+                </p>
               </div>
             </div>
           )}
