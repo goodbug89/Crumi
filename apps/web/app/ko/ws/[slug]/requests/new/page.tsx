@@ -1,6 +1,7 @@
 'use client';
 
 import { createClient } from '@/lib/supabase/client';
+import { ArrowLeft } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
@@ -79,7 +80,7 @@ export default function NewRequestPage() {
           href={`/ko/ws/${slug}/requests`}
           className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface text-muted-foreground hover:bg-muted"
         >
-          ←
+          <ArrowLeft className="w-4 h-4" />
         </Link>
         <h2 className="text-2xl font-bold tracking-tight text-foreground">{t('title')}</h2>
       </div>
@@ -87,7 +88,10 @@ export default function NewRequestPage() {
       <div className="rounded-xl border border-border bg-surface shadow-sm overflow-hidden">
         <form onSubmit={handleSubmit} className="p-6 flex flex-col gap-6">
           {error && (
-            <div className="rounded-lg bg-danger/10 px-4 py-3 text-sm text-danger">{error}</div>
+            <p className="flex items-center gap-1.5 text-xs font-medium text-danger">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-danger shrink-0" />
+              {error}
+            </p>
           )}
 
           <div className="flex flex-col gap-6">

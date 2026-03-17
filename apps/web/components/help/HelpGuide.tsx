@@ -1,8 +1,45 @@
 'use client';
 
+import { X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+
+function GuideImage({ src }: { src: string }) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <div className="flex items-center justify-center h-36 bg-slate-100 text-slate-400 text-xs font-medium">
+        이미지를 불러올 수 없습니다.
+      </div>
+    );
+  }
+
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt="Guide Visual"
+      className="w-full object-cover"
+      style={{ maxHeight: '240px' }}
+      onError={() => setFailed(true)}
+    />
+  );
+}
+
+function getImageUrl(type: string) {
+  const images: Record<string, string> = {
+    dashboard: 'dashboard.png',
+    pipeline: 'pipeline.png',
+    aiCoach: 'aicoach.png',
+    customers: 'dashboard.png',
+    projects: 'dashboard.png',
+    requests: 'aicoach.png',
+  };
+
+  return `/help/${images[type] || images.dashboard}`;
+}
 
 export default function HelpGuide() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +67,7 @@ export default function HelpGuide() {
         type="button"
         onClick={() => setIsOpen(true)}
         className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-50 text-slate-500 hover:bg-emerald-50 hover:text-emerald-600 transition-all active:scale-95 border border-slate-200 shadow-sm"
-        title="도움말 보기"
+        title={t('buttonTitle')}
       >
         <span className="text-xs font-bold leading-none">?</span>
       </button>
@@ -41,9 +78,9 @@ export default function HelpGuide() {
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="absolute top-6 right-6 text-slate-400 hover:text-slate-600 p-2 rounded-lg hover:bg-slate-100 transition-all font-bold"
+              className="absolute top-6 right-6 text-slate-400 hover:text-slate-600 p-2 rounded-lg hover:bg-slate-100 transition-all"
             >
-              ✕
+              <X className="w-4 h-4" />
             </button>
 
             <div className="flex flex-col gap-8">
@@ -61,12 +98,7 @@ export default function HelpGuide() {
 
               {/* 이미지/비주얼 영역 */}
               <div className="rounded-xl border border-slate-100 bg-slate-50/50 overflow-hidden shadow-inner">
-                <img
-                  src={getImageUrl(currentType)}
-                  alt="Guide Visual"
-                  className="w-full object-cover"
-                  style={{ maxHeight: '240px' }}
-                />
+                <GuideImage src={getImageUrl(currentType)} />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -125,17 +157,4 @@ export default function HelpGuide() {
       )}
     </div>
   );
-}
-
-function getImageUrl(type: string) {
-  const images: Record<string, string> = {
-    dashboard: 'dashboard.png',
-    pipeline: 'pipeline.png',
-    aiCoach: 'aicoach.png',
-    customers: 'dashboard.png',
-    projects: 'dashboard.png',
-    requests: 'aicoach.png',
-  };
-
-  return `/help/${images[type] || images.dashboard}`;
 }

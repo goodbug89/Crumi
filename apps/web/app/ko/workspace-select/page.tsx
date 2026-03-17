@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
+import { ArrowRight, Building2, Plus } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
@@ -99,14 +100,16 @@ export default async function WorkspaceSelectPage() {
                 </div>
               </div>
               <span className="h-8 w-8 flex items-center justify-center rounded-lg bg-slate-50 text-slate-400 group-hover:bg-emerald-600 group-hover:text-white transition-all">
-                →
+                <ArrowRight className="w-4 h-4" />
               </span>
             </Link>
           ))}
 
           {workspaces.length === 0 && (
             <div className="flex flex-col items-center gap-6 rounded-xl border border-dashed border-slate-300 bg-white p-12 text-center">
-              <div className="text-4xl grayscale opacity-30">🏝️</div>
+              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-slate-100 text-slate-400">
+                <Building2 className="w-6 h-6" strokeWidth={1.5} />
+              </div>
               <div className="flex flex-col gap-1">
                 <p className="text-base font-bold text-slate-900">{t('noWorkspaces.title')}</p>
                 <p className="text-xs font-medium text-slate-500">
@@ -121,8 +124,9 @@ export default async function WorkspaceSelectPage() {
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/ko/workspace-create"
-            className="h-12 flex-1 flex items-center justify-center rounded-lg bg-emerald-600 px-8 font-bold text-white shadow-lg shadow-emerald-600/10 hover:bg-emerald-700 active:scale-[0.98] transition-all text-sm"
+            className="h-12 flex-1 flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-8 font-bold text-white shadow-lg shadow-emerald-600/10 hover:bg-emerald-700 active:scale-[0.98] transition-all text-sm"
           >
+            <Plus className="w-4 h-4" />
             {t('createNew')}
           </Link>
           <Link

@@ -1,6 +1,7 @@
 'use client';
 
 import { createClient } from '@/lib/supabase/client';
+import { ArrowLeft } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
@@ -146,9 +147,9 @@ export default function EditDealPage() {
       <div className="flex items-center gap-4">
         <Link
           href={`/ko/ws/${slug}/pipeline`}
-          className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface text-muted-foreground hover:bg-muted"
+          className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface text-muted-foreground hover:bg-muted transition-all"
         >
-          ←
+          <ArrowLeft className="h-4 w-4" strokeWidth={1.75} />
         </Link>
         <h2 className="text-2xl font-bold tracking-tight text-foreground">{t('title')}</h2>
       </div>

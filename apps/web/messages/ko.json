@@ -135,12 +135,15 @@
     "invite": {
       "title": "워크스페이스 초대",
       "description": "{workspaceName} 팀원들이 당신을 기다리고 있습니다!",
-      "joinNow": "지금 바로 합류하기",
+      "joinNow": "가입 신청하기",
       "later": "나중에 하기",
-      "agreement": "합류하기를 클릭하면 Crumi의 이용 약관 및 개인정보 처리방침에 동의하는 것으로 간주됩니다.",
+      "agreement": "가입 신청을 하면 Crumi의 이용 약관 및 개인정보 처리방침에 동의하는 것으로 간주됩니다.",
       "invalidCode": "유효하지 않은 초대 코드",
       "invalidCodeDescription": "초대 코드가 만료되었거나 올바르지 않습니다. 관리자에게 문의하세요.",
-      "goToWorkspace": "내 워크스페이스로 이동"
+      "goToWorkspace": "내 워크스페이스로 이동",
+      "pendingTitle": "승인 대기 중",
+      "pendingDescription": "{workspaceName} 워크스페이스의 관리자가 가입 요청을 검토 중입니다.",
+      "pendingNote": "승인이 완료되면 이메일로 알려드립니다."
     }
   },
   "sidebar": {
@@ -478,6 +481,7 @@
     },
     "members": {
       "title": "팀 멤버 관리",
+      "pendingTitle": "가입 승인 대기",
       "columns": {
         "user": "사용자",
         "role": "역할",
@@ -493,14 +497,19 @@
       "footnote2": "* Owner 역할은 다른 멤버에게 양도하기 전까지 유지됩니다."
     },
     "invite": {
-      "copyLink": "🔗 초대 링크 복사",
-      "copied": "✅ 복사 완료"
+      "copyLink": "초대 링크 복사",
+      "copied": "복사 완료"
     },
     "removeMember": {
       "button": "제외",
       "processing": "처리중...",
       "confirmMessage": "정말 \"{memberName}\" 멤버를 워크스페이스에서 제외하시겠습니까?\n제외된 멤버는 더 이상 워크스페이스 데이터에 접근할 수 없습니다.",
       "error": "멤버 제외 실패: {error}"
+    },
+    "approveMember": {
+      "approve": "승인",
+      "reject": "거절",
+      "processing": "처리중..."
     },
     "billing": {
       "title": "결제 및 구독 관리",
@@ -662,6 +671,7 @@
   },
   "help": {
     "close": "닫기",
+    "buttonTitle": "도움말 보기",
     "workflow": "Standard Workflow",
     "dashboard": {
       "title": "대시보드 시작 가이드",

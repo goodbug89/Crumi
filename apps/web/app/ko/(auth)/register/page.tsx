@@ -1,6 +1,7 @@
 'use client';
 
 import { createClient } from '@/lib/supabase/client';
+import { CheckCircle } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -66,8 +67,8 @@ export default function RegisterPage() {
   if (success) {
     return (
       <div className="flex flex-col items-center gap-5 py-6 text-center">
-        <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 text-3xl shadow-lg shadow-emerald-600/5">
-          🎉
+        <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 shadow-lg shadow-emerald-600/5">
+          <CheckCircle className="w-8 h-8" strokeWidth={1.5} />
         </div>
         <div className="flex flex-col gap-2">
           <h2 className="text-xl font-bold text-slate-900 tracking-tight">{t('successTitle')}</h2>
@@ -92,9 +93,10 @@ export default function RegisterPage() {
       <h2 className="text-xl font-bold text-slate-900 tracking-tight">{t('registerTitle')}</h2>
 
       {error && (
-        <div className="rounded-lg bg-rose-50 border border-rose-100 px-4 py-3 text-xs font-bold text-rose-600">
+        <p className="flex items-center gap-1.5 text-xs font-medium text-rose-600">
+          <span className="inline-block h-1.5 w-1.5 rounded-full bg-rose-500 shrink-0" />
           {error}
-        </div>
+        </p>
       )}
 
       <div className="flex flex-col gap-2">

@@ -1,6 +1,7 @@
 'use client';
 
 import { createClient } from '@/lib/supabase/client';
+import { Sparkles } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -88,8 +89,8 @@ export default function CreateWorkspacePage() {
       <div className="w-full max-w-md">
         {/* 헤더 */}
         <div className="mb-8 flex flex-col items-center gap-3">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/20 text-3xl">
-            ✨
+          <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-primary/10 text-primary">
+            <Sparkles className="w-7 h-7" strokeWidth={1.5} />
           </div>
           <h1 className="text-2xl font-bold text-foreground">{t('title')}</h1>
           <p className="text-sm text-center text-muted-foreground">{t('subtitle')}</p>
@@ -99,7 +100,10 @@ export default function CreateWorkspacePage() {
         <div className="rounded-2xl border border-border bg-surface p-8 shadow-sm">
           <form onSubmit={handleCreate} className="flex flex-col gap-5">
             {error && (
-              <div className="rounded-lg bg-danger/10 px-4 py-3 text-sm text-danger">{error}</div>
+              <p className="flex items-center gap-1.5 text-xs font-medium text-danger">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-danger shrink-0" />
+                {error}
+              </p>
             )}
 
             <div className="flex flex-col gap-2">

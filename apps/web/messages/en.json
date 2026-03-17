@@ -135,12 +135,15 @@
     "invite": {
       "title": "Workspace Invitation",
       "description": "Your teammates at {workspaceName} are waiting for you!",
-      "joinNow": "Join Now",
+      "joinNow": "Request to Join",
       "later": "Maybe Later",
-      "agreement": "By clicking Join, you agree to Crumi's Terms of Service and Privacy Policy.",
+      "agreement": "By requesting to join, you agree to Crumi's Terms of Service and Privacy Policy.",
       "invalidCode": "Invalid Invite Code",
       "invalidCodeDescription": "The invite code has expired or is incorrect. Please contact your admin.",
-      "goToWorkspace": "Go to My Workspaces"
+      "goToWorkspace": "Go to My Workspaces",
+      "pendingTitle": "Awaiting Approval",
+      "pendingDescription": "The admin of {workspaceName} is reviewing your join request.",
+      "pendingNote": "You'll be notified by email once approved."
     }
   },
   "sidebar": {
@@ -478,6 +481,7 @@
     },
     "members": {
       "title": "Team Member Management",
+      "pendingTitle": "Pending Approval",
       "columns": {
         "user": "User",
         "role": "Role",
@@ -493,14 +497,19 @@
       "footnote2": "* The Owner role is retained until it is transferred to another member."
     },
     "invite": {
-      "copyLink": "🔗 Copy Invite Link",
-      "copied": "✅ Copied!"
+      "copyLink": "Copy Invite Link",
+      "copied": "Copied!"
     },
     "removeMember": {
       "button": "Remove",
       "processing": "Processing...",
       "confirmMessage": "Are you sure you want to remove \"{memberName}\" from this workspace?\nRemoved members will no longer have access to workspace data.",
       "error": "Failed to remove member: {error}"
+    },
+    "approveMember": {
+      "approve": "Approve",
+      "reject": "Reject",
+      "processing": "Processing..."
     },
     "billing": {
       "title": "Billing & Subscription",
@@ -655,6 +664,119 @@
       "submitting": "Saving...",
       "saveError": "An error occurred while saving the activity record.",
       "authRequired": "Authentication is required."
+    },
+    "filterAll": "All Activities",
+    "filterMine": "My Activities",
+    "authorBy": "by {name}"
+  },
+  "help": {
+    "close": "Close",
+    "buttonTitle": "View Help",
+    "workflow": "Standard Workflow",
+    "dashboard": {
+      "title": "Dashboard Getting Started Guide",
+      "intro": "The dashboard is your strategic command center showing the most important sales activities at a glance.",
+      "section1": {
+        "title": "What is a Nudge?",
+        "description": "An intelligent reminder that AI automatically detects customers or projects past their set cooltime and suggests follow-up actions."
+      },
+      "section2": {
+        "title": "How to Use the Smart Scanner",
+        "description": "Click 'Generate Smart Nudges' and AI will analyze neglected customers in real-time and create action items on your dashboard."
+      },
+      "step1": "Check Activities",
+      "step2": "Generate Nudges",
+      "step3": "Take Action"
+    },
+    "customers": {
+      "title": "Customer Management Guide",
+      "intro": "Successful sales start with accurate customer information management.",
+      "section1": {
+        "title": "Stakeholders",
+        "description": "Refers to decision-makers or hands-on partners within a project. The more accurately you define their roles, the more precise your AI coaching becomes."
+      },
+      "section2": {
+        "title": "Activity Timeline",
+        "description": "Record all calls and meeting notes on the customer detail page. This accumulated data enables analysis of the optimal sales timing."
+      },
+      "step1": "Register Customer",
+      "step2": "Build Relationship",
+      "step3": "Log Activities"
+    },
+    "projects": {
+      "title": "Project-Centric Management",
+      "intro": "Go beyond a simple customer list — collaborate with your team centered around 'Projects' as business units.",
+      "section1": {
+        "title": "Connecting Customers",
+        "description": "Multiple customers can be linked to a single project. This is useful for understanding the overall dynamics of stakeholders."
+      },
+      "section2": {
+        "title": "Status Management",
+        "description": "Manage the project lifecycle from Planning to Completed to ensure nothing falls through the cracks."
+      },
+      "step1": "Create Project",
+      "step2": "Connect Stakeholders",
+      "step3": "Track Progress"
+    },
+    "pipeline": {
+      "title": "Sales Pipeline Guide",
+      "intro": "A tool to visually manage the process from potential sales opportunities to actual revenue.",
+      "section1": {
+        "title": "Sales Stages",
+        "description": "Progress your deals through Lead → Proposal → Negotiation → Won stages to close more business."
+      },
+      "section2": {
+        "title": "Expected Amount & Win Rate",
+        "description": "Enter the expected amount and win probability for each deal, and the dashboard will automatically calculate your expected monthly revenue."
+      },
+      "step1": "Register Deal",
+      "step2": "Move Stages",
+      "step3": "Close Contract"
+    },
+    "aiCoach": {
+      "title": "How to Use the AI Sales Coach",
+      "intro": "Crumi AI learns from your sales data and acts as a reliable partner who thinks alongside you.",
+      "section1": {
+        "title": "Real-time Insights",
+        "description": "Combines analysis of neglect periods, deal sizes, and past success stories to recommend the action you should take right now."
+      },
+      "section2": {
+        "title": "Sales Health Report",
+        "description": "Converts the health of your current sales activities into a score. If the score is low, try implementing the AI's suggested actions."
+      },
+      "step1": "Data Learning",
+      "step2": "Pattern Analysis",
+      "step3": "Strategy Coaching"
+    },
+    "requests": {
+      "title": "Growing with the Community",
+      "intro": "Crumi evolves through users' voices. If you need a feature, suggest it and vote.",
+      "section1": {
+        "title": "Voting System",
+        "description": "You can vote on other users' suggestions, and Pro members have higher-weight voting rights."
+      },
+      "section2": {
+        "title": "Roadmap Transparency",
+        "description": "Approved suggestions are reflected in the roadmap, and you can track development progress in real-time."
+      },
+      "step1": "Suggest Feature",
+      "step2": "Community Vote",
+      "step3": "Roadmap Inclusion"
+    },
+    "general": {
+      "title": "Crumi Guide",
+      "intro": "Press the question mark button whenever you need help!",
+      "section1": {
+        "title": "Contact Us",
+        "description": "For further inquiries, please contact our customer support."
+      },
+      "section2": {
+        "title": "Feedback",
+        "description": "Please leave any inconveniences on the feature request board."
+      },
+      "step1": "Start",
+      "step2": "Learn",
+      "step3": "Succeed"
     }
   }
 }
