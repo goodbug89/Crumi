@@ -1,6 +1,7 @@
 'use client';
 
 import { createClient } from '@/lib/supabase/client';
+import { ArrowLeft } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
@@ -99,34 +100,32 @@ export default function NewDealPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto flex flex-col gap-10 animate-fade-in-up pb-20">
-      <div className="flex flex-col gap-2">
-        <div className="flex items-center gap-4">
-          <Link
-            href={`/ko/ws/${slug}/pipeline`}
-            className="flex h-10 w-10 items-center justify-center rounded-2xl border border-border bg-surface text-muted-foreground hover:bg-muted transition-all"
-          >
-            ←
-          </Link>
-          <h2 className="text-3xl font-black tracking-tight text-foreground">{t('new.title')}</h2>
+    <div className="max-w-2xl mx-auto flex flex-col gap-4 animate-fade-in-up pb-10">
+      <div className="flex items-center gap-3">
+        <Link
+          href={`/ko/ws/${slug}/pipeline`}
+          className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface text-muted-foreground hover:bg-muted transition-all"
+        >
+          <ArrowLeft className="h-4 w-4" strokeWidth={1.75} />
+        </Link>
+        <div className="flex flex-col gap-0.5">
+          <h2 className="text-base font-semibold text-foreground">{t('new.title')}</h2>
+          <p className="text-muted-foreground text-[13px]">{t('new.subtitle')}</p>
         </div>
-        <p className="text-muted-foreground font-medium ml-14">{t('new.subtitle')}</p>
       </div>
 
-      <div className="rounded-[40px] border border-border bg-surface shadow-2xl shadow-black/[0.03] overflow-hidden">
-        <form onSubmit={handleSubmit} className="p-10 flex flex-col gap-10">
+      <div className="rounded-lg border border-border bg-surface shadow-sm overflow-hidden">
+        <form onSubmit={handleSubmit} className="p-4 flex flex-col gap-4">
           {error && (
-            <div className="rounded-2xl bg-danger/10 px-6 py-4 text-sm font-bold text-danger border border-danger/20">
+            <div className="rounded-lg bg-danger/10 px-4 py-3 text-[13px] text-danger border border-danger/20">
               {error}
             </div>
           )}
 
-          <div className="flex flex-col gap-8">
-            <div className="flex flex-col gap-3">
-              <label
-                htmlFor="title"
-                className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 ml-1"
-              >
+          <div className="flex flex-col gap-4">
+            {/* 거래 제목 */}
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="title" className="text-[12px] font-medium text-foreground">
                 {t('new.fields.title')} <span className="text-danger">*</span>
               </label>
               <input
@@ -137,16 +136,14 @@ export default function NewDealPage() {
                 onChange={handleChange}
                 placeholder={t('new.fields.titlePlaceholder')}
                 required
-                className="h-16 w-full rounded-2xl border border-border bg-muted/20 px-8 text-lg font-black text-foreground placeholder:text-muted-foreground/40 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all shadow-inner"
+                className="h-9 w-full rounded-lg border border-input bg-background px-3 text-[13px] text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20 transition-all"
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="flex flex-col gap-3">
-                <label
-                  htmlFor="stage"
-                  className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 ml-1"
-                >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* 진행 단계 */}
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="stage" className="text-[12px] font-medium text-foreground">
                   {t('new.fields.stage')}
                 </label>
                 <select
@@ -154,7 +151,7 @@ export default function NewDealPage() {
                   name="stage"
                   value={formData.stage}
                   onChange={handleChange}
-                  className="h-14 w-full rounded-2xl border border-border bg-muted/20 px-6 font-bold text-foreground focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all appearance-none cursor-pointer"
+                  className="h-9 w-full rounded-lg border border-input bg-background px-3 text-[13px] text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20 transition-all appearance-none cursor-pointer"
                 >
                   <option value="lead">{t('new.fields.stageOptions.lead')}</option>
                   <option value="contact">{t('new.fields.stageOptions.contact')}</option>
@@ -163,11 +160,9 @@ export default function NewDealPage() {
                 </select>
               </div>
 
-              <div className="flex flex-col gap-3">
-                <label
-                  htmlFor="probability"
-                  className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 ml-1"
-                >
+              {/* 예상 승률 */}
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="probability" className="text-[12px] font-medium text-foreground">
                   {t('new.fields.probability')}
                 </label>
                 <div className="relative">
@@ -179,23 +174,21 @@ export default function NewDealPage() {
                     max="100"
                     value={formData.probability}
                     onChange={handleChange}
-                    className="h-14 w-full rounded-2xl border border-border bg-muted/20 px-6 font-bold text-foreground focus:border-primary transition-all shadow-inner"
+                    className="h-9 w-full rounded-lg border border-input bg-background px-3 pr-8 text-[13px] text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20 transition-all"
                   />
-                  <span className="absolute right-6 top-1/2 -translate-y-1/2 text-muted-foreground font-black">
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[13px] text-muted-foreground pointer-events-none">
                     %
                   </span>
                 </div>
               </div>
 
-              <div className="flex flex-col gap-3 md:col-span-2">
-                <label
-                  htmlFor="amount"
-                  className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 ml-1"
-                >
+              {/* 예상 금액 */}
+              <div className="flex flex-col gap-1.5 sm:col-span-2">
+                <label htmlFor="amount" className="text-[12px] font-medium text-foreground">
                   {t('new.fields.amount')}
                 </label>
                 <div className="relative">
-                  <span className="absolute left-6 top-1/2 -translate-y-1/2 text-muted-foreground font-black">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[13px] text-muted-foreground pointer-events-none">
                     ₩
                   </span>
                   <input
@@ -205,16 +198,14 @@ export default function NewDealPage() {
                     value={formData.amount}
                     onChange={handleChange}
                     placeholder={t('new.fields.amountPlaceholder')}
-                    className="h-16 w-full rounded-2xl border border-border bg-muted/20 pl-12 pr-6 text-xl font-black text-primary focus:border-primary transition-all shadow-inner"
+                    className="h-9 w-full rounded-lg border border-input bg-background pl-7 pr-3 text-[13px] text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20 transition-all"
                   />
                 </div>
               </div>
 
-              <div className="flex flex-col gap-3">
-                <label
-                  htmlFor="customer_id"
-                  className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 ml-1"
-                >
+              {/* 연결된 고객 */}
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="customer_id" className="text-[12px] font-medium text-foreground">
                   {t('new.fields.customer')}
                 </label>
                 <select
@@ -222,7 +213,7 @@ export default function NewDealPage() {
                   name="customer_id"
                   value={formData.customer_id}
                   onChange={handleChange}
-                  className="h-14 w-full rounded-2xl border border-border bg-muted/20 px-6 font-bold text-foreground focus:border-primary transition-all appearance-none cursor-pointer"
+                  className="h-9 w-full rounded-lg border border-input bg-background px-3 text-[13px] text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20 transition-all appearance-none cursor-pointer"
                 >
                   <option value="">{t('new.fields.customerDefault')}</option>
                   {customers.map((c) => (
@@ -233,11 +224,9 @@ export default function NewDealPage() {
                 </select>
               </div>
 
-              <div className="flex flex-col gap-3">
-                <label
-                  htmlFor="project_id"
-                  className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 ml-1"
-                >
+              {/* 연계 프로젝트 */}
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="project_id" className="text-[12px] font-medium text-foreground">
                   {t('new.fields.project')}
                 </label>
                 <select
@@ -245,7 +234,7 @@ export default function NewDealPage() {
                   name="project_id"
                   value={formData.project_id}
                   onChange={handleChange}
-                  className="h-14 w-full rounded-2xl border border-border bg-muted/20 px-6 font-bold text-foreground focus:border-primary transition-all appearance-none cursor-pointer"
+                  className="h-9 w-full rounded-lg border border-input bg-background px-3 text-[13px] text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/20 transition-all appearance-none cursor-pointer"
                 >
                   <option value="">{t('new.fields.projectDefault')}</option>
                   {projects.map((p) => (
@@ -258,17 +247,17 @@ export default function NewDealPage() {
             </div>
           </div>
 
-          <div className="flex items-center justify-end gap-4 pt-6 border-t border-border/50">
+          <div className="flex items-center justify-end gap-3 pt-2 border-t border-border">
             <Link
               href={`/ko/ws/${slug}/pipeline`}
-              className="h-14 px-8 flex items-center justify-center rounded-2xl font-bold text-muted-foreground hover:bg-muted transition-all"
+              className="h-9 px-4 flex items-center justify-center rounded-lg border border-border bg-background text-[13px] font-medium text-muted-foreground hover:bg-muted transition-all"
             >
               {t('new.cancel')}
             </Link>
             <button
               type="submit"
               disabled={loading || !formData.title}
-              className="h-14 px-12 bg-primary text-white rounded-2xl font-black text-lg shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50"
+              className="h-9 px-5 bg-primary text-white rounded-lg text-[13px] font-medium shadow-sm hover:bg-primary/90 active:scale-[0.98] transition-all disabled:opacity-50"
             >
               {loading ? t('new.submitting') : t('new.submit')}
             </button>

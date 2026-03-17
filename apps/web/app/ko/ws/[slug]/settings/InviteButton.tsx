@@ -1,5 +1,6 @@
 'use client';
 
+import { Check, Link2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -24,7 +25,7 @@ export default function InviteButton({
     <button
       type="button"
       onClick={handleCopy}
-      className={`h-9 px-4 rounded-lg text-sm font-bold transition-all shadow-sm
+      className={`h-8 px-3 rounded-lg text-[12px] font-semibold transition-all flex items-center gap-1.5 shadow-sm
         ${
           copied
             ? 'bg-success text-white'
@@ -32,7 +33,17 @@ export default function InviteButton({
         }
       `}
     >
-      {copied ? t('copied') : t('copyLink')}
+      {copied ? (
+        <>
+          <Check className="w-3.5 h-3.5" />
+          {t('copied')}
+        </>
+      ) : (
+        <>
+          <Link2 className="w-3.5 h-3.5" />
+          {t('copyLink')}
+        </>
+      )}
     </button>
   );
 }

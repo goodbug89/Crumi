@@ -1,8 +1,22 @@
 import { createClient } from '@/lib/supabase/server';
-import { BarChart2, FolderOpen, Mail, Search, User } from 'lucide-react';
+import { BarChart2, FolderOpen, User } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+
+function formatAmountShort(amount: number): string {
+  if (amount === 0) return '₩0';
+  if (amount >= 100000000) {
+    const eok = Math.floor(amount / 100000000);
+    const man = Math.floor((amount % 100000000) / 10000);
+    return man > 0 ? `₩${eok}억 ${man}만` : `₩${eok}억`;
+  }
+  if (amount >= 10000) {
+    const man = Math.floor(amount / 10000);
+    return `₩${man}만`;
+  }
+  return `₩${amount.toLocaleString()}`;
+}
 
 export default async function PipelinePage({
   params,
@@ -135,7 +149,7 @@ export default async function PipelinePage({
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-[11px] font-medium text-primary tabular-nums">
-                    ₩{stage.totalAmount.toLocaleString()}
+                    {formatAmountShort(stage.totalAmount)}
                   </span>
                   <span className="text-[11px] font-medium text-muted-foreground bg-surface px-1.5 py-0.5 rounded-sm border border-border tabular-nums">
                     {stage.deals.length}
@@ -180,7 +194,7 @@ export default async function PipelinePage({
 
                     <div className="flex items-center justify-between border-t border-border pt-2">
                       <p className="font-semibold text-foreground text-[13px] tabular-nums">
-                        ₩{deal.amount ? deal.amount.toLocaleString() : '0'}
+                        {deal.amount ? formatAmountShort(deal.amount) : '₩0'}
                       </p>
                       <div className="flex items-center gap-1.5">
                         <div className="w-10 h-1 bg-muted rounded-full overflow-hidden">

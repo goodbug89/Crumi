@@ -1,7 +1,7 @@
 'use client';
 
 import { createClient } from '@/lib/supabase/client';
-import { CheckSquare, Mail, Phone, Plus, StickyNote, Users, X } from 'lucide-react';
+import { CalendarDays, CheckSquare, Mail, Phone, Plus, StickyNote, Users, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -25,9 +25,13 @@ export default function ActivityForm({
   const t = useTranslations('activities');
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [saveError, setSaveError] = useState('');
   const [type, setType] = useState('note');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [completedAt, setCompletedAt] = useState(
+    () => new Date().toISOString().slice(0, 16), // 'YYYY-MM-DDTHH:mm'
+  );
 
   const ACTIVITY_TYPES = [
     { id: 'call', label: t('types.call'), icon: Phone, color: 'text-blue-500' },
@@ -42,6 +46,7 @@ export default function ActivityForm({
     if (!title) return;
 
     setLoading(true);
+    setSaveError('');
     try {
       const supabase = createClient();
       const {
@@ -59,13 +64,14 @@ export default function ActivityForm({
         type,
         title,
         description,
-        completed_at: new Date().toISOString(), // 기본적으로 완료 상태로 저장
+        completed_at: completedAt ? new Date(completedAt).toISOString() : new Date().toISOString(),
       });
 
       if (error) throw error;
 
       setTitle('');
       setDescription('');
+      setCompletedAt(new Date().toISOString().slice(0, 16));
       setIsOpen(false);
 
       if (onSuccess) {
@@ -75,7 +81,7 @@ export default function ActivityForm({
       }
     } catch (err) {
       console.error('Error saving activity:', err);
-      alert(t('form.saveError'));
+      setSaveError(t('form.saveError'));
     } finally {
       setLoading(false);
     }
@@ -108,6 +114,7 @@ export default function ActivityForm({
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        {/* 활동 타입 선택 */}
         <div className="flex flex-wrap gap-2">
           {ACTIVITY_TYPES.map((actType) => (
             <button
@@ -134,16 +141,33 @@ export default function ActivityForm({
             onChange={(e) => setTitle(e.target.value)}
             placeholder={t('form.titlePlaceholder')}
             required
-            className="h-10 px-3 rounded-lg border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+            className="h-10 px-3 rounded-lg border border-border bg-background text-[13px] focus:outline-none focus:ring-2 focus:ring-primary/20"
           />
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder={t('form.descriptionPlaceholder')}
             rows={3}
-            className="p-3 rounded-lg border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 resize-none"
+            className="p-3 rounded-lg border border-border bg-background text-[13px] focus:outline-none focus:ring-2 focus:ring-primary/20 resize-none"
           />
+          {/* 날짜/시간 입력 */}
+          <div className="flex items-center gap-2">
+            <CalendarDays className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+            <input
+              type="datetime-local"
+              value={completedAt}
+              onChange={(e) => setCompletedAt(e.target.value)}
+              className="flex-1 h-9 px-3 rounded-lg border border-border bg-background text-[13px] text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
+            />
+          </div>
         </div>
+
+        {saveError && (
+          <p className="flex items-center gap-1.5 text-xs font-medium text-danger">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-danger shrink-0" />
+            {saveError}
+          </p>
+        )}
 
         <div className="flex justify-end gap-2">
           <button

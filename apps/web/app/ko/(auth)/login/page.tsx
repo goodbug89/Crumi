@@ -49,9 +49,10 @@ export default function LoginPage() {
       <h2 className="text-xl font-bold text-slate-900 tracking-tight">{t('loginTitle')}</h2>
 
       {error && (
-        <div className="rounded-lg bg-rose-50 border border-rose-100 px-4 py-3 text-xs font-bold text-rose-600">
+        <p className="flex items-center gap-1.5 text-xs font-medium text-rose-600">
+          <span className="inline-block h-1.5 w-1.5 rounded-full bg-rose-500 shrink-0" />
           {error}
-        </div>
+        </p>
       )}
 
       <div className="flex flex-col gap-2">

@@ -1,6 +1,7 @@
 'use client';
 
 import { createClient } from '@/lib/supabase/client';
+import { Check, ChevronUp } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -76,9 +77,13 @@ export default function VoteButton({
       `}
     >
       <span
-        className={`text-base transition-all ${loading ? 'animate-pulse' : ''} ${!voted && 'group-hover/vote:-translate-y-0.5'}`}
+        className={`transition-all ${loading ? 'animate-pulse' : ''} ${!voted && 'group-hover/vote:-translate-y-0.5'}`}
       >
-        {voted ? '✓' : '▲'}
+        {voted ? (
+          <Check className="w-3.5 h-3.5" strokeWidth={2.5} />
+        ) : (
+          <ChevronUp className="w-3.5 h-3.5" strokeWidth={2.5} />
+        )}
       </span>
       <span className="font-bold text-xs tabular-nums leading-none">{votes}</span>
     </button>
